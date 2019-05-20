@@ -8,14 +8,14 @@
           <div class="md-subhead"></div>
         </md-card-header>
            <div class="form-group">
-                <label for="emailId">EmailId:</label>
-                <input type="text" v-model="emailId"  style="margin-left:17px"/>
-                <span>{{emailId}}</span>
+                <label for="password">Password:</label>
+                <input type="text" v-model="password"  style="margin-left:17px"/>
+                <span>{{password}}</span>
             </div>
          <md-card-content>
            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" v-model="password" style="margin-left:5px" />
+                <label for="confirmpassword">Confirmpassword:</label>
+                <input type="confirmpassword" v-model="confirmpassword" style="margin-left:5px" />
             </div>
         </md-card-content>
         <md-card-content>
@@ -43,11 +43,11 @@
 
 import axios from 'axios'
 export default {
+     name: 'Resetpassword',
   data () {
-    //alert(this.emailId);
     return {
-    emailId:'',
      password:'',
+     confirmpassword:''
       
     }
   },
@@ -57,14 +57,14 @@ export default {
 
     Resetpassword() {
       const data={
-        emailId:this.emailId,
-        password:this.password
+        password:this.password,
+         confirmpassword:this.confirmpassword
       }
+     // var token=localStorage.get
     axios
       .post('http://localhost:8080/user/resetPassword/{token}',data)
       .then(response => {
-        alert("successfully reset the done");
-       this.emailId=response.blog
+        this.confirmpassword=response.data;
        })
       .catch(error => {
        alert(error)

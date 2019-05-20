@@ -1,31 +1,25 @@
 <template>
-  <div>
+ <div>
     <md-card md-with-hover>
       <md-ripple>
+        <form>
         <md-card-header>
           <div class="md-title" style="color:cornflowerblue">Fundoo</div>
           <div class="md-subhead"></div>
         </md-card-header>
-        <md-card-action>
            <div class="form-group">
                 <label for="emailId">EmailId:</label>
-                <input type="text" v-model="emailId" name="emailId" style="margin-left:17px"/>
+                <input type="text" v-model="emailId"  style="margin-left:17px"/>
+                <span>{{emailId}}</span>
             </div>
-             </md-card-action>
-        <!-- <md-card-content>
-           <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" v-model="password" name="password" style="margin-left:5px" />
-            </div>
-        </md-card-content> -->
         <md-card-content>
-          <button style="background-color:#87ceeb" @click="Forgotpassword">Sumbit</button>
-        <div>
-        </div> 
-
-        <router-link to="/resetpassword" class="btn btn-link">click to Resetpassword</router-link>
+          <button style="background-color:#87ceeb" @click="Forgotpassword">Forgotpassword <br></button>
+          <div>
+          </div>
+          <router-link to="/Resetpassword" class="Resetpassword">Click to Resetpassword</router-link>
+         
         </md-card-content>
-
+        </form>
        </md-ripple>
     </md-card>
   </div>
@@ -44,7 +38,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'Login',
+  name: 'Forgotpassword',
 data() {
     return {
      emailId:'',
@@ -62,8 +56,9 @@ data() {
      axios
       .post('http://localhost:8080/user/forgotpassword',data)
       .then(response => {
+        this.emailId=response.data;
        alert("emailId is present in database");
-         this.emailId=response.blog
+       //  this.emailId=response.blog
 })
       .catch(error => {
       alert(error)

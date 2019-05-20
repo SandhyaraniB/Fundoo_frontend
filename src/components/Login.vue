@@ -40,6 +40,8 @@
     margin: 4px;
     display: inline-block;
     vertical-align: top;
+    /* display:flex, */
+    
   }
 </style>
 
@@ -54,21 +56,18 @@ data() {
     };
   },
   methods: {
-    Login()
-    {
+    Login(){
       const data={
         emailId:this.emailId,
         password:this.password
       }
-      alert(data);
-      
-       alert("successfully  Login");
-     
-     axios
+      axios
       .post('http://localhost:8080/user/login',data)
       .then(response => {
-       alert("successfully  Login");
-         this.emailId=response.blog
+        alert(response.data.satusmessage)
+      //  alert("successfully  Login");
+       localStorage.setItem('token',response.data.token);
+        // this.emailId=response.blog
 })
       .catch(error => {
       alert(error)
