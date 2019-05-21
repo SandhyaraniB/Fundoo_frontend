@@ -9,14 +9,14 @@
         </md-card-header>
            <div class="form-group">
                 <label for="emailId">EmailId:</label>
-                <input type="text" v-model="emailId"  style="margin-left:17px"/>
+                <input type="emailId" v-model="emailId"  style="margin-left:17px"/>
                 <span>{{emailId}}</span>
             </div>
         <md-card-content>
           <button style="background-color:#87ceeb" @click="Forgotpassword">Forgotpassword <br></button>
           <div>
           </div>
-          <router-link to="/Resetpassword" class="Resetpassword">Click to Resetpassword</router-link>
+          <router-link to="/user/resetPassword/:yut7gbhbhhh" class="Resetpassword">Click to Resetpassword</router-link>
          
         </md-card-content>
         </form>
@@ -52,11 +52,12 @@ data() {
         emailId:this.emailId,
        // password:this.password
       }
-      alert(data);
+      alert("fffffffffffffffff");
      axios
       .post('http://localhost:8080/user/forgotpassword',data)
       .then(response => {
         this.emailId=response.data;
+        alert(response.data.satusmessage)
        alert("emailId is present in database");
        //  this.emailId=response.blog
 })

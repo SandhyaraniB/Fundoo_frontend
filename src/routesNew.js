@@ -1,10 +1,10 @@
-import Login from './components/Login.vue';
-import Counting from './components/Counting.vue';
-import Register from './components/Register.vue';
-import ForgotPassword from './components/ForgotPassword.vue';
-import resetPassword from './components/resetPassword.vue';
-import test from './components/test.vue'
-import Verified from './components/verified.vue'
+import Login from './components/user/Login.vue';
+import Counting from './components/user/Counting.vue';
+import Register from './components/user/Register.vue';
+import ForgotPassword from './components/user/ForgotPassword.vue';
+import resetPassword from './components/user/resetPassword.vue';
+import test from './components/user/test.vue';
+import Verified from './components/user/verified.vue'
 // import router from 'router'
 //import Vue from 'vue';
 // import Router from 'vue-router'
@@ -14,19 +14,19 @@ export default//route=new router({
  
    [
     { 
-        path: '/Login',
+        path: '/user/Login',
         component: Login
     },
     { 
-        path: '/Counting', 
+        path: '/user/Counting', 
         component: Counting
     },
     { 
-        path: '/', 
+        path: '/user/', 
         component: Register
     },
     { 
-        path: '/ForgotPassword', 
+        path: '/user/ForgotPassword', 
         component: ForgotPassword
     },
     { 
@@ -34,7 +34,7 @@ export default//route=new router({
         component: resetPassword
     },
     {
-        path:'/test',
+        path:'/user/test',
         component:test
     },
     {
@@ -53,3 +53,16 @@ export default//route=new router({
 //                 },
 //     ],
 //   })
+// import Vue from 'vue'
+// import Router from 'vue-router'
+// import Register from './components/Register'
+// Vue.use(Router)
+// export default new Router({
+//     mode: 'history',
+//   routes: [
+//     {
+//       path: '/',
+//       component: Register
+//     }
+//   ]
+// })

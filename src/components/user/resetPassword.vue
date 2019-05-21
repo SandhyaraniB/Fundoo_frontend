@@ -9,15 +9,15 @@
         </md-card-header>
            <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="text" v-model="password"  style="margin-left:17px"/>
-                <span>{{password}}</span>
+                <input type="text" v-model="password"  style="margin-left:1px"/>
+                <!-- <span>{{password}}</span> -->
             </div>
-         <md-card-content>
+         <!-- <md-card-content>
            <div class="form-group">
                 <label for="confirmpassword">Confirmpassword:</label>
-                <input type="confirmpassword" v-model="confirmpassword" style="margin-left:5px" />
+                <input type="confirmpassword" v-model="confirmpassword" style="margin-left:75px" />
             </div>
-        </md-card-content>
+        </md-card-content> -->
         <md-card-content>
           <button style="background-color:#87ceeb" @click="Resetpassword">ResetPassword <br></button>
           <div>
@@ -31,8 +31,8 @@
 
 <style  scoped>
   .md-card {
-    width: 320px;
-    height:350px;
+    width: 300px;
+    height:200px;
     margin: 4px;
     display: inline-block;
     vertical-align: top;
@@ -58,13 +58,16 @@ export default {
     Resetpassword() {
       const data={
         password:this.password,
-         confirmpassword:this.confirmpassword
+        confirmpassword:this.confirmpassword
       }
+      alert("qwertqwer")
      // var token=localStorage.get
-    axios
-      .post('http://localhost:8080/user/resetPassword/{token}',data)
+    //axios.post('http://localhost:8080/user/resetPassword/{token}',data)
+    axios.put(`http://localhost:8080/user/resetPassword`,data,{ headers: {token:this.$route.params.token} })
       .then(response => {
         this.confirmpassword=response.data;
+        alert("nnnnnnnnnnnnnnnnnnnnnnn")
+        alert(response.data.message)
        })
       .catch(error => {
        alert(error)
@@ -73,3 +76,5 @@ export default {
 }
 }
 </script>
+
+// axios.put(`${BASE_URL}/resetpassword`,data,{ headers: {token:this.$route.params.token} })

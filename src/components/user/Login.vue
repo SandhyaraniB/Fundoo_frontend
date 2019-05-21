@@ -22,7 +22,7 @@
           <button style="background-color:#87ceeb" @click="Login">Sign in</button>
           <div>
           </div>
-        <router-link to="/forgotpassword" class="btn btn-link">forgot password</router-link>
+        <router-link to="/user/forgotpassword" class="btn btn-link">forgot password</router-link>
         <div>
         </div>
         <!-- <router-link to="/register" class="btn btn-link">Click to register</router-link> -->
@@ -46,7 +46,8 @@
 </style>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import {userService} from '/home/admin1/Desktop/fundoo/src/Service/UserService.js'
 export default {
   name: 'Login',
 data() {
@@ -55,23 +56,41 @@ data() {
      password:'',
     };
   },
+
   methods: {
     Login(){
+      
       const data={
         emailId:this.emailId,
         password:this.password
       }
-      axios
-      .post('http://localhost:8080/user/login',data)
-      .then(response => {
-        alert(response.data.satusmessage)
-      //  alert("successfully  Login");
-       localStorage.setItem('token',response.data.token);
-        // this.emailId=response.blog
-})
-      .catch(error => {
+    //  console.log('dattaaaaaaaaa')
+      userService.login(data)
+      .then('loginSuccess')
+        .catch(error => {
       alert(error)
-      })
+      })                
+                  
+             
+
+      // /console.log('HI.....')
+//       const data={
+//         emailId:this.emailId,
+//         password:this.password
+//       }
+//       axios
+//       .post('http://localhost:8080/user/login',data)
+//       .then(response => {
+//         alert(response.data.satusmessage)
+//       //  alert("successfully  Login");
+//       // console.log(response.data.token);
+//        localStorage.setItem('token',response.data.token);
+//         // this.emailId=response.blog
+// })
+//       .catch(error => {
+//       alert(error)
+//       })
+
   }
 }
 }

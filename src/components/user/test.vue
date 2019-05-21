@@ -9,7 +9,7 @@
 <md-field class="login">
       <label>Suffix</label>
       <md-input v-model="empty"></md-input>
-      <button style="background-color:#87ceeb" @click="Test">Sign in</button>
+      <button style="background-color:#87ceeb" @click="Test">TESTING</button>
     </md-field>
 </template>
 
@@ -29,16 +29,8 @@ data() {
   },
     Test()
     {
-      
-      // alert(this.router.url);
-      
-       alert("successfully  Login");
-     
-    
-  }
-    // name: "InputsPage",
-    // components: {
-     // mdbInput
+      alert("successfully  Login");
+    }
 
     
   };
