@@ -69,27 +69,7 @@ data() {
       .then('loginSuccess')
         .catch(error => {
       alert(error)
-      })                
-                  
-             
-
-      // /console.log('HI.....')
-//       const data={
-//         emailId:this.emailId,
-//         password:this.password
-//       }
-//       axios
-//       .post('http://localhost:8080/user/login',data)
-//       .then(response => {
-//         alert(response.data.satusmessage)
-//       //  alert("successfully  Login");
-//       // console.log(response.data.token);
-//        localStorage.setItem('token',response.data.token);
-//         // this.emailId=response.blog
-// })
-//       .catch(error => {
-//       alert(error)
-//       })
+      }) 
 
   }
 }

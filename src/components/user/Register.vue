@@ -43,51 +43,10 @@
     </md-card>
   </div>
 </template>
-
-
-
-
-
-// import axios from 'axios'
-// export default {
-//   name:'Register',
-//   data () {
-//     return {
-      
-//      emailId:'',
-//      name:'',
-//      mobileNumber:'',
-//      password:'',
-      
-//     };
-//   },
-
-
-//  methods: {
-
-//     Register() {
-//       const data={
-//         emailId:this.emailId,
-//         name:this.name,
-//         mobileNumber:this.mobileNumber,
-//         password:this.password
-//       }
-//     axios
-//       .post('http://localhost:8080/user/register',data)
-//       .then(response => {
-//          alert(response.data.satusmessage); 
-//          })
-//       .catch(error => {
-//        alert(error)
-//       })
-//   }
-// }
-// }
-
 <script>
 import {userService} from '/home/admin1/Desktop/fundoo/src/Service/UserService.js'
 export default {
-  name: 'Register',
+  name: 'register',
 data() {
     return {
      emailId:'',
@@ -110,27 +69,7 @@ data() {
       .then('registeration done')
         .catch(error => {
       alert(error)
-      })  
-//       const data={
-//         emailId:this.emailId,
-//         name:this.name,
-//         mobileNumber:this.mobileNumber,
-//         password:this.password
-//       }
-//       axios
-//       .post('http://localhost:8080/user/register',data)
-//       .then(response => {
-//         // alert('registered...')
-//         //  alert(window)
-//         alert(response.data.message)
-//       //  console.log('result');
-        
-// })
-//       .catch(error => {
-//         // console.log('error')
-        
-//       alert(error)
-//       })
+      });
   }
 }
 }

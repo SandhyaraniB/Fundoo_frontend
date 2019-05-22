@@ -5,24 +5,12 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import Routes from './routesNew'
-// import VueRouter from 'vue-router';
-// Vue.use(VueRouter);
-//  Vue.use(VueRouter);
-// const router=new VueRouter({
-//   mode: 'history',
-//   routes:Routes,
-  
-// });
+
 
 export default {
   name: 'app',
- //router:router,
   components: {
-    //HelloWorld
-   //Login
-   //Counting
+    
    }
 }
 </script>
@@ -36,5 +24,4 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-/* import 'mdbvue'; */
 </style>
