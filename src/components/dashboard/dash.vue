@@ -1,12 +1,11 @@
 <template>
-  
+    <div>
     <div>
     <md-toolbar md-elevation="0" class="toolbar">
-       <div class="md-toolbar-row">
-      <md-button class="md-icon-button" @click="showNavigation=true">
+    <div class="md-toolbar-row">
+    <md-button class="md-icon-button" @click="showNavigation = true">
         <md-icon>menu</md-icon>
       </md-button>
-
       <span class="md-title">FundooNotes</span>
 
        <div class="md-toolbar-section-center">
@@ -22,59 +21,52 @@
       <div class="md-toolbar-section-end">
       <img src="" style="color:pink">
        <md-button style=" color:pink" class="md-icon-button">
-     
        </md-button>
       </div>
        </div>
-   
- </md-toolbar>
-   <md-divider></md-divider>
-
-    <md-drawer :md-active.sync="showNavigation" md-swipeable>
-    </md-drawer>
-  
-<div>
- 
-   <div class="sidenav">
+    </md-toolbar>
+    
+    </div>
+      <md-divider></md-divider>
+    <div>
+        
+    </div>
+    <md-content >
+   <!-- <div class="sidenav"> -->
     <md-drawer :md-active.sync="showNavigation" class="sidenav">
-      
-        <!-- <span class="md-title">My App name</span> -->
-     
-      <md-list>
-       <!-- <md-button to="/components/button">Default</md-button> -->
+    <md-list>
+
+     <md-button>
      <md-list-item>
-     <!-- <md-icon>note</md-icon> -->
-     <div>
-  
-         
-     <img src="/assets/nottt.svg">
-     <!-- <md-button to="/components/button">Notes</md-button> -->
-     </div>
+     <md-icon>note</md-icon>
+     <span class="md-list-item-text">notes</span>
      </md-list-item>
+     </md-button>
+
+     <md-button>
+       <md-list-item>
+       <md-icon>Reminder</md-icon>
+       <span class="md-list-item-text">reminder</span>
+       </md-list-item>
+     </md-button>
+
+     <md-divider></md-divider>
+     <md-button>
         <md-list-item>
-          <md-button>
           <md-icon>Archive</md-icon>
           <span class="md-list-item-text">Archive</span>
-          </md-button>
          </md-list-item>
+     </md-button>
+     <md-button>
         <md-list-item>
-          <md-button>
           <md-icon>delete</md-icon>
           <span class="md-list-item-text">Trash</span>
-          </md-button>
-
-         </md-button>
-         
         </md-list-item>
-
-        <md-list-item>
-          <md-icon>error</md-icon>
-          <span class="md-list-item-text">Spam</span>
-        </md-list-item>
+     </md-button>
       </md-list>
     </md-drawer>
+    </md-content>
    </div>
-
 </template>
 
 <style scoped>
@@ -100,8 +92,25 @@
     width: 77%;
     border-radius: 8px;
    }
-   
-   </style>
+
+   .sidenav{
+    margin-top: 60px;
+    height: 400px;
+    /* overflow: visible; */
+    width: 200px;
+   }
+    .md-content {
+    max-width: 200px;
+    max-height: 200px;
+    overflow: auto;
+  }
+ 
+      .md-drawer{
+
+    margin-top: 100px;
+      }
+ 
+</style>
 
 <script>
 export default {

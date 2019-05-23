@@ -7,7 +7,9 @@ import Routes from './routesNew';
 import VueRouter from 'vue-router';
 import VueMaterialIcon from 'vue-material-icon';
 import VTooltip from 'v-tooltip'
- 
+import Vuetify from 'vuetify'
+
+Vue.use(Vuetify)
 Vue.use(VTooltip)
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
