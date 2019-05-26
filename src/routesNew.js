@@ -6,9 +6,13 @@ import ForgotPassword from './components/user/ForgotPassword.vue';
 import resetPassword from './components/user/resetPassword.vue';
 import test from './components/user/test.vue';
 import Verified from './components/user/verified.vue';
-import dashboard from './components/dashboard/dashboard.vue'
-import dash from './components/dashboard/dash.vue'
-import CreateNote from './components/note/CreateNote.vue'
+import navbar from './components/navbar.vue'
+import CreateNote from './components/CreateNote.vue';
+import dash from './components/dash.vue'
+import dash1 from './components/dash1.vue'
+import iconlist from './components/iconlist.vue';
+import cards from './components/cards.vue';
+
 export default
  [
     { 
@@ -18,6 +22,14 @@ export default
     { 
         path: '/user/Counting', 
         component: Counting
+    },
+    { 
+        path: '/cards', 
+        component: cards
+    },
+    { 
+        path: '/iconlist', 
+        component: iconlist
     },
     { 
         path: '/user/HelloWorld', 
@@ -44,16 +56,28 @@ export default
         component:Verified
     },
     {
-        path:'/dashboard/dashboard',
-        component:dashboard
+        path:'/CreateNote',
+        component:CreateNote
     },
     {
-        path:'/dashboard/dash',
+        path:'/dash',
         component:dash
     },
     {
-        path:'/note/CreateNote',
-        component:CreateNote
-    }
+        path:'/dash1',
+        component:dash1
+    },
+    {
+        path:'/navbar',
+        component:navbar,
+        children:
+       [
+            {
+                path:'CreateNote',
+                component:CreateNote
+            }
+       ]
+    },
+  
  ]
  

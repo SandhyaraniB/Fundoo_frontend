@@ -1,0 +1,117 @@
+<template>
+  <div style="width:100%;">
+    <md-menu style="margin-left:-5px;">
+    <md-button md-menu-trigger class="md-icon-button">
+      <md-icon class="icon">notifications</md-icon>
+    </md-button>
+    <md-menu-content style="width:200px;height:500px;">
+        <md-menu-item>Reminder : </md-menu-item>
+        <md-menu-item class="dates">Later today</md-menu-item>
+        <md-menu-item class="dates">Tomorrow</md-menu-item>
+        <md-menu-item class="dates">Next week</md-menu-item>
+      </md-menu-content>
+      </md-menu>
+    
+    <md-button class="md-icon-button">
+      <md-icon >person_add</md-icon>
+    </md-button>
+
+    <md-menu style="margin-left:-5px;">
+    <md-button md-menu-trigger class="md-icon-button">
+      <md-icon class="icon">color_lens</md-icon>
+    </md-button>
+    <md-menu-content style="width:200px;height:150px;">
+      <div>
+         <md-button class="md-icon-button" style="background-color:white;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:red;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:orange;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:yellow;">
+      <md-icon ></md-icon>
+    </md-button>
+
+      </div>
+      
+       <div>
+         <md-button class="md-icon-button" style="background-color:green;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:teal;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:blue;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:darkblue;">
+      <md-icon ></md-icon>
+    </md-button>
+
+      </div>
+       <div>
+         <md-button class="md-icon-button" style="background-color:purple;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:pink;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:brown;">
+      <md-icon ></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" style="background-color:grey;">
+      <md-icon ></md-icon>
+    </md-button>
+
+      </div>
+        
+      </md-menu-content>
+      </md-menu>
+    
+    <!-- <md-button class="md-icon-button">
+      <md-icon class="icon">color_lens</md-icon>
+    </md-button> -->
+    <md-button class="md-icon-button">
+      <md-icon class="icon">crop_original</md-icon>
+    </md-button>
+    <md-button class="md-icon-button">
+      <md-icon class="icon">unarchive</md-icon>
+    </md-button>
+    <md-button class="md-icon-button">
+      <md-icon class="icon">more_vert</md-icon>
+    </md-button>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.icon{
+  padding: 0px;
+  margin-left: 0px;
+}
+
+.reminder{
+  width:120px;
+  height: 50%;
+}
+
+.dates{
+  margin-top:-10px;
+}
+
+</style>
+
+<script>
+export default {
+  // flag: true,
+
+  data: () => ({
+    
+  }),
+  methods: {
+    
+  }
+};
+</script>

@@ -8,8 +8,23 @@ import VueRouter from 'vue-router';
 import VueMaterialIcon from 'vue-material-icon';
 import VTooltip from 'v-tooltip'
 import Vuetify from 'vuetify'
+import MenuIcon from "vue-material-design-icons/Menu.vue"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+ Vue.component("menu-icon", MenuIcon);
+ Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
+library.add(fas) // Include needed icons.
 
-Vue.use(Vuetify)
+ 
+//  Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  iconfont: 'mdi'||'md' || 'mdi' || 'fa' || 'fa4'||'faSvg',
+  icons: {
+    'cancel': 'fas fa-ban',
+    'menu': 'fas fa-ellipsis-v'
+  }
+})
 Vue.use(VTooltip)
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
