@@ -7,23 +7,19 @@
           <md-button class="md-icon-button" @click="showNavigation = true">
             <md-icon>menu</md-icon>
           </md-button>
-           <div>
-             <img src="./../assets/keep.png" width="25px">
-           </div>
+          <div>
+            <img src="./../assets/keep.png" width="25px">
+          </div>
           <div style="margin-right: 91px;width: 15%;text-align: start;">
             <p style="margin-left:10px">FundooNotes</p>
           </div>
-         
-
 
           <div class="md-toolbar-section-center" style="width: 40%; text-align: start;">
             <!-- <input  style="width: -webkit-fill-available;border:none;" type="text" placeholder="Search"> -->
             <!-- <label for="search"><i class="material-icons">search</i></label> -->
             <md-card class="card">
-               <md-icon style="margin-left:5px;">search</md-icon>
+              <md-icon style="margin-left:5px;">search</md-icon>
               <input class="input" placeholder="Search">
-             
-
             </md-card>
           </div>
           <!-- <v-btn icon> 
@@ -32,12 +28,14 @@
           <div class style="margin-left: 100px;">
             <md-button style="color:black" class="md-icon-button" width="-30px">
               <md-icon style="color:black">refresh</md-icon>
+              <md-tooltip md-direction="bottom">Refresh</md-tooltip>
             </md-button>
           </div>
 
           <div class style="margin-left: 10px;">
             <md-button style="color:black" class="md-icon-button" width="-30px">
               <md-icon style="color:black">settings</md-icon>
+              <md-tooltip md-direction="bottom">settings</md-tooltip>
             </md-button>
           </div>
 
@@ -48,14 +46,12 @@
           </div>
 
           <div class style="margin-right: 15px;">
-            
             <!-- <md-button> -->
-                <!-- <img src="./../assets/dhatri.png" width="20px" style="color:pink;border-radius:20px;"> -->
+            <!-- <img src="./../assets/dhatri.png" width="20px" style="color:pink;border-radius:20px;"> -->
             <!-- </md-button> -->
-             <md-button class="md-icon-button">
-                      <img src="./../assets/dhatri.png" width="50px" style="color:pink;border-radius:30px;">
-
-      </md-button>
+            <md-button class="md-icon-button">
+              <img src="./../assets/dhatri.png" width="50px" style="color:pink;border-radius:30px;">
+            </md-button>
           </div>
         </div>
       </md-toolbar>
@@ -85,7 +81,11 @@
       </md-drawer>
     </div>
     <CreateNote></CreateNote>
-    <cards></cards>
+    <md-button class="md-icon-button" @click="getnotes()">
+      <md-icon>location_on</md-icon>
+      <md-tooltip md-direction="bottom">pin</md-tooltip>
+    </md-button>
+    <!-- <cards></cards> -->
     <!-- <router-view></router-view> -->
   </div>
 </template>
@@ -108,20 +108,23 @@
   width: 103%;
 }
 #Search {
+  flex: 0%;
   padding: 3px;
   width: 77%;
   border-radius: 8px;
 }
-.search
-{
-width: 42px;
-height: 47px;
-margin-left: 5px;
-margin-top: 5px;
-background: transparent;
+.search {
+  flex: 0%;
+  width: 42px;
+  height: 47px;
+  margin-left: 5px;
+  margin-top: 5px;
+  background: transparent;
 }
 
 .sidenav {
+  display: flex;
+
   margin-top: 10px;
   height: 600px;
   /* overflow: visible; */
@@ -129,6 +132,8 @@ background: transparent;
 }
 
 .md-content {
+  display: flex;
+
   max-width: 400px;
   max-height: 200px;
   overflow: auto;
@@ -137,13 +142,13 @@ background: transparent;
 .md-drawer {
   margin-top: 110px;
 }
-.card{
+.card {
   margin-left: -90px;
   height: 40px;
   width: 140%;
   border-radius: 8px;
 }
-.input{
+.input {
   margin-left: 2%;
   margin-top: 5px;
   width: 90%;
@@ -154,16 +159,30 @@ background: transparent;
 
 <script>
 import CreateNote from "./CreateNote";
-import cards from "./cards";
+import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+// import cards from "./cards"
 export default {
   name: "IconButtons",
   components: {
-    CreateNote,
-    cards
+    CreateNote
+    // cards
   },
   data: () => ({
     showNavigation: false,
     showSidepanel: false
-  })
+  }),
+  methods: {
+    getnotes() {
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      alert(token.token);
+      NoteService.GetAllNotes(token.token)
+        .then("cards.")
+        .catch(error => {
+          alert(error);
+        });
+    }
+  }
 };
 </script>

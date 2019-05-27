@@ -1,74 +1,113 @@
-<template>
-  <div id="app">
-    <v-app>
+<div id="app">
+  <template>
+  <v-app light>
+    <v-navigation-drawer
+      persistent
+      :mini-variant="miniVariant"
+      :clipped="toolabar.clippedLeft && !nav.right || toolabar.clippedRight"
+      v-model="drawer"
+      enable-resize-watcher
+      app
+      :right="nav.right"
+    >
+      <v-list>
+        <v-list-tile
+          value="true"
+          v-for="(item, i) in items"
+          :key="i"
+        >
+          <v-list-tile-action>
+            <v-icon light v-html="item.icon"></v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
+    <!-- TOOLBAR -->
+    <v-toolbar
+      fixed
+      app
+      class="blue"
+      :clipped-left="toolabar.clippedLeft"
+      :clipped-right="toolabar.clippedRight"
+    >
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
+      <v-btn
+        icon
+        light
+        @click.stop="miniVariant = !miniVariant"
+      >
+        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        light
+        @click.stop="clipped = !clipped"
+      >
+        <v-icon>web</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        light
+        @click.stop="fixed = !fixed"
+      >
+        <v-icon>remove</v-icon>
+      </v-btn>
+      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        icon
+        light
+        @click.stop="rightDrawer = !rightDrawer"
+      >
+        <v-icon>menu</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <main>
       <v-content>
-        <v-container>
-          <v-navigation-drawer
-            persistent
-            :clipped="clipped"
-            v-model="drawer"
-            enable-resize-watcher
-            app
-            fixed
-          >
-            <v-list>
-              <v-list-tile >
-                <v-btn>
-                <v-icon>Note</v-icon>
-                </v-btn>
-              <!-- value="true" v-for="(item, i) in items" :key="i" -->
-                <!-- <v-list-tile-action>
-                  <v-icon v-html="item.icon"></v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title v-text="item.title"></v-list-tile-title>
-                </v-list-tile-content> -->
-              </v-list-tile>
-            </v-list>
-          </v-navigation-drawer>
-          <v-toolbar app :clipped-left="clipped" style="margin=200px">
-            <v-toolbar-side-icon @click.stop="drawer = !drawer" style="width: 20px;
-    height: 20px;margin-right: 1000px; "></v-toolbar-side-icon>
-            <!-- <v-btn>menu</v-btn> -->
-          </v-toolbar>
-          <v-content>
-            <router-view/>
-          </v-content>
-          <v-footer :fixed="fixed" app>
-            <span>&copy; 2018</span>
-          </v-footer>
+        <v-container fluid>
+          <v-slide-y-transition mode="out-in">
+            <v-layout column align-center>
+              <v-btn
+                @click.stop="toolabar.clippedLeft = !toolabar.clippedLeft"
+              >
+                Clip left Toolbar
+              </v-btn>
+              <v-btn
+                @click.stop="toolabar.clippedRight = !toolabar.clippedRight"
+              >
+                Clip right Toolbar
+              </v-btn>
+
+              <v-btn
+                @click.stop="nav.right = !nav.right"
+              >
+                Nav Right
+              </v-btn>
+            </v-layout>
+          </v-slide-y-transition>
         </v-container>
       </v-content>
-    </v-app>
-  </div>
+    </main>
+    <v-navigation-drawer
+      temporary
+      :right="right"
+      v-model="rightDrawer"
+    >
+      <v-list>
+        <v-list-tile @click="right = !right">
+          <v-list-tile-action>
+            <v-icon light>compare_arrows</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-footer :fixed="fixed" app>
+      <span>&copy; 2017</span>
+    </v-footer>
+  </v-app>
 </template>
-<script>
-export default {
-  data: () => ({
-    drawer: false,
-    clipped: true,
-    items: [
-      {
-        // 左抽屉 navigation-drawer
-        icon: "bubble_chart",
-        title: "微信"
-      },
-      {
-        // 左抽屉 navigation-drawer
-        icon: "bubble_chart",
-        title: "QQ"
-      }
-    ]
-  })
-};
-</script>
-<style>
-.v-toolbar{
-  background-color: brown;
-  margin-bottom: 2000px;
-  align:top;
-  margin-top: 0px;
-
-  /* margin-top: 500px; */
-}
-</style>

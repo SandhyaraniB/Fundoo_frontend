@@ -28,9 +28,10 @@ export default {
 
   methods: {
     Verify(){
-     const token=this.token;
+     const token=this.$route.params.token;
+     alert("Token"+token)
      axios
-      .post('http://localhost:8080/user/validateEmailId'+token)
+      .get('http://localhost:8080/user/validateEmailId/',{ headers: {token:this.$route.params.token} })
       .then(response => {
        alert("successfully  verified");
       

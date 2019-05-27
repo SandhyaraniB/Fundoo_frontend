@@ -5,15 +5,18 @@
       <md-card style="width: 420px; height: 44px;">
         <div> 
           
-          <input type="text" placeholder="Take a note..." style="margin: 10px;border:none;">
+          <input type="text"  placeholder="Take a note..." style="margin: 10px;border:none;">
           <md-button class="md-icon-button">
             <md-icon>list</md-icon>
+            <md-tooltip md-direction="bottom">new list</md-tooltip>
           </md-button>
           <md-button class="md-icon-button">
             <md-icon>create</md-icon>
+            <md-tooltip md-direction="bottom">new note with drawing</md-tooltip>
           </md-button>
           <md-button class="md-icon-button">
             <md-icon>crop_original</md-icon>
+            <md-tooltip md-direction="bottom">new note with image</md-tooltip>
           </md-button>
         </div>
       </md-card>
@@ -22,13 +25,15 @@
     <div v-else>
       <md-card class="takenote">
         <div>
-          <input type="text" placeholder="title" class="titleone">
+          <input type="text" v-model="title" name="title" placeholder="title" class="titleone" style="border: none;" >
+           
           <md-button class="md-icon-button">
             <md-icon>location_on</md-icon>
+            <md-tooltip md-direction="bottom">pin</md-tooltip>
           </md-button>
         </div>
         <div>
-          <input type="text" placeholder="description" class="titletwo">
+          <input type="text" v-model="content" name="content" placeholder="description" class="titletwo" style="border: none;">
         </div>
        
         <iconlist></iconlist>
@@ -53,8 +58,9 @@
           </md-button>  @click="flagchange" -->
           <!-- <div> -->
           
-          <md-button class="close">
+          <md-button class="close" @click="createnote()">
             Close
+            <md-tooltip md-direction="bottom">close</md-tooltip>
           </md-button>
           <!-- </div> -->
          
@@ -64,13 +70,10 @@
         </md-ripple>
       </md-card>
     </div>
-
-    <!-- <div v-if="flag">
-               Sushant p
-    </div>
-    <div v-else>
-        Sushant has done...........it
-    </div>-->
+     <md-button class="md-icon-button" @click="getnotes()">
+            <md-icon>location_on</md-icon>
+            <md-tooltip md-direction="bottom">pin</md-tooltip>
+          </md-button>
   </div>
 </template>
 
@@ -116,16 +119,56 @@
 
 <script>
 import iconlist from './../components/iconlist'
+import {NoteService} from '/home/admin1/Desktop/fundoo/src/Service/NoteService.js'
 export default {
   // flag: true,
 
-  data: () => ({
-    flag: true
-  }),
+  data() {
+     return {
+    title:'',
+     content:'',
+     flag: true,
+    } 
+  },
+ 
   methods: {
     flagchange() {
       this.flag = !this.flag;
       // alert(this.flag);
+    },
+     createnote(){
+       
+      
+      const data={
+        title:this.title,
+        content:this.content
+        
+      }
+      // alert("STARTS...."+data.title)
+      const token={
+       token:localStorage.getItem('token')
+      }
+       alert("title"+token.token);
+    //  console.log('dattaaaaaaaaa')
+      // userService.login(data)
+      NoteService.CreateNote(data,token)
+      .then('created successfully')
+        .catch(error => {
+      alert(error)
+      }) 
+
+  },
+   getnotes(){
+       const token={
+       token:localStorage.getItem('token')
+      }
+      alert(token.token)
+      NoteService.GetAllNotes(token)
+      .then('cards.')
+        .catch(error => {
+      alert(error)
+      }) 
+
     }
   },
   components:{

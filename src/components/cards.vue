@@ -3,17 +3,20 @@
     <div>
       <md-card class="takenote">
         <div>
-          <input type="text" placeholder="title" class="titleone">
-          
+          <input type="text" v-model="title" name="title" placeholder="title" class="titleone" style="border: none;" >
         </div>
         <div>
-          <input type="text" placeholder="description" class="titletwo">
+          <input type="text" v-model="content" name="content" placeholder="description" class="titletwo" style="border: none;">
         </div>
 
         <iconlist></iconlist>
         <md-ripple></md-ripple>
       </md-card>
     </div>
+    <md-button class="md-icon-button" @click="getnotes()">
+      <md-icon class="icon">archive</md-icon>
+      <md-tooltip md-direction="bottom">archive</md-tooltip>
+    </md-button>
   </div>
 </template>
 
@@ -61,11 +64,25 @@
 
 <script>
 import iconlist from "./../components/iconlist";
+import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 export default {
   // flag: true,
 
   components: {
     iconlist
+  },
+  methods: {
+    getnotes() {
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      alert(token.token);
+      NoteService.GetAllNotes(token)
+        .then("cards.")
+        .catch(error => {
+          alert(error);
+        });
+    }
   }
 };
 </script>

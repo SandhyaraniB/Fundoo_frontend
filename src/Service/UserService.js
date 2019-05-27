@@ -5,12 +5,15 @@ export const userService =
     register
 };
 
+alert(URL);
 function login(data)
 {
      alert(data);
      axios.post('http://localhost:8080/user/login',data)
           .then(response => { alert(response.data.satusmessage)
+           localStorage.removeItem('token');
            localStorage.setItem('token',response.data.token);
+           window.location.href="http://localhost:8081/navbar"
         }).catch(error => { alert(error)})
 }
  function register(data)
@@ -18,7 +21,8 @@ function login(data)
      alert("inside userservice register");
      alert(data);
      axios.post('http://localhost:8080/user/register',data)
-          .then(response => {alert(response.data.message)})
+          .then(response => {alert(response.data.message)},
+          window.location.href="http://localhost:8081/user/Login")
           .catch(error => { alert(error)})
  }
          

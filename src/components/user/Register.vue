@@ -67,6 +67,8 @@ data() {
      //console.log('1213');
     userService.register(data)
       .then('registeration done')
+      
+      // this.$router.push('http://localhost:8081/user/Login')
         .catch(error => {
       alert(error)
       });
