@@ -33,6 +33,7 @@ export default {
      axios
       .get('http://localhost:8080/user/validateEmailId/',{ headers: {token:this.$route.params.token} })
       .then(response => {
+        window.location.href="/user/Login"
        alert("successfully  verified");
       
          this.emailId=response.blog

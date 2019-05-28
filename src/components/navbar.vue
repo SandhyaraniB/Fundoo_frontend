@@ -99,10 +99,28 @@
               <span style="width:100px;margin-left:-120px;">Labels</span>
             </v-list-tile-action>
             <v-list-tile-action>
-              <md-button style="width:100px;margin-left:-80px;">
+              <!-- <md-button style="width:100px;margin-left:-80px;">
                 <md-icon class="icon">create</md-icon>
                 <span>Edit Label</span>
-              </md-button>
+              </md-button> -->
+              <div>
+    <md-dialog :md-active.sync="showDialog">
+      <md-dialog-title>Preferences</md-dialog-title>
+
+        <md-field md-clearable>
+      <!-- <label>Create new label</label> -->
+      <md-input v-model="labelname" placeholder="create new label"></md-input>
+      <!-- like login -->
+    </md-field>
+        
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="showDialog = false">Close</md-button>
+        <md-button class="md-primary" @click="submit()">Save</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+
+    <md-button  @click="showDialog = true">Edit Labels</md-button>
+  </div>
             </v-list-tile-action>
           </v-list-tile>
           <div>
@@ -154,6 +172,8 @@ export default {
     // cards
   },
   data: () => ({
+    showDialog: false,
+    labelname:'',
     drawer: {
       // sets the open status of the drawer
       open: true,
@@ -209,11 +229,31 @@ export default {
         // normal drawer
         this.drawer.open = !this.drawer.open;
       }
+    },
+    submit(){
+      const data={
+        labelname:this.labelname
+      }
+      console.log('====================================')
+      console.log("dataAAA",this.labelname);
+      console.log('====================================')
+        axios
+    .post('http://localhost:8080/Label/createlabel',data)
+    .then(res => {
+      if (res){
+        //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log("AAAAAAAAAA",res);
+        console.log('====================================');
+        
+        
+      }
+    }).catch(error => { alert(error)})
     }
   }
 };
 </script>
-<style>
+<style lang="scss" scoped>
 .f {
   color: blue;
   font-weight: bold;
@@ -270,6 +310,9 @@ export default {
   height: 30px;
   border: none;
 }
+.md-dialog {
+    max-width: 768px;
+  }
 </style>
 
 

@@ -8,11 +8,8 @@ export default {
     [
       {title:'' },
       {content:'' }
-    ]
-    },
-    methods:
-    {
-         getnotes(){
+    ],
+     getnotes(){
        const token={
        token:localStorage.getItem('token')
       }
@@ -24,6 +21,21 @@ export default {
       }) 
 
     }
+    },
+    methods:
+    {
+    //      getnotes(){
+    //    const token={
+    //    token:localStorage.getItem('token')
+    //   }
+    //   alert(token.token)
+    //   NoteService.GetAllNotes(token)
+    //   .then('cards.')
+    //     .catch(error => {
+    //   alert(error)
+    //   }) 
+
+    // }
     }
 }
 </script>

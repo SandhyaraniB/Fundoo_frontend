@@ -1,12 +1,15 @@
-<template v-for="item in items">
-  <div>
-    <div>
+<template >
+  <div >
+    <!-- <div class="row" v-for="result in results"> -->
+      <div>
       <md-card class="takenote">
         <div>
-          <input type="text" v-model="title" name="title" placeholder="title" class="titleone" style="border: none;" >
+          <input type="text" v-model="this.title" name="title" placeholder="title" class="titleone" style="border: none;" >
+        <!-- {{result.title}} -->
         </div>
         <div>
-          <input type="text" v-model="content" name="content" placeholder="description" class="titletwo" style="border: none;">
+          <input type="text" v-model="this.content" name="content" placeholder="description" class="titletwo" style="border: none;">
+        <!-- {{result.content}} -->
         </div>
 
         <iconlist></iconlist>
@@ -69,14 +72,17 @@ import axios from 'axios'
 export default {
   // flag: true,
  data: {
-    items: 
+    results: 
     [
-      {title:'' },
+      {title:''  },
       {content:''}
     ]
     },
   components: {
     iconlist
+  },
+    mounted () {
+    this. getnotes();
   },
   methods: {
     getnotes() {
@@ -92,14 +98,15 @@ export default {
        
     axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
     .then(res => {
-      if (res){
-        //VmUser.$bus.$emit('add-user', { user: user})
-        console.log('====================================');
-        console.log("AAAAAAAAAA",res);
-        console.log('====================================');
+      this.results=res.data.results
+      // if (res){
+      //   //VmUser.$bus.$emit('add-user', { user: user})
+      //   console.log('====================================');
+      //   console.log("AAAAAAAAAA",res);
+      //   console.log('====================================');
         
         
-      }
+      // }
     }).catch(error => { alert(error)})
     }
   }
