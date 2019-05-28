@@ -30,6 +30,7 @@ Vue.use(VueMaterial);
 Vue.use(VueRouter);
 Vue.component(VueMaterialIcon.name, VueMaterialIcon)
 Vue.config.productionTip = false;
+
 const router=new VueRouter({
   mode: 'history',
   routes:Routes,

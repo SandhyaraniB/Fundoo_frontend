@@ -1,4 +1,4 @@
-<template>
+<template v-for="item in items">
   <div>
     <div>
       <md-card class="takenote">
@@ -65,9 +65,16 @@
 <script>
 import iconlist from "./../components/iconlist";
 import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+import axios from 'axios'
 export default {
   // flag: true,
-
+ data: {
+    items: 
+    [
+      {title:'' },
+      {content:''}
+    ]
+    },
   components: {
     iconlist
   },
@@ -77,11 +84,23 @@ export default {
         token: localStorage.getItem("token")
       };
       alert(token.token);
-      NoteService.GetAllNotes(token)
-        .then("cards.")
-        .catch(error => {
-          alert(error);
-        });
+      // NoteService.GetAllNotes(token)
+      //   .then("cards.")
+      //   .catch(error => {
+      //     alert(error);
+      //   });
+       
+    axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
+    .then(res => {
+      if (res){
+        //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log("AAAAAAAAAA",res);
+        console.log('====================================');
+        
+        
+      }
+    }).catch(error => { alert(error)})
     }
   }
 };

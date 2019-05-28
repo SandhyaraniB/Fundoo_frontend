@@ -48,6 +48,7 @@
 <script>
 // import axios from 'axios'
 import {userService} from '/home/admin1/Desktop/fundoo/src/Service/UserService.js'
+import axios from 'axios'
 export default {
   name: 'Login',
 data() {
@@ -64,14 +65,28 @@ data() {
         emailId:this.emailId,
         password:this.password
       }
-    //  console.log('dattaaaaaaaaa')
-      userService.login(data)
-      .then('loginSuccess')
-        .catch(error => {
-      alert(error)
-      }) 
+     console.log('dattaaaaaaaaa')
+      // userService.login(data)
+      // .then('loginSuccess')
+      //   .catch(error => {
+      // alert(error)
+      // }) 
+
+      axios
+    .post('http://localhost:8080/user/login',data)
+    .then(res => {
+      if (res){
+        //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log("AAAAAAAAAA",res);
+        console.log('====================================');
+        
+        
+      }
+    }).catch(error => { alert(error)})
+}
 
   }
 }
-}
+
 </script>

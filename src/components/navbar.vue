@@ -1,188 +1,275 @@
 <template>
-  <div>
-    <!-- <router-view></router-view> -->
-    <div>
-      <md-toolbar md-elevation="0" class="toolbar">
-        <div class="md-toolbar-row">
-          <md-button class="md-icon-button" @click="showNavigation = true">
-            <md-icon>menu</md-icon>
-          </md-button>
+  <div id="app" style="margin-top:-60px;">
+    <v-flex xs6>
+    <v-app id="inspire" dark>
+      <v-toolbar style=" background: beige;">
+        <md-button
+          class="md-icon-button"
+          @click="toggleDrawer"
+          style="margin-left:-1050px;margin-top:10px;"
+        >
+          <md-icon>menu</md-icon>
+        </md-button>
+
+        <img src="./../assets/keep.png" style="width:35px;margin-top:13px;">
+
+        <span style="margin-left:20px;margin-top:45px;">
+          <span class="f">F</span>
+          <span class="u">u</span>
+          <span class="n">n</span>
+          <span class="d">d</span>
+          <span class="o">o</span>
+          <span class="oo">o</span>
+        </span>
+        <md-card class="card">
+          <md-icon style="margin-left:5px;">search</md-icon>
+          <input class="input" placeholder="Search">
+        </md-card>
+
+        <md-button
+          style="color:black;margin-left: 820px;margin-top: -45px;"
+          class="md-icon-button"
+          width="-30px"
+        >
+          <md-icon style="color:black">refresh</md-icon>
+          <md-tooltip md-direction="bottom">Refresh</md-tooltip>
+        </md-button>
+
+        <md-button
+          style="color:black;margin-top: -45px;margin-left: 10px;"
+          class="md-icon-button"
+          width="-30px"
+        >
+          <md-icon style="color:black">settings</md-icon>
+          <md-tooltip md-direction="bottom">settings</md-tooltip>
+        </md-button>
+
+        <md-button
+          style="color:black;margin-top: -45px;margin-left: 30px;"
+          class="md-icon-button"
+          width="-30px"
+        >
+          <md-icon style="color:black">apps</md-icon>
+        </md-button>
+
+        <md-button style="margin-top:-45px; margin-left: 40px;" class="md-icon-button">
+          <img src="./../assets/dhatri.png" width="20px" style="color:pink;border-radius:20px;">
+        </md-button>
+      </v-toolbar>
+      <v-divider></v-divider>
+
+      <v-navigation-drawer
+        :clipped="drawer.clipped"
+        :fixed="drawer.fixed"
+        :permanent="drawer.permanent"
+        :mini-variant="drawer.mini"
+        v-model="drawer.open"
+        app
+      >
+        <v-list style="width:200px;">
+          <v-list-tile>
+          <!-- v-if="!drawer.permanent" @click="makeDrawerPermanent" -->
+            <FlexboxLayout flexDirection="column" backgroundColor="#3c495e">
+              <div>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                <md-button style="width:100px;margin-left:-80px;">
+                  <md-icon class="icon">note</md-icon>
+                  <span>Notes</span>
+                </md-button>
+              </v-list-tile-title>
+            </v-list-tile-content>
+              </div>
+              <div>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                <md-button style="width:100px;margin-left:-80px;">
+                  <md-icon class="icon">notifications</md-icon>
+                  <span>Reminder</span>
+                </md-button>
+              </v-list-tile-title>
+            </v-list-tile-content>
+              </div>
+            </FlexboxLayout>
+          </v-list-tile>
+           <md-divider></md-divider>
+          <!-- <v-divider></v-divider> -->
+          <v-list-tile>
+            <v-list-tile-action>
+              <span style="width:100px;margin-left:-120px;">Labels</span>
+            </v-list-tile-action>
+            <v-list-tile-action>
+              <md-button style="width:100px;margin-left:-80px;">
+                <md-icon class="icon">create</md-icon>
+                <span>Edit Label</span>
+              </md-button>
+            </v-list-tile-action>
+          </v-list-tile>
           <div>
-            <img src="./../assets/keep.png" width="25px">
           </div>
-          <div style="margin-right: 91px;width: 15%;text-align: start;">
-            <p style="margin-left:10px">FundooNotes</p>
-          </div>
+           <md-divider></md-divider>
+          <!-- <v-divider></v-divider> -->
 
-          <div class="md-toolbar-section-center" style="width: 40%; text-align: start;">
-            <!-- <input  style="width: -webkit-fill-available;border:none;" type="text" placeholder="Search"> -->
-            <!-- <label for="search"><i class="material-icons">search</i></label> -->
-            <md-card class="card">
-              <md-icon style="margin-left:5px;">search</md-icon>
-              <input class="input" placeholder="Search">
-            </md-card>
-          </div>
-          <!-- <v-btn icon> 
-          <v-icon>search</v-icon>
-          </v-btn>-->
-          <div class style="margin-left: 100px;">
-            <md-button style="color:black" class="md-icon-button" width="-30px">
-              <md-icon style="color:black">refresh</md-icon>
-              <md-tooltip md-direction="bottom">Refresh</md-tooltip>
-            </md-button>
-          </div>
+          <v-list-tile>
+            <v-list-tile-action>
+              <md-button style="width:100px;margin-left:-80px;">
+                <md-icon class="icon">archive</md-icon>
+                <span>Archive</span>
+              </md-button>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>
+                <md-button style="width:100px;margin-left:-80px;">
+                  <md-icon class="icon">delete</md-icon>
+                  <span>Trash</span>
+                </md-button>
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-navigation-drawer>
 
-          <div class style="margin-left: 10px;">
-            <md-button style="color:black" class="md-icon-button" width="-30px">
-              <md-icon style="color:black">settings</md-icon>
-              <md-tooltip md-direction="bottom">settings</md-tooltip>
-            </md-button>
-          </div>
-
-          <div class style="margin-left: 10px;">
-            <md-button style="color:black" class="md-icon-button" width="-30px">
-              <md-icon style="color:black">apps</md-icon>
-            </md-button>
-          </div>
-
-          <div class style="margin-right: 15px;">
-            <!-- <md-button> -->
-            <!-- <img src="./../assets/dhatri.png" width="20px" style="color:pink;border-radius:20px;"> -->
-            <!-- </md-button> -->
-            <md-button class="md-icon-button">
-              <img src="./../assets/dhatri.png" width="50px" style="color:pink;border-radius:30px;">
-            </md-button>
-          </div>
-        </div>
-      </md-toolbar>
-    </div>
-    <div>
-      <md-drawer :md-active.sync="showNavigation" class="sidenav">
-        <md-content class="md-scrollbar">
-          <md-list>
-            <md-tabs md-sync-route>
-              <md-list-item>
-                <md-tab id="tab-home" md-label="Notes" to="/navbar/CreateNote" exact></md-tab>
-              </md-list-item>
-              <!-- <md-list-item>
-                                          <md-tab id="tab-home" md-label="Reminder" to="/note/Reminder" exact>
-                                              </md-tab>
-              </md-list-item>-->
-              <!-- <md-divider></md-divider> -->
-
-              <!-- <md-tab id="tab-home" md-label="archive" to="/note/Archive" exact>
-                                                  </md-tab>
-
-              <md-tab id="tab-home" md-label="Trash" to="/note/Trash" exact>-->
-              <!-- </md-tab> -->
-            </md-tabs>
-          </md-list>
-        </md-content>
-      </md-drawer>
-    </div>
-    <CreateNote></CreateNote>
-    <md-button class="md-icon-button" @click="getnotes()">
-      <md-icon>location_on</md-icon>
-      <md-tooltip md-direction="bottom">pin</md-tooltip>
-    </md-button>
-    <!-- <cards></cards> -->
-    <!-- <router-view></router-view> -->
+      <v-content>
+        <v-container fluid fill-height>
+          <v-layout justify-center align-center>
+            <v-flex shrink>
+              <div style="margin-top:-230px;">
+                <CreateNote></CreateNote>
+              </div>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-content>
+    </v-app>
+     </v-flex>
   </div>
 </template>
 
-<style scoped>
-.md-primary {
-  color: black;
-}
-.md-toolbar-row {
-  background-color: white;
-}
-
-.toolbar {
-  margin-left: -15px;
-  margin-top: -58px;
-  width: 101%;
-  flex-direction: row;
-  align-items: center;
-  white-space: nowrap;
-  width: 103%;
-}
-#Search {
-  flex: 0%;
-  padding: 3px;
-  width: 77%;
-  border-radius: 8px;
-}
-.search {
-  flex: 0%;
-  width: 42px;
-  height: 47px;
-  margin-left: 5px;
-  margin-top: 5px;
-  background: transparent;
-}
-
-.sidenav {
-  display: flex;
-
-  margin-top: 10px;
-  height: 600px;
-  /* overflow: visible; */
-  width: 200px;
-}
-
-.md-content {
-  display: flex;
-
-  max-width: 400px;
-  max-height: 200px;
-  overflow: auto;
-}
-
-.md-drawer {
-  margin-top: 110px;
-}
-.card {
-  margin-left: -90px;
-  height: 40px;
-  width: 140%;
-  border-radius: 8px;
-}
-.input {
-  margin-left: 2%;
-  margin-top: 5px;
-  width: 90%;
-  height: 30px;
-  border: none;
-}
-</style>
 
 <script>
 import CreateNote from "./CreateNote";
-import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
-// import cards from "./cards"
 export default {
-  name: "IconButtons",
   components: {
     CreateNote
     // cards
   },
   data: () => ({
-    showNavigation: false,
-    showSidepanel: false
+    drawer: {
+      // sets the open status of the drawer
+      open: true,
+      // sets if the drawer is shown above (false) or below (true) the toolbar
+      clipped: false,
+      // sets if the drawer is CSS positioned as 'fixed'
+      fixed: false,
+      // sets if the drawer remains visible all the time (true) or not (false)
+      permanent: false,
+      // sets the drawer to the mini variant, showing only icons, of itself (true)
+      // or showing the full drawer (false)
+      mini: true
+    },
+
+    toolbar: {
+      //
+      fixed: true,
+      // sets if the toolbar contents is leaving space for drawer (false) or not (true)
+      clippedLeft: false
+    },
+    footer: {
+      // sets the CSS position of the footer
+      fixed: true,
+      // sets if the footer is full width (true) or gives space to the drawer (false)
+      clippedLeft: true
+    }
   }),
+
+  props: {
+    source: String
+  },
+
   methods: {
-    getnotes() {
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      alert(token.token);
-      NoteService.GetAllNotes(token.token)
-        .then("cards.")
-        .catch(error => {
-          alert(error);
-        });
+    // changes the drawer to permanent
+    makeDrawerPermanent() {
+      this.drawer.permanent = true;
+      // set the clipped state of the drawer and toolbar
+      this.drawer.clipped = false;
+      this.toolbar.clippedLeft = false;
+    },
+    // toggles the drawer variant (mini/full)
+    toggleMiniDrawer() {
+      this.drawer.mini = !this.drawer.mini;
+    },
+    // toggles the drawer type (permanent vs temporary) or shows/hides the drawer
+    toggleDrawer() {
+      if (this.drawer.permanent) {
+        this.drawer.permanent = !this.drawer.permanent;
+        // set the clipped state of the drawer and toolbar
+        // this.drawer.clipped = true
+        // this.toolbar.clippedLeft = true
+      } else {
+        // normal drawer
+        this.drawer.open = !this.drawer.open;
+      }
     }
   }
 };
 </script>
+<style>
+.f {
+  color: blue;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "Times New Roman";
+  text-align: center;
+}
+.u {
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  /* // font-family: sans-serif; */
+  text-align: center;
+}
+.n {
+  color: yellow;
+  font-weight: bold;
+  font-size: 30px;
+  /* // font-family: sans-serif; */
+  text-align: center;
+}
+.d {
+  color: blue;
+  font-weight: bold;
+  font-size: 30px;
+  /* // font-family: sans-serif; */
+  text-align: center;
+}
+.o {
+  color: green;
+  font-weight: bold;
+  font-size: 30px;
+  /* // font-family: sans-serif; */
+  text-align: center;
+}
+.oo {
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  /* // font-family: sans-serif; */
+  text-align: center;
+}
+.card {
+  margin-top: -45px;
+  margin-left: 265px;
+  height: 50px;
+  width: 50%;
+  border-radius: 8px;
+}
+.input {
+  margin-left: 2%;
+  margin-top: 10px;
+  width: 80%;
+  height: 30px;
+  border: none;
+}
+</style>
+
+

@@ -24,22 +24,27 @@ export const NoteService =
     // var tokenone=localStorage.getItem('token');
      alert("AAAAA"+data.title);
     //  alert("Insied Servise......",tokenone)
-     axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token.token} })
+     axios.post('http://localhost:8080/note/deletenote',data,{ headers: {token:token.token} })
      .this(response=>{alert(response.data.message)})
      .catch(error=>{alert(error)})
  }
 
  function UpdateNote(data,token)
  {
-     axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token.token} })
+     axios.post('http://localhost:8080/note/updatenote',data,{ headers: {token:token.token} })
      .this(response=>{alert(response.data.message)})
      .catch(error=>{alert(error)})
  }
 
  function GetAllNotes(token)
  {
+    //console.log("defde");
+    // console.log('====================================');
+    // console.log();
+    // console.log('====================================');
      axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
-     .this(response=>{alert(response)})
+     .this(response=>{alert(response)
+    })
      .catch(error=>{alert(error)})
-        
+       
  }

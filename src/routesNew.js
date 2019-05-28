@@ -5,11 +5,11 @@ import Register from './components/user/Register.vue';
 import ForgotPassword from './components/user/ForgotPassword.vue';
 import resetPassword from './components/user/resetPassword.vue';
 import test from './components/user/test.vue';
+import testone from './components/testone.vue';
+
 import Verified from './components/user/verified.vue';
 import navbar from './components/navbar.vue'
 import CreateNote from './components/CreateNote.vue';
-import dash from './components/dash.vue'
-import dash1 from './components/dash1.vue'
 import iconlist from './components/iconlist.vue';
 import cards from './components/cards.vue';
 
@@ -30,6 +30,10 @@ export default
     { 
         path: '/iconlist', 
         component: iconlist
+    },
+    { 
+        path: '/testone', 
+        component: testone
     },
     { 
         path: '/user/HelloWorld', 
@@ -58,14 +62,6 @@ export default
     {
         path:'/CreateNote',
         component:CreateNote
-    },
-    {
-        path:'/dash',
-        component:dash
-    },
-    {
-        path:'/dash1',
-        component:dash1
     },
     {
         path:'/navbar',

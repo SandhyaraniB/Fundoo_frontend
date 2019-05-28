@@ -1,8 +1,8 @@
 <template>
   <div style="width:100%;">
-    <div>
+    <!-- <div>
       <md-chip class="md-primary" md-deletable>Deletable</md-chip>
-    </div>
+    </div> -->
     <md-menu style="margin-left:-5px;">
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">notifications</md-icon>

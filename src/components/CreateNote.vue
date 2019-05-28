@@ -2,11 +2,11 @@
   <div>
     
     <div @click="flagchange" v-if="flag" style="margin:14px">
-      <md-card style="width: 420px; height: 44px;">
+      <md-card style="width: 600px; height: 54px;">
         <div> 
           
-          <input type="text"  placeholder="Take a note..." style="margin: 10px;border:none;">
-          <md-button class="md-icon-button">
+          <input type="text"  placeholder="Take a note..." style="margin: 10px;border:none;width:350px;height:30px;">
+          <md-button class="md-icon-button" style="margin-left:20px;">
             <md-icon>list</md-icon>
             <md-tooltip md-direction="bottom">new list</md-tooltip>
           </md-button>
@@ -35,8 +35,9 @@
         <div>
           <input type="text" v-model="content" name="content" placeholder="description" class="titletwo" style="border: none;">
         </div>
-       
+       <div>
         <iconlist></iconlist>
+       </div>
         <!-- <div class="icon"> -->
           <!-- <md-button class="md-icon-button">
             <md-icon>notifications</md-icon>
@@ -159,14 +160,21 @@ export default {
 
   },
    getnotes(){
+     //console.log('====================================');
+     console.log("werwerwt");
+     //console.log('====================================');
+     console.log('====================================');
+     console.log();
+     console.log('====================================');
        const token={
        token:localStorage.getItem('token')
       }
       alert(token.token)
       NoteService.GetAllNotes(token)
-      .then('cards.')
+      .then('cards')
+      
         .catch(error => {
-      alert(error)
+      //alert(error)
       }) 
 
     }
