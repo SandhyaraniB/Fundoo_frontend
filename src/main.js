@@ -16,7 +16,12 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
  Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
 library.add(fas) // Include needed icons.
 
+import VueFlex from "vue-flex";
+// Already autoprefixed for vendor prefixes.
+// Also namespaced to avoid collisions.
+import "vue-flex/dist/vue-flex.css";
  
+Vue.use(VueFlex);
 //  Vue.use(Vuetify)
 Vue.use(Vuetify, {
   iconfont: 'mdi'||'md' || 'mdi' || 'fa' || 'fa4'||'faSvg',

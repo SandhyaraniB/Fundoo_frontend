@@ -1,11 +1,10 @@
 <template>
   <div>
-    
     <div @click="flagchange" v-if="flag" style="margin:14px">
       <md-card style="width: 600px; height: 54px;">
-        <div> 
-          
-          <input type="text"  placeholder="Take a note..." style="margin: 10px;border:none;width:350px;height:30px;">
+        <div>
+          <input type="text" placeholder="Take a note..." style="margin: 10px;border:none;width:350px;height:30px; outline=none"
+          >
           <md-button class="md-icon-button" style="margin-left:20px;">
             <md-icon>list</md-icon>
             <md-tooltip md-direction="bottom">new list</md-tooltip>
@@ -25,21 +24,35 @@
     <div v-else>
       <md-card class="takenote">
         <div>
-          <input type="text" v-model="title" name="title" placeholder="title" class="titleone" style="border: none;" >
-           
+          <input
+            type="text"
+            v-model="title"
+            name="title"
+            placeholder="title"
+            class="titleone"
+            style="border: none; outline=none"
+          >
+
           <md-button class="md-icon-button">
             <md-icon>location_on</md-icon>
             <md-tooltip md-direction="bottom">pin</md-tooltip>
           </md-button>
         </div>
         <div>
-          <input type="text" v-model="content" name="content" placeholder="description" class="titletwo" style="border: none;">
+          <input
+            type="text"
+            v-model="content"
+            name="content"
+            placeholder="description"
+            class="titletwo"
+            style="border: none; outline=none"
+          >
         </div>
-       <div>
-        <iconlist></iconlist>
-       </div>
+        <div>
+          <iconlist></iconlist>
+        </div>
         <!-- <div class="icon"> -->
-          <!-- <md-button class="md-icon-button">
+        <!-- <md-button class="md-icon-button">
             <md-icon>notifications</md-icon>
           </md-button>
           <md-button class="md-icon-button">
@@ -56,25 +69,15 @@
           </md-button>
           <md-button class="md-icon-button">
             <md-icon>more_vert</md-icon>
-          </md-button>  @click="flagchange" -->
-          <!-- <div> -->
-          
-          <md-button class="close" @click="createnote()">
-            Close
-            <md-tooltip md-direction="bottom">close</md-tooltip>
-          </md-button>
-          <!-- </div> -->
-         
-        <!-- </div> -->
-        <md-ripple>
-         
-        </md-ripple>
+        </md-button>  @click="flagchange"-->
+        <!-- <div> -->
+
+        <md-button class="close" @click="createnote()">
+          Close
+          <md-tooltip md-direction="bottom">close</md-tooltip>
+        </md-button>
       </md-card>
     </div>
-     <md-button class="md-icon-button" @click="getnotes()">
-            <md-icon>location_on</md-icon>
-            <md-tooltip md-direction="bottom">pin</md-tooltip>
-          </md-button>
   </div>
 </template>
 
@@ -96,90 +99,60 @@
   border: none;
 }
 .takenote {
-  width: 500px;
+  width: 600px;
 }
-.titleone{
+.titleone {
   margin-top: 15px;
   width: 80%;
 }
-.titletwo{
+.titletwo {
   // margin-top: 15px;
   width: 80%;
   margin-left: -50px;
 }
-.icon{
+.icon {
   margin-left: -25px;
 }
 
-.close{
+.close {
   margin-top: -40px;
   margin-left: 80%;
-  
 }
 </style>
 
 <script>
-import iconlist from './../components/iconlist'
-import {NoteService} from '/home/admin1/Desktop/fundoo/src/Service/NoteService.js'
+import iconlist from "./../components/iconlist";
+import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 export default {
-  // flag: true,
-
   data() {
-     return {
-    title:'',
-     content:'',
-     flag: true,
-    } 
+    return {
+      title: "",
+      content: "",
+      flag: true
+    };
   },
- 
+
   methods: {
     flagchange() {
       this.flag = !this.flag;
-      // alert(this.flag);
     },
-     createnote(){
-       
-      
-      const data={
-        title:this.title,
-        content:this.content
-        
-      }
-      // alert("STARTS...."+data.title)
-      const token={
-       token:localStorage.getItem('token')
-      }
-       alert("title"+token.token);
-    //  console.log('dattaaaaaaaaa')
-      // userService.login(data)
-      NoteService.CreateNote(data,token)
-      .then('created successfully')
+    createnote() {
+      const data = {
+        title: this.title,
+        content: this.content
+      };
+      const token = {
+        token: localStorage.getItem("token")
+      };
+     
+      NoteService.CreateNote(data, token)
+        .then("created successfully")
         .catch(error => {
-      alert(error)
-      }) 
-
-  },
-   getnotes(){
-     //console.log('====================================');
-     console.log("werwerwt");
-     //console.log('====================================');
-     console.log('====================================');
-     console.log();
-     console.log('====================================');
-       const token={
-       token:localStorage.getItem('token')
-      }
-      alert(token.token)
-      NoteService.GetAllNotes(token)
-      .then('cards')
-      
-        .catch(error => {
-      //alert(error)
-      }) 
-
+          alert(error);
+        });
     }
   },
-  components:{
+  components: {
     iconlist
   }
 };

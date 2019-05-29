@@ -1,28 +1,94 @@
 <template >
   <div >
-    <!-- <div class="row" v-for="result in results"> -->
-      <div>
+  
+     
+    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" @click="noteinfo(result.noteid)">
+      <!-- //applying color for card result.colorChange put  in style with binding -->
       <md-card class="takenote">
-        <div>
-          <input type="text" v-model="this.title" name="title" placeholder="title" class="titleone" style="border: none;" >
-        <!-- {{result.title}} -->
-        </div>
-        <div>
-          <input type="text" v-model="this.content" name="content" placeholder="description" class="titletwo" style="border: none;">
-        <!-- {{result.content}} -->
-        </div>
 
-        <iconlist></iconlist>
-        <md-ripple></md-ripple>
+        <div>
+          <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
+        </div>
+        <div>
+          <input type="text" v-model="result.content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
+        </div>
+        <iconlist @clicked="onClickChild(result.noteid)"></iconlist>
       </md-card>
     </div>
-    <md-button class="md-icon-button" @click="getnotes()">
-      <md-icon class="icon">archive</md-icon>
-      <md-tooltip md-direction="bottom">archive</md-tooltip>
-    </md-button>
+     
+     <!-- </flex-col>
+    </flex-row> -->
   </div>
+  <!-- <div>
+     <v-container>
+      <v-layout>
+        <v-flex xs12 sm6 md4 ma-5 v-for="result in allNotes" v-bind:key="result">
+          <md-card flat class="elevation-20 test">
+           
+             <v-card-title primary-title class="pa-4"> -->
+               <!-- <div>
+                  <h3 class="headline mb-0">{{result.title}}</h3>
+                  
+               </div>
+           </v-card-title> -->
+          <!-- </md-card>
+        </v-flex>
+      </v-layout>
+   </v-container>
+  </div> --> 
 </template>
+<script>
+import iconlist from "./../components/iconlist";
+// import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+import axios from 'axios'
+export default {
 
+data() {
+  this.getnotes()
+     return {
+      
+   allNotes:[]
+    } 
+  },
+  components: {
+    iconlist
+  },
+  methods: {
+    onClickButton (event) {
+      this.$emit('clicked', event)
+    },
+    getnotes() {
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      // alert(token.token);
+      // NoteService.GetAllNotes(token)
+      //   .then("cards.")
+      //   .catch(error => {
+      //     alert(error);
+      //   });
+       
+    axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
+    .then(res => {
+      this.allNotes=res.data;
+      if (res){
+        //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log("Get All Notes",res);
+        console.log('====================================');
+        
+        
+      }
+    }).catch(error => { alert(error)})
+    },
+    noteinfo(note){
+      console.log('====================================')
+      console.log("Particular Note"+note)
+      console.log('====================================')
+    }
+  }
+};
+</script>
 <style lang="scss" scoped>
 .md-card {
   border-radius: 10px;
@@ -42,10 +108,11 @@
 }
 .takenote {
   width: 275px;
+  margin-left: 200px;
 }
 .titleone {
   margin-top: 15px;
-  margin-left: -54px;
+  margin-right:55px;
   width: 70%;
   border: none;
 }
@@ -63,52 +130,9 @@
   margin-top: -40px;
   margin-left: 80%;
 }
+.getcards{
+  display:flex-row;
+  // flex-direction:flex-row;
+  
+}
 </style>
-
-<script>
-import iconlist from "./../components/iconlist";
-import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
-import axios from 'axios'
-export default {
-  // flag: true,
- data: {
-    results: 
-    [
-      {title:''  },
-      {content:''}
-    ]
-    },
-  components: {
-    iconlist
-  },
-    mounted () {
-    this. getnotes();
-  },
-  methods: {
-    getnotes() {
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      alert(token.token);
-      // NoteService.GetAllNotes(token)
-      //   .then("cards.")
-      //   .catch(error => {
-      //     alert(error);
-      //   });
-       
-    axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
-    .then(res => {
-      this.results=res.data.results
-      // if (res){
-      //   //VmUser.$bus.$emit('add-user', { user: user})
-      //   console.log('====================================');
-      //   console.log("AAAAAAAAAA",res);
-      //   console.log('====================================');
-        
-        
-      // }
-    }).catch(error => { alert(error)})
-    }
-  }
-};
-</script>

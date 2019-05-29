@@ -47,7 +47,7 @@
 
 <script>
 // import axios from 'axios'
-import {userService} from '/home/admin1/Desktop/fundoo/src/Service/UserService.js'
+// import {userService} from '/home/admin1/Desktop/fundoo/src/Service/UserService.js'
 import axios from 'axios'
 export default {
   name: 'Login',
@@ -65,7 +65,7 @@ data() {
         emailId:this.emailId,
         password:this.password
       }
-     console.log('dattaaaaaaaaa')
+    //  console.log('dattaaaaaaaaa')
       // userService.login(data)
       // .then('loginSuccess')
       //   .catch(error => {
@@ -80,9 +80,11 @@ data() {
         console.log('====================================');
         console.log("AAAAAAAAAA",res);
         console.log('====================================');
-        
+        localStorage.removeItem('token');
+        localStorage.setItem('token',res.data.token);
         
       }
+      
     }).catch(error => { alert(error)})
 }
 

@@ -12,7 +12,7 @@ import navbar from './components/navbar.vue'
 import CreateNote from './components/CreateNote.vue';
 import iconlist from './components/iconlist.vue';
 import cards from './components/cards.vue';
-
+import getlabels from './components/getlabels.vue'
 export default
  [
     { 
@@ -64,6 +64,10 @@ export default
         component:CreateNote
     },
     {
+        path:'/getlabels',
+        component:getlabels
+    },
+    {
         path:'/navbar',
         component:navbar,
         children:
@@ -71,6 +75,10 @@ export default
             {
                 path:'CreateNote',
                 component:CreateNote
+            },
+            {
+                path:'cards',
+                component:cards
             }
        ]
     },

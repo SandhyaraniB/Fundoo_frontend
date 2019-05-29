@@ -10,10 +10,10 @@
       </md-button>
       <!-- <md-menu-content style="width:200px;height:500px;">
         <md-menu-item>Reminder : </md-menu-item>
-        <md-menu-item class="dates">Later today</md-menu-item>
+        <md-menu-item class="dates" @click="today()">Later today</md-menu-item>
         <md-menu-item class="dates">Tomorrow</md-menu-item>
         <md-menu-item class="dates">Next week</md-menu-item>
-      </md-menu-content>-->
+      </md-menu-content> -->
     </md-menu>
 
     <md-menu style="margin-left:-5px;">
@@ -99,7 +99,7 @@
     </md-button>
     <md-button class="md-icon-button">
       <md-icon class="icon">archive</md-icon>
-      <md-tooltip md-direction="bottom">archive</md-tooltip>
+      <md-tooltip md-direction="bottom" @click="isArchive()">archive</md-tooltip>
     </md-button>
     <!-- <md-button class="md-icon-button">
       <md-icon class="icon">more_vert</md-icon>
@@ -110,12 +110,12 @@
         <md-icon class="icon">more_vert</md-icon>
         <md-tooltip md-direction="bottom">more</md-tooltip>
       </md-button>
-      <!-- <md-menu-content style="width:200px;height:500px;">
-        <md-menu-item class="more" @click="deletenote()">Delete note</md-menu-item>
+       <md-menu-content style="width:200px;height:500px;">
+        <md-menu-item class="more" @click="deletenote()">Delete note</md-menu-item> 
         <md-menu-item class="more" @click="addlabel()">add labels</md-menu-item>
-        <md-menu-item class="more">Add drawing</md-menu-item>
-        <md-menu-item class="more">Make a copy</md-menu-item>
-      </md-menu-content>-->
+        <!-- <md-menu-item class="more">Add drawing</md-menu-item>
+        <md-menu-item class="more">Make a copy</md-menu-item> -->
+      </md-menu-content>
     </md-menu>
   </div>
 </template>
@@ -143,25 +143,28 @@
 <script>
 import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import { Labelservice } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
-
+import Vue from 'vue';
+import moment from 'moment'
 export default {
   // flag: true,
 
   data() {
     return {
-      labelname: "",
-      noteid: ""
+      labelname: ""
     };
   },
   methods: {
+    onClickChild (value) {
+      console.log("SSSSSSS"+value) // someValue
+    },
     deletenote() {
       const data = {
-        noteid: this.noteid
+       
       };
       const token = {
         token: localStorage.getItem("token")
       };
-      NoteService.DeleteNote(data, token)
+      NoteService.DeleteNote(noteid, token)
         .then("notedeleted")
         .catch(error => {
           alert(error);
@@ -175,10 +178,26 @@ export default {
         token: localStorage.getItem("token")
       };
       Labelservice.CreateLabel(data, token)
-        .then("notedeleted")
+        .then("labeladded")
         .catch(error => {
           alert(error);
         });
+    },
+    today(){
+
+      var date=new Date();
+  //     Vue.filter('formatDate', function(date) {
+  // if (date) {
+  //   return moment(String(date)).format('MM/DD/YYYY hh:mm')
+    console.log("DATEEEEE"+moment(String(date)).format('DD/MM/YYYY hh:mm'));
+//   }
+// });
+      console.log('====================================');
+      console.log(date.setDate+date.setMonth+date.setFullYear);
+      console.log('====================================');
+    },
+    isArchive(){
+      
     }
   }
 };

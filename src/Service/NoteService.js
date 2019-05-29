@@ -12,19 +12,18 @@ export const NoteService =
  {
     //  var token=localStorage.getItem('token');
     // var tokenone=localStorage.getItem('token');
-     alert("AAAAA"+data.title);
     //  alert("Insied Servise......",tokenone)
      axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token.token} })
      .this(response=>{alert(response.data.message)})
      .catch(error=>{alert(error)})
  }
- function DeleteNote(data,token)
+ function DeleteNote(noteid,token)
  {
     //  var token=localStorage.getItem('token');
     // var tokenone=localStorage.getItem('token');
-     alert("AAAAA"+data.title);
+    //  alert("AAAAA"+data.title);
     //  alert("Insied Servise......",tokenone)
-     axios.post('http://localhost:8080/note/deletenote',data,{ headers: {token:token.token} })
+     axios.post('http://localhost:8080/note/deletenote',noteid,{ headers: {token:token.token} })
      .this(response=>{alert(response.data.message)})
      .catch(error=>{alert(error)})
  }
@@ -38,10 +37,6 @@ export const NoteService =
 
  function GetAllNotes(token)
  {
-    //console.log("defde");
-    // console.log('====================================');
-    // console.log();
-    // console.log('====================================');
      axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
      .this(response=>{alert(response)
     })

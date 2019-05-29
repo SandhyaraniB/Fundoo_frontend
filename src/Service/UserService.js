@@ -8,7 +8,7 @@ export const userService =
 alert(URL);
 function login(data)
 {
-     alert(data);
+     // alert(data);
      axios.post('http://localhost:8080/user/login',data)
           .then(response => { alert(response.data.satusmessage)
            localStorage.removeItem('token');
@@ -18,8 +18,8 @@ function login(data)
 }
  function register(data)
  {
-     alert("inside userservice register");
-     alert(data);
+     // alert("inside userservice register");
+     // alert(data);
      axios.post('http://localhost:8080/user/register',data)
           .then(response => {alert(response.data.message)},
           window.location.href="http://localhost:8081/user/Login")
