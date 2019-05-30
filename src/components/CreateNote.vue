@@ -24,29 +24,17 @@
     <div v-else>
       <md-card class="takenote">
         <div>
-          <input
-            type="text"
-            v-model="title"
-            name="title"
-            placeholder="title"
-            class="titleone"
-            style="border: none; outline=none"
-          >
-
-          <md-button class="md-icon-button">
+          <input type="text" v-model="title"  name="title" placeholder="title" class="titleone" >
+           
+            <md-button class="md-icon-button">
             <md-icon>location_on</md-icon>
             <md-tooltip md-direction="bottom">pin</md-tooltip>
           </md-button>
         </div>
         <div>
-          <input
-            type="text"
-            v-model="content"
-            name="content"
-            placeholder="description"
-            class="titletwo"
-            style="border: none; outline=none"
-          >
+          <input type="text" v-model="content"  name="content"  placeholder="description" class="titletwo"  style="border: none; outline=none"   >
+        </div>
+        <div>
         </div>
         <div>
           <iconlist></iconlist>
@@ -81,45 +69,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-.md-card {
-  border-radius: 10px;
-  display: flex;
-  width: 420px;
-  height: 105px;
-  margin: 4px;
-  display: inline-block;
-  vertical-align: top;
-  color: aliceblue;
-}
-.card-title {
-  border: none;
-}
-.card-note {
-  border: none;
-}
-.takenote {
-  width: 600px;
-}
-.titleone {
-  margin-top: 15px;
-  width: 80%;
-}
-.titletwo {
-  // margin-top: 15px;
-  width: 80%;
-  margin-left: -50px;
-}
-.icon {
-  margin-left: -25px;
-}
-
-.close {
-  margin-top: -40px;
-  margin-left: 80%;
-}
-</style>
-
 <script>
 import iconlist from "./../components/iconlist";
 import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
@@ -150,6 +99,20 @@ export default {
         .catch(error => {
           alert(error);
         });
+    },
+    updatenote(){
+       const data = {
+        title: this.title,
+        content: this.content
+      };
+       const token = {
+        token: localStorage.getItem("token")
+      };
+       NoteService.update(data, token)
+        .then("created successfully")
+        .catch(error => {
+          alert(error);
+        });
     }
   },
   components: {
@@ -157,3 +120,45 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.md-card {
+  border-radius: 10px;
+  display: flex;
+  width: 420px;
+  height: 105px;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: top;
+  color: aliceblue;
+}
+.card-title {
+  border: none;
+}
+.card-note {
+  border: none;
+}
+.takenote {
+  width: 600px;
+}
+.titleone {
+  margin-top: 15px;
+  width: 80%;
+  border: none; 
+  outline:none;
+}
+.titletwo {
+  // margin-top: 15px;
+  width: 80%;
+  margin-left: -50px;
+}
+.icon {
+  margin-left: -25px;
+}
+
+.close {
+  margin-top: -40px;
+  margin-left: 80%;
+}
+</style>
+
+

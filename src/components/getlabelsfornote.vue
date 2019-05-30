@@ -2,10 +2,12 @@
   <div>
     <div v-for= "result in alllabels" v-bind:key="result">
       <div>
+
           <md-button>
-          <md-icon>label</md-icon>
+          <!-- <md-icon>label</md-icon> -->
           <!-- <input  v-model="result.labelname"  name="labelname" class="titletwo"> -->
-           {{result.labelname}}
+          <md-checkbox :value="true">{{result.labelname}}</md-checkbox>
+          <!-- {{result.labelname}} -->
           </md-button>
      </div>
     </div>
@@ -21,7 +23,7 @@ export default {
 data() {
   this.getlabels()
      return {
-      
+      value:true,
    alllabels:[]
     } 
   },

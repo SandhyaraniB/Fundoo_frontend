@@ -105,17 +105,17 @@
                   <md-dialog :md-active.sync="showDialog" >
                     <md-dialog-title>Edit Labels</md-dialog-title>
 
-                    <md-field md-clearable>
-                      <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
+                    <!-- <md-field md-clearable>
+                       <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
 
-                      <md-select v-model="labelname"
+                      <!-- <md-select v-model="labelname"
                         name="labelname"
                         placeholder="select label name"
                         id="labelname">
                         <md-option value="fight-club">Fight Club</md-option>
                         <md-option value="godfather">Godfather</md-option>
                       </md-select>
-                    </md-field>
+                    </md-field> -->
 
                     <md-dialog-actions>
                       <md-button class="md-primary" @click="showDialog = false">Close</md-button>

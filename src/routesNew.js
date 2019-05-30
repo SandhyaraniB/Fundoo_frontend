@@ -78,10 +78,27 @@ export default
             },
             {
                 path:'cards',
-                component:cards
+                component:cards,
+                children:
+                [
+                     {
+                         path:'iconlist',
+                         component:iconlist
+                     },
+                ]
             }
        ]
     },
-  
+    {
+        path:'cards',
+        component:cards,
+        children:
+        [
+             {
+                 path:'iconlist',
+                 component:iconlist
+             },
+        ]
+    }
  ]
  

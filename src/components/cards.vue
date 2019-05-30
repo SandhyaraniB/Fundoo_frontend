@@ -1,8 +1,6 @@
 <template >
   <div >
-  
-     
-    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" @click="noteinfo(result.noteid)">
+   <div v-for= "result in allNotes" v-bind:key="result" class="getcards" @click="noteinfo(result.noteid)">
       <!-- //applying color for card result.colorChange put  in style with binding -->
       <md-card class="takenote">
 
@@ -12,12 +10,13 @@
         <div>
           <input type="text" v-model="result.content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
         </div>
-        <iconlist @clicked="onClickChild(result.noteid)"></iconlist>
+        <!-- <iconlist @clicked="onClickChild(result.noteid)"></iconlist> -->
+        <!-- <button @click="noteinfo" class="btn btn-info">Send Child A Message</button> -->
+        <iconlist :parentmessage="parentmessage" style="color:black" @click="noteinfo"></iconlist>
       </md-card>
     </div>
-     
-     <!-- </flex-col>
-    </flex-row> -->
+  
+    
   </div>
   <!-- <div>
      <v-container>
@@ -46,14 +45,17 @@ export default {
 data() {
   this.getnotes()
      return {
-      
+      parentmessage:'',
    allNotes:[]
     } 
   },
   components: {
-    iconlist
+    iconlist,
   },
   methods: {
+     sendMessage() {
+                this.parentmessage = '<b>Message From Parent:</b> Do Your Homework'
+            },
     onClickButton (event) {
       this.$emit('clicked', event)
     },
@@ -84,6 +86,7 @@ data() {
     noteinfo(note){
       console.log('====================================')
       console.log("Particular Note"+note)
+       this.parentmessage = note
       console.log('====================================')
     }
   }
