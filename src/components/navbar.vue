@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="margin-top:-60px;">
+  <div id="app" class="dashboard" style="margin-top:-60px;">
     <v-flex xs6>
       <v-app id="inspire" dark>
         <v-toolbar style=" background: beige;">
@@ -61,12 +61,9 @@
         <!-- ===================================================================================================================================================== -->
         <v-navigation-drawer
           :clipped="drawer.clipped"
-          :fixed="drawer.fixed"
           :permanent="drawer.permanent"
-          :mini-variant="drawer.mini"
           v-model="drawer.open"
-          app
-        >
+          app>
           <v-list style="width:200px;">
             <v-list-tile>
               <!-- v-if="!drawer.permanent" @click="makeDrawerPermanent" -->
@@ -104,9 +101,9 @@
                 <div style="margin-right: 200px;" >
                   <md-dialog :md-active.sync="showDialog" >
                     <md-dialog-title>Edit Labels</md-dialog-title>
-
-                    <!-- <md-field md-clearable>
-                       <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
+<!-- 
+                    <md-field md-clearable> -->
+                       <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
 
                       <!-- <md-select v-model="labelname"
                         name="labelname"
@@ -118,7 +115,12 @@
                     </md-field> -->
 
                     <md-dialog-actions>
-                      <md-button class="md-primary" @click="showDialog = false">Close</md-button>
+                       <input type="text" v-model="labelname"  placeholder="labelname" style="border:none" >
+                      <md-button type="submit" class="md-primary md-raised" @click="showDialog = false">Close</md-button>
+                      <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active.sync="showSnackbar" md-persistent>
+                      <span>Connection timeout. Showing limited messages!</span>
+                      <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
+                      </md-snackbar>
                       <md-button class="md-primary" @click="submit()">Save</md-button>
                     </md-dialog-actions>
                   </md-dialog>
@@ -183,6 +185,10 @@ export default {
     getlabels
   },
   data: () => ({
+    showSnackbar: false,
+    position: 'center',
+    duration: 4000,
+    isInfinity: false,
     showDialog: false,
     labelname: "",
     results:[],
@@ -192,7 +198,7 @@ export default {
       // sets if the drawer is shown above (false) or below (true) the toolbar
       clipped: false,
       // sets if the drawer is CSS positioned as 'fixed'
-      fixed: false,
+      // fixed: false,
       // sets if the drawer remains visible all the time (true) or not (false)
       permanent: false,
       // sets the drawer to the mini variant, showing only icons, of itself (true)
@@ -273,7 +279,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .dashboard{
-  display: flex;
+  // display: flex;
+  margin-top:-60px;
 }
 .f {
   color: blue;

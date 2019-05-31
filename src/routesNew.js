@@ -1,28 +1,25 @@
-import Login from './components/user/Login.vue';
-import Counting from './components/user/Counting.vue';
-import HelloWorld from './components/user/HelloWorld.vue';
-import Register from './components/user/Register.vue';
-import ForgotPassword from './components/user/ForgotPassword.vue';
-import resetPassword from './components/user/resetPassword.vue';
-import test from './components/user/test.vue';
+import Login from './components/Login.vue';
+
+import HelloWorld from './components/HelloWorld.vue';
+import Register from './components/Register.vue';
+import ForgotPassword from './components/ForgotPassword.vue';
+import resetPassword from './components/resetPassword.vue';
+import test from './components/test.vue';
 import testone from './components/testone.vue';
 
-import Verified from './components/user/verified.vue';
+import Verified from './components/verified.vue';
 import navbar from './components/navbar.vue'
 import CreateNote from './components/CreateNote.vue';
 import iconlist from './components/iconlist.vue';
 import cards from './components/cards.vue';
-import getlabels from './components/getlabels.vue'
+import getlabels from './components/getlabels.vue';
 export default
  [
     { 
-        path: '/user/Login',
+        path: '/Login',
         component: Login
     },
-    { 
-        path: '/user/Counting', 
-        component: Counting
-    },
+    
     { 
         path: '/cards', 
         component: cards
@@ -36,27 +33,27 @@ export default
         component: testone
     },
     { 
-        path: '/user/HelloWorld', 
+        path: '/HelloWorld', 
         component: HelloWorld
     },
     { 
-        path: '/user/', 
+        path: '/', 
         component: Register
     },
     { 
-        path: '/user/ForgotPassword', 
+        path: '/ForgotPassword', 
         component: ForgotPassword
     },
     { 
-        path: '/user/resetPassword/:token', 
+        path: '/resetPassword/:token', 
         component: resetPassword
     },
     {
-        path:'/user/test',
+        path:'/test',
         component:test
     },
     {
-        path:'/user/validateEmailId/:token',
+        path:'/validateEmailId/:token',
         component:Verified
     },
     {

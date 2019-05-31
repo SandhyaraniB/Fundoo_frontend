@@ -23,7 +23,7 @@ export const NoteService =
     //  var token=localStorage.getItem('token');
     // var tokenone=localStorage.getItem('token');
     //  alert("Insied Servise......",tokenone)
-     axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token.token} })
+     axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token} })
      .this(response=>{alert(response.data.message)})
      .catch(error=>{alert(error)})
  }
@@ -79,7 +79,7 @@ export const NoteService =
  }
  function Reminder(noteid,token)
  {
-     axios.put('http://localhost:8080/note/reminder',noteid,{ headers: {token:token.token} })
+     axios.put('http://localhost:8080/note/reminder/'+noteid,{ headers: {token:token.token} })
      .this(response=>{alert(response)
     })
      .catch(error=>{alert(error)})

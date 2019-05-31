@@ -1,20 +1,20 @@
 <template>
-  <div style="width:100%;">
-                <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div>
-    <md-menu style="margin-left:-5px;">
+  <div style="width:100%;" class="iconlist">
+    <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div>
+    <md-menu style="margin-left:-5px;" class="mdreminder">
       <md-button md-menu-trigger class="md-icon-button" @click="reminder()">
         <md-icon class="icon">notifications</md-icon>
         <md-tooltip md-direction="bottom">Remind me</md-tooltip>
       </md-button>
-      <!-- <md-menu-content style="width:200px;height:500px;">
+      <md-menu-content style="width:200px;height:500px;">
         <md-menu-item>Reminder : </md-menu-item>
         <md-menu-item class="dates" @click="today()">Later today</md-menu-item>
-        <md-menu-item class="dates">Tomorrow</md-menu-item>
+        <md-menu-item class="dates" @click="tomorrow()">Tomorrow</md-menu-item>
         <md-menu-item class="dates">Next week</md-menu-item>
-      </md-menu-content>-->
+      </md-menu-content>
     </md-menu>
 
-    <md-menu style="margin-left:-5px;">
+    <md-menu style="margin-left:-5px;" class="mdcollaborator">
       <md-button md-menu-trigger class="md-icon-button" @click="collaborator()">
         <md-icon class="icon">person_add</md-icon>
         <md-tooltip md-direction="bottom">collaborator</md-tooltip>
@@ -95,9 +95,9 @@
       <md-icon class="icon">crop_original</md-icon>
       <md-tooltip md-direction="bottom">add image</md-tooltip>
     </md-button>
-    <md-button class="md-icon-button" @click="isArchive()">
+    <md-button class="md-icon-button" @click="isArchive()" v-model="noteid">
       <md-icon class="icon">archive</md-icon>
-      <md-tooltip md-direction="bottom" >archive</md-tooltip>
+      <md-tooltip md-direction="bottom">archive</md-tooltip>
     </md-button>
     <md-menu style="margin-left:-5px;">
       <md-button md-menu-trigger class="md-icon-button">
@@ -108,16 +108,22 @@
         <md-button>
           <md-menu-item class="more" @click="deletenote()">Delete note</md-menu-item>
         </md-button>
-       <md-button md-menuone-trigger @click="visible = !visible">add labels </md-button>
-              <md-menuone-item v-if="visible" class="dropdown">
-        <md-menuone-content style="margin-left:200px;">
-          <md-menuone-item>
-     <getlabelsfornote></getlabelsfornote>
-          </md-menuone-item>
-        </md-menuone-content>
+        <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button>
+        <md-menuone-item v-if="visible" class="dropdown">
+          <md-menuone-content style="margin-left:200px;">
+            <md-menuone-item>
+              
+              <getlabelsfornote></getlabelsfornote>
+            </md-menuone-item>
+          </md-menuone-content>
         </md-menuone-item>
       </md-menu-content>
     </md-menu>
+    <!-- <md-button @click="getnoteid()">
+      <md-icon>menu</md-icon>
+    </md-button>
+    <blog-post post-title=parentmessage></blog-post>
+    <h3>{{ parentmessage }}</h3>-->
   </div>
 </template>
 <script>
@@ -125,31 +131,65 @@ import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService
 import { Labelservice } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
 import getlabelsfornote from "./../components/getlabelsfornote.vue";
 // import Vue from "vue";
+import axios from "axios";
 import moment from "moment";
 export default {
-    props: ['parentmessage'],
+  props: ["parentmessage"],
+
   // flag: true,
   components: {
- getlabelsfornote,
+    getlabelsfornote
   },
   data() {
     return {
+      noteid: this.parentmessage,
+      noteidinstr: "",
       labelname: "",
-      visible:false
+      visible: false
     };
+    nnoteid=this.parentmessage
   },
+  // data: function(){
+  //        return () =>{
+  //          noteid: this.parentmessage
+  //          alert("RRRRRRR"+noteid)
+  //        }
+  //     },
+
   methods: {
+    
+    getnoteid() {
+      console.log("====================================");
+      console.log("Dhatri:" + noteid);
+      console.log("====================================");
+    },
+
+    // ............................................................deletenote.......................................................................................
     deletenote() {
-      // const data = {};
+      this.noteid = this.parentmessage;
+      // alert(this.noteid);
+      // alert("noteid" + this.noteid);
       const token = {
         token: localStorage.getItem("token")
       };
-      NoteService.DeleteNote(noteid, token)
-        .then("notedeleted")
+      // NoteService.DeleteNote(this.noteid, token)
+      //   .then("notedeleted")
+      //   .catch(error => {
+      //     alert(error);
+      //   });
+      axios
+        .delete("http://localhost:8080/note/deletenote/" + this.noteid, {
+          headers: { token: token.token }
+        })
+        .this(response => {
+          alert(response.data.message);
+        })
         .catch(error => {
           alert(error);
         });
     },
+
+    // ..............................................................addlabel..................................................................................................
     addlabel() {
       const data = {
         labelname: this.labelname
@@ -165,38 +205,82 @@ export default {
     },
     today() {
       var date = new Date();
-      //     Vue.filter('formatDate', function(date) {
-      // if (date) {
-      //   return moment(String(date)).format('MM/DD/YYYY hh:mm')
-      console.log("DATEEEEE" + moment(String(date)).format("DD/MM/YYYY hh:mm"));
-      //   }
-      // });
+          Vue.filter('formatDate', function(date) {
+      if (date) {
+        return moment(String(date)).format('MM/DD/YYYY hh:mm')
+        console.log("DATEEEEE" + moment(String(date)).format("DD/MM/YYYY hh:mm"));
+        }
+      });
       console.log("====================================");
       console.log(date.setDate + date.setMonth + date.setFullYear);
       console.log("====================================");
     },
-    
-    // isArchive() {
-    //  const token = {
+    tomorrow()
+    {
+      var date = new Date();
+
+   
+   },
+   isArchive(){
+     this.noteid = this.parentmessage;
+      // alert(this.noteid);
+      // alert("noteid" + this.noteid);
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      // NoteService.DeleteNote(this.noteid, token)
+      //   .then("notedeleted")
+      //   .catch(error => {
+      //     alert(error);
+      //   });
+      axios
+        .delete("http://localhost:8080/note/archivenote/" + this.noteid, {
+          headers: { token: token.token }
+        })
+        .this(response => {
+          alert(response.data.message);
+        })
+        .catch(error => {
+          alert(error);
+        });
+   },
+
+    // isArchive()
+    //  {
+    //   //  this.noteid= this.parentmessage;
+    //     alert("notoooeid" +noteid);
+    //   const token = {
     //     token: localStorage.getItem("token")
     //   };
-    //    NoteService.ArchiveNote(noteid,token)
-    //     .then("donearchive")
-    //     .catch(error => {
-    //       alert(error);
-    //     });
+    //   console.log('====================================');
+    //   console.log("notidddddd"+  noteid  );
+    //   console.log('====================================');
+    //   log
+    //   //  NoteService.ArchiveNote(noteid,token)
+    //   //   .then("donearchive")
+    //   //   .catch(error => {
+    //   //     alert(error);
+    //   //   });
+    //   // axios.post("http://localhost:8080/note/archivenote/"+this.noteid,{headers:{token:token.token}})
+    //   axios
+    //     .post("http://localhost:8080/note/archivenote/" +this.noteid, {headers: { token: token.token }
+    //     })
+    //  .this(response=>{alert(response.data.message)
+    // })
+    //  .catch(error=>{alert(error)})
     // },
 
-    // reminder(){
-    //  const token = {
-    //     token: localStorage.getItem("token")
-    //   };
-    //    NoteService.Reminder(noteid,token)
-    //     .then("reminder done")
-    //     .catch(error => {
-    //       alert(error);
-    //     });
-    // },
+    reminder(){
+      this.noteid= this.parentmessage;
+     const token = {
+        token: localStorage.getItem("token")
+      };
+       NoteService.Reminder(this.noteid,token)
+        .then("reminder done")
+        .catch(error => {
+          alert(error);
+        });
+    },
     // collaborator(){
     //  const token = {
     //     token: localStorage.getItem("token")
@@ -226,15 +310,16 @@ export default {
     //       alert(error);
     //     });
     // },
-
   }
 };
-
-
-
-
 </script>
 <style lang="scss" scoped>
+.mdreminder{
+  display: flexbox
+}
+.iconlist{
+  display: flex
+}
 .icon {
   padding: 0px;
   margin-left: 0px;
@@ -251,5 +336,8 @@ export default {
 
 .more {
   margin-top: -20px;
+}
+.mdcollaborator{
+  display: flexbox
 }
 </style>

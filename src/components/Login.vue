@@ -22,7 +22,7 @@
           <button style="background-color:#87ceeb" @click="Login">Sign in</button>
           <div>
           </div>
-        <router-link to="/user/forgotpassword" class="btn btn-link">forgot password</router-link>
+        <router-link to="/forgotpassword" class="btn btn-link">forgot password</router-link>
         <div>
         </div>
         <!-- <router-link to="/register" class="btn btn-link">Click to register</router-link> -->

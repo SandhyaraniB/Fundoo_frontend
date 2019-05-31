@@ -1,10 +1,9 @@
 <template >
-  <div>
+  <div class="getlables">
     <div v-for= "result in alllabels" v-bind:key="result">
       <div>
-          <md-button>
+          <md-button style="margin-right: 100px;">
           <md-icon>label</md-icon>
-          <!-- <input  v-model="result.labelname"  name="labelname" class="titletwo"> -->
            {{result.labelname}}
           </md-button>
      </div>
@@ -52,44 +51,9 @@ data() {
 };
 </script>
 <style lang="scss" scoped>
-.md-card {
-  border-radius: 10px;
+.getlables{
   display: flex;
-  width: 250px;
-  height: 105px;
-  margin: 4px;
-  display: inline-block;
-  vertical-align: top;
-  color: aliceblue;
-}
-.card-title {
-  border: none;
-}
-.card-note {
-  border: none;
-}
-.takenote {
-  width: 275px;
-}
-.titleone {
-  margin-top: 15px;
-  margin-right: 10px;
-  width: 70%;
-  border: none;
-}
-.titletwo {
-  // margin-top: 15px;
-  width: 70%;
-  outline:none;
-  margin-left:60px;
-  border: none;
-}
-.icon {
-  margin-left: -25px;
+flex-direction: column;
 }
 
-.close {
-  margin-top: -40px;
-  margin-left: 80%;
-}
 </style>

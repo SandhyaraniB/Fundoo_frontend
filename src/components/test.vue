@@ -12,10 +12,6 @@
       <button style="background-color:#87ceeb" @click="Test">TESTING</button>
     </md-field>
 </template>
-
-  
-
-
 <script>
  //import { mdbInput } from "mdbvue";
   // import { VBPopover } from 'bootstrap-vue/es/directives'

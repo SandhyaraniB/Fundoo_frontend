@@ -1,40 +1,42 @@
-<template >
-  <div >
-   <div v-for= "result in allNotes" v-bind:key="result" class="getcards" @click="noteinfo(result.noteid)">
-      <!-- //applying color for card result.colorChange put  in style with binding -->
-      <md-card class="takenote">
-
+<template>
+  <div class="cards">
+   <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
+   <!-- @click="showDialog = true"  -->
+   <!-- //applying color for card result.colorChange put  in style with binding -->
+     <md-card class="takenote" >
         <div>
           <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
         </div>
         <div>
           <input type="text" v-model="result.content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
         </div>
-        <!-- <iconlist @clicked="onClickChild(result.noteid)"></iconlist> -->
-        <!-- <button @click="noteinfo" class="btn btn-info">Send Child A Message</button> -->
-        <iconlist :parentmessage="parentmessage" style="color:black" @click="noteinfo"></iconlist>
-      </md-card>
-    </div>
-  
+        <div>
+        <iconlist :parentmessage=result.noteid style="color:white" ></iconlist>
+        </div>
+      </md-card >
     
-  </div>
-  <!-- <div>
-     <v-container>
-      <v-layout>
-        <v-flex xs12 sm6 md4 ma-5 v-for="result in allNotes" v-bind:key="result">
-          <md-card flat class="elevation-20 test">
-           
-             <v-card-title primary-title class="pa-4"> -->
-               <!-- <div>
-                  <h3 class="headline mb-0">{{result.title}}</h3>
-                  
-               </div>
-           </v-card-title> -->
-          <!-- </md-card>
-        </v-flex>
-      </v-layout>
-   </v-container>
-  </div> --> 
+    </div>
+    <div>
+     <md-dialog :md-active.sync="showDialog">
+      <!-- <md-dialog-title>Preferences</md-dialog-title> -->
+      <md-card class="takenote" >
+        <div>
+          <input type="text" v-model="title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
+        </div>
+        <div>
+          <input type="text" v-model="content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
+        </div>
+        <div @click="noteinfo(noteid)">
+        <iconlist :parentmessage=noteid style="color:white" ></iconlist>
+        </div>
+          <md-dialog-actions>
+        <md-button class="md-primary" @click="showDialog = false">Close</md-button>
+      </md-dialog-actions>
+      </md-card >
+     
+    </md-dialog>
+    </div>
+</div>
 </template>
 <script>
 import iconlist from "./../components/iconlist";
@@ -43,18 +45,23 @@ import axios from 'axios'
 export default {
 
 data() {
+ 
   this.getnotes()
      return {
+      showDialog: false,
       parentmessage:'',
-   allNotes:[]
+     allNotes:[]
     } 
   },
   components: {
     iconlist,
   },
   methods: {
+    // showDailogue(){
+    //   this.Dialog=!this.Dialog  
+    // },
      sendMessage() {
-                this.parentmessage = '<b>Message From Parent:</b> Do Your Homework'
+                // this.parentmessage = '<b>Message From Parent:</b> Do Your Homework'
             },
     onClickButton (event) {
       this.$emit('clicked', event)
@@ -85,7 +92,7 @@ data() {
     },
     noteinfo(note){
       console.log('====================================')
-      console.log("Particular Note"+note)
+      // console.log("Particular Note"+note)
        this.parentmessage = note
       console.log('====================================')
     }
@@ -93,6 +100,9 @@ data() {
 };
 </script>
 <style lang="scss" scoped>
+.cards{
+  display: flex;
+}
 .md-card {
   border-radius: 10px;
   display: flex;
@@ -134,8 +144,9 @@ data() {
   margin-left: 80%;
 }
 .getcards{
-  display:flex-row;
-  // flex-direction:flex-row;
+ 
+  flex-direction:flex-row;
+  //  flex-direction: column;
   
 }
 </style>

@@ -16,7 +16,7 @@
           <button style="background-color:#87ceeb" @click="Forgotpassword">Forgotpassword <br></button>
           <div>
           </div>
-          <router-link to="/user/resetPassword/:yut7gbhbhhh" class="Resetpassword">Click to Resetpassword</router-link>
+          <router-link to="/resetPassword/:yut7gbhbhhh" class="Resetpassword">Click to Resetpassword</router-link>
          
         </md-card-content>
         </form>

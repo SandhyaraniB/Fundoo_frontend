@@ -34,7 +34,7 @@
           <button style="background-color:#87ceeb" @click="Register">Register</button>
           <div>
           </div>
-        <router-link to="/user/Login" class="btn btn-link">click to login</router-link>
+        <router-link to="/Login" class="btn btn-link">click to login</router-link>
         <div>
         </div>
         </md-card-content>
@@ -68,7 +68,7 @@ data() {
     userService.register(data)
       .then('registeration done')
       
-      // this.$router.push('http://localhost:8081/user/Login')
+      // this.$router.push('http://localhost:8081/Login')
         .catch(error => {
       alert(error)
       });
