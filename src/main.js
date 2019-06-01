@@ -20,7 +20,7 @@ import VueFlex from "vue-flex";
 // Already autoprefixed for vendor prefixes.
 // Also namespaced to avoid collisions.
 import "vue-flex/dist/vue-flex.css";
- 
+//  import navbar from './components/navbar.vue'
 Vue.use(VueFlex);
 //  Vue.use(Vuetify)
 Vue.use(Vuetify, {
@@ -39,7 +39,14 @@ Vue.config.productionTip = false;
 const router=new VueRouter({
   mode: 'history',
   routes:Routes,
+  // routes:
+  // [
+  //   {
+  //     path:'/navbar',
+  //     component:navbar
+  //   } 
   
+  // ]
 });
 new Vue({
   render: h => h(App),

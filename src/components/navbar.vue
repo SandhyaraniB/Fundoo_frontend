@@ -72,8 +72,9 @@
                   <v-list-tile-content>
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right:300px;">
+                        <router-link class="nav-link" to="/navbar/dashboard">
                         <md-icon class="icon">note</md-icon>
-                        <router-link to="/cards" tag="li"></router-link>
+                        <!-- <router-link to="/cards" tag="li"></router-link> -->
                         <!-- <h2>{{  $route.params}}</h2> -->
                      <!-- <ul>
                        <li>
@@ -81,7 +82,7 @@
                        </li>
                      </ul> -->
                         <!-- <router-view></router-view> -->
-                        <span>Notes</span>
+                        <span>Notes</span></router-link>
                       </md-button>
                     </v-list-tile-title>
                   </v-list-tile-content>
@@ -123,8 +124,9 @@
                     </md-field> -->
 
                     <md-dialog-actions>
-                       <input type="text" v-model="labelname"  placeholder="labelname" style="border:none" >
-                      <md-button type="submit" class="md-primary md-raised" @click="showDialog = false">Close</md-button>
+                       <input type="text" v-model="labelname"  placeholder="labelname" style="border:none,margin-bottom: 300px;" >
+                    <getlabels></getlabels>
+                   <md-button type="submit" class="md-primary md-raised" @click="showDialog = false">Close</md-button>
                       <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active.sync="showSnackbar" md-persistent>
                       <span>Connection timeout. Showing limited messages!</span>
                       <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
@@ -145,8 +147,10 @@
             <v-list-tile>
               <v-list-tile-action>
                 <md-button style="width:100px;margin-left:-80px;">
+                   <router-link class="nav-link" to="/navbar/archive">
                   <md-icon class="icon">archive</md-icon>
                   <span>Archive</span>
+                   </router-link>
                 </md-button>
               </v-list-tile-action>
               <!-- ------------------------------------------------------------------------------------------------------------------->
@@ -167,13 +171,14 @@
           <v-container fluid fill-height>
             <v-layout justify-center align-center>
               <v-flex shrink>
-                <div style="margin-top:-230px;">
+                <!-- <div style="margin-top:-230px;">
+                  <router-view></router-view>
                   <CreateNote></CreateNote>
-                </div>
+                </div> -->
                 <div>
-                    <router-view></router-view>
+                    <!-- <router-view></router-view> -->
                   <!-- <cards></cards> -->
-                  <!-- <router-view></router-view> -->
+                  <router-view></router-view>
                 </div>
               </v-flex>
             </v-layout>
@@ -236,7 +241,7 @@ export default {
       console.log('====================================');
       console.log("reminder clicked");
       console.log('====================================');
-      window.location.href="/navbar/reminder"
+      // window.location.href="/navbar/reminder"
   this.$http.post('/navbar/reminder')
     },
     // changes the drawer to permanent
@@ -285,7 +290,9 @@ export default {
           }
         })
         .catch(error => {
-          alert(error);
+         console.log('====================================');
+         console.log(error);
+         console.log('====================================');
         });
     },
     addReference: function(e) {

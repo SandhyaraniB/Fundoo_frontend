@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%;" class="iconlist">
     <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div>
-    <md-menu style="margin-left:-5px;" class="mdreminder">
+    <!-- <md-menu style="margin-left:-5px;" class="mdreminder">
       <md-button md-menu-trigger class="md-icon-button" @click="reminder()">
         <md-icon class="icon">notifications</md-icon>
         <md-tooltip md-direction="bottom">Remind me</md-tooltip>
@@ -12,18 +12,27 @@
         <md-menu-item class="dates" @click="tomorrow()">Tomorrow</md-menu-item>
         <md-menu-item class="dates">Next week</md-menu-item>
       </md-menu-content>
-    </md-menu>
+    </md-menu> -->
 
-    <!-- <md-menu style="margin-left:-5px;">
+    <md-menu style="margin-left:-5px;">
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">notifications</md-icon>
         <md-tooltip md-direction="bottom">Remind me</md-tooltip>
       </md-button>
       <md-menu-content style="width:200px;height:500px;">
         <span>Reminder:</span>
-        <md-button>
+        <!-- <md-button> -->
+           
           <md-menu-item class="more" @click="today()">Later today</md-menu-item>
-        </md-button>
+        <!-- </md-button> -->
+         <!-- <md-button> -->
+          
+          <md-menu-item class="moree" @click="tomorrow()">Tomorrow</md-menu-item>
+          
+           
+          <md-menu-item class="moree" @click="weeklater()">weeklater</md-menu-item>
+ 
+        <!-- </md-button> -->
         <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button>
         <md-menuone-item v-if="visible" class="dropdown">
           <md-menuone-content style="margin-left:200px;">
@@ -33,8 +42,9 @@
             </md-menuone-item>
           </md-menuone-content>
         </md-menuone-item>
+           </md-list>
       </md-menu-content>
-    </md-menu> -->
+    </md-menu>
 
     <md-menu style="margin-left:-5px;" class="mdcollaborator">
       <md-button md-menu-trigger class="md-icon-button" @click="collaborator()">
@@ -44,6 +54,7 @@
       <!-- <md-menu-content style="width:200px;height:500px;">
         <md-menu-item>Collabrators : </md-menu-item>
         <md-button class="md-icon-button">
+          
            <md-icon class="icon"> person_add</md-icon>
          
            </md-button>
@@ -200,7 +211,7 @@ export default {
       //     alert(error);
       //   });
       axios
-        .delete("http://localhost:8080/note/deletenote/" + this.noteid, {
+        .put("http://localhost:8080/note/trashnote/" + this.noteid, {},{
           headers: { token: token.token }
         })
         .this(response => {
@@ -230,20 +241,23 @@ export default {
     today() {
       //  this.noteid = this.parentmessage;
       var date = new Date();
+      // date.setDate(date.getDate() + 1)
+      // var endDate = new Date(date.getDate() + 1);
       var day = date.getDate();
       var month = date.getMonth();
       var year = date.getFullYear();
-          Vue.filter('formatDate', function(date) {
+      var data = year+'-'+month+'-'+day;
+          Vue.filter('formatDate', function(data) {
       if (date) {
-        return moment(String(date)).format('yyyy-mm-dd')
+        return moment(String(data)).format('yyyy-mm-dd')
         console.log("====================================");
-      console.log(moment(String(date)).format('yyyy-mm-dd'));
+      console.log(moment(String(data)).format('yyyy-mm-dd'));
       console.log("====================================");
-        console.log("DATEEEEE" + moment(String(date)).format("DD/MM/YYYY hh:mm"));
+        console.log("DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm"));
         }
       });
       console.log("====================================");
-      console.log(date);
+      console.log(data);
       console.log("====================================");
       this.noteid= this.parentmessage;
       console.log("====================================");
@@ -262,15 +276,84 @@ export default {
   
     },
 
-    tomorrow()
-    {
+
+  tomorrow() {
+      //  this.noteid = this.parentmessage;
       var date = new Date();
-
-   
-   },
-
-
-
+      date.setDate(date.getDate() + 1)
+      // var endDate = new Date(date.getDate() + 1);
+      var day = date.getDate();
+      var month = date.getMonth();
+      var year = date.getFullYear();
+      var data = year+'-'+month+'-'+day;
+          Vue.filter('formatDate', function(data) {
+      if (date) {
+        return moment(String(data)).format('yyyy-mm-dd')
+        console.log("====================================");
+      console.log(moment(String(data)).format('yyyy-mm-dd'));
+      console.log("====================================");
+        console.log("DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm"));
+        }
+      });
+      console.log("====================================");
+      console.log(data);
+      console.log("====================================");
+      this.noteid= this.parentmessage;
+      console.log("====================================");
+      console.log(this.noteid);
+      console.log("====================================");
+      const token = {
+        token: localStorage.getItem("token") 
+      };
+      console.log('====================================')
+      console.log("253 line"+date)
+      console.log('====================================')
+     axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
+     .this(response=>{
+       console.log('====================================');
+       console.log(response);
+       console.log('====================================');
+    })
+     .catch(error=>{console.log('====================================');
+     console.log( error);
+     console.log('====================================');})
+  },
+  weeklater(){
+    //  this.noteid = this.parentmessage;
+      var date = new Date();
+      date.setDate(date.getDate() + 7)
+      // var endDate = new Date(date.getDate() + 1);
+      var day = date.getDate();
+      var month = date.getMonth();
+      var year = date.getFullYear();
+      var data = year+'-'+month+'-'+day;
+          Vue.filter('formatDate', function(data) {
+      if (date) {
+        return moment(String(data)).format('yyyy-mm-dd')
+        console.log("====================================");
+      console.log(moment(String(data)).format('yyyy-mm-dd'));
+      console.log("====================================");
+        console.log("DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm"));
+        }
+      });
+      console.log("====================================");
+      console.log(data);
+      console.log("====================================");
+      this.noteid= this.parentmessage;
+      console.log("====================================");
+      console.log(this.noteid);
+      console.log("====================================");
+      const token = {
+        token: localStorage.getItem("token") 
+      };
+      console.log('====================================')
+      console.log("253 line"+date)
+      console.log('====================================')
+     axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
+     .this(response=>{alert(response)
+    })
+     .catch(error=>{alert(error)})
+  },
    isArchive(){
      this.noteid = this.parentmessage;
      console.log("noteid==>", this.noteid);
@@ -304,47 +387,36 @@ export default {
         });
    },
 
-
-    reminder(){
-      this.noteid= this.parentmessage;
+    collaborator(){
+       this.noteid = this.parentmessage;
      const token = {
         token: localStorage.getItem("token")
       };
-      
-     axios.put('http://localhost:8080/note/reminder/'+noteid,{ headers: {token:token.token} })
-     .this(response=>{alert(response)
-    })
-     .catch(error=>{alert(error)})
+       NoteService.AddingCollaborator(noteid,emailid,token)
+        .catch(error => {
+          alert(error);
+        });
     },
-    // collaborator(){
+    // addcolor(){
     //  const token = {
     //     token: localStorage.getItem("token")
     //   };
-    //    NoteService.AddingCollaborator(noteid,emailid,token)
+    //    NoteService.addcolor(noteid,token,color)
+    //     .then("reminder done")
     //     .catch(error => {
     //       alert(error);
     //     });
     // },
-    // // addcolor(){
-    // //  const token = {
-    // //     token: localStorage.getItem("token")
-    // //   };
-    // //    NoteService.addcolor(noteid,token,color)
-    // //     .then("reminder done")
-    // //     .catch(error => {
-    // //       alert(error);
-    // //     });
-    // // },
-    // addimage(){
-    //  const token = {
-    //     token: localStorage.getItem("token")
-    //   };
-    //    NoteService.AddImageToNote(noteid,token)
-    //     .then("image added to the note")
-    //     .catch(error => {
-    //       alert(error);
-    //     });
-    // },
+    addimage(){
+     const token = {
+        token: localStorage.getItem("token")
+      };
+       NoteService.AddImageToNote(noteid,token)
+        .then("image added to the note")
+        .catch(error => {
+          alert(error);
+        });
+    },
   }
 };
 </script>

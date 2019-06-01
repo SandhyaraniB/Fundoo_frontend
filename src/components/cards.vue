@@ -3,16 +3,25 @@
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
    <!-- @click="showDialog = true"  -->
    <!-- //applying color for card result.colorChange put  in style with binding -->
-     <md-card class="takenote" >
+     <md-card>
         <div>
           <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
         </div>
         <div>
           <input type="text" v-model="result.content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
         </div>
+        <div v-if="result.reminder!=null">
+        <md-chip class="md-accent" md-deletable>{{result.reminder}}</md-chip>
+        </div>
         <div>
         <iconlist :parentmessage=result.noteid style="color:white" ></iconlist>
         </div>
+        <!-- <div> -->
+    <!-- <md-chip>Static</md-chip> -->
+    <!-- <md-chip class="md-primary" md-deletable>Deletable</md-chip> -->
+    
+    <!-- <md-chip md-disabled>Disabled</md-chip> -->
+  <!-- </div> -->
       </md-card >
     
     </div>
@@ -122,6 +131,8 @@ data() {
 .takenote {
   width: 275px;
   margin-left: 200px;
+  margin-top: -350px;
+
 }
 .titleone {
   margin-top: 15px;
