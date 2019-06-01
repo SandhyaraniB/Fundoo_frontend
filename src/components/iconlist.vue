@@ -14,6 +14,28 @@
       </md-menu-content>
     </md-menu>
 
+    <!-- <md-menu style="margin-left:-5px;">
+      <md-button md-menu-trigger class="md-icon-button">
+        <md-icon class="icon">notifications</md-icon>
+        <md-tooltip md-direction="bottom">Remind me</md-tooltip>
+      </md-button>
+      <md-menu-content style="width:200px;height:500px;">
+        <span>Reminder:</span>
+        <md-button>
+          <md-menu-item class="more" @click="today()">Later today</md-menu-item>
+        </md-button>
+        <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button>
+        <md-menuone-item v-if="visible" class="dropdown">
+          <md-menuone-content style="margin-left:200px;">
+            <md-menuone-item>
+              
+              <getlabelsfornote></getlabelsfornote>
+            </md-menuone-item>
+          </md-menuone-content>
+        </md-menuone-item>
+      </md-menu-content>
+    </md-menu> -->
+
     <md-menu style="margin-left:-5px;" class="mdcollaborator">
       <md-button md-menu-trigger class="md-icon-button" @click="collaborator()">
         <md-icon class="icon">person_add</md-icon>
@@ -130,7 +152,7 @@
 import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import { Labelservice } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
 import getlabelsfornote from "./../components/getlabelsfornote.vue";
-// import Vue from "vue";
+import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
 export default {
@@ -200,86 +222,99 @@ export default {
       Labelservice.CreateLabel(data, token)
         .then("labeladded")
         .catch(error => {
-          alert(error);
+          console.log('====================================')
+          console.log(error)
+          console.log('====================================')
         });
     },
     today() {
+      //  this.noteid = this.parentmessage;
       var date = new Date();
+      var day = date.getDate();
+      var month = date.getMonth();
+      var year = date.getFullYear();
           Vue.filter('formatDate', function(date) {
       if (date) {
-        return moment(String(date)).format('MM/DD/YYYY hh:mm')
+        return moment(String(date)).format('yyyy-mm-dd')
+        console.log("====================================");
+      console.log(moment(String(date)).format('yyyy-mm-dd'));
+      console.log("====================================");
         console.log("DATEEEEE" + moment(String(date)).format("DD/MM/YYYY hh:mm"));
         }
       });
       console.log("====================================");
-      console.log(date.setDate + date.setMonth + date.setFullYear);
+      console.log(date);
       console.log("====================================");
+      this.noteid= this.parentmessage;
+      console.log("====================================");
+      console.log(this.noteid);
+      console.log("====================================");
+      const token = {
+        token: localStorage.getItem("token") 
+      };
+      console.log('====================================')
+      console.log("253 line"+date)
+      console.log('====================================')
+     axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
+     .this(response=>{alert(response)
+    })
+     .catch(error=>{alert(error)})
+  
     },
+
     tomorrow()
     {
       var date = new Date();
 
    
    },
+
+
+
    isArchive(){
      this.noteid = this.parentmessage;
+     console.log("noteid==>", this.noteid);
+     
       // alert(this.noteid);
       // alert("noteid" + this.noteid);
       const token = {
         token: localStorage.getItem("token")
       };
+      console.log("token==>",token);
+      
       // NoteService.DeleteNote(this.noteid, token)
       //   .then("notedeleted")
       //   .catch(error => {
       //     alert(error);
       //   });
-      axios
-        .delete("http://localhost:8080/note/archivenote/" + this.noteid, {
+      axios.put("http://localhost:8080/note/archivenote/" + this.noteid,{}, {
           headers: { token: token.token }
         })
-        .this(response => {
+        .then(response => {
+          console.log('====================================')
+          console.log('response ',response);
+          console.log('====================================')
           alert(response.data.message);
         })
         .catch(error => {
+          console.log('====================================')
+          console.log('error ',error)
+          console.log('====================================')
           alert(error);
         });
    },
 
-    // isArchive()
-    //  {
-    //   //  this.noteid= this.parentmessage;
-    //     alert("notoooeid" +noteid);
-    //   const token = {
-    //     token: localStorage.getItem("token")
-    //   };
-    //   console.log('====================================');
-    //   console.log("notidddddd"+  noteid  );
-    //   console.log('====================================');
-    //   log
-    //   //  NoteService.ArchiveNote(noteid,token)
-    //   //   .then("donearchive")
-    //   //   .catch(error => {
-    //   //     alert(error);
-    //   //   });
-    //   // axios.post("http://localhost:8080/note/archivenote/"+this.noteid,{headers:{token:token.token}})
-    //   axios
-    //     .post("http://localhost:8080/note/archivenote/" +this.noteid, {headers: { token: token.token }
-    //     })
-    //  .this(response=>{alert(response.data.message)
-    // })
-    //  .catch(error=>{alert(error)})
-    // },
 
     reminder(){
       this.noteid= this.parentmessage;
      const token = {
         token: localStorage.getItem("token")
       };
-       NoteService.Reminder(this.noteid,token)
-        .then("reminder done")
-        .catch(error => {
-          alert(error);
-        });
+      
+     axios.put('http://localhost:8080/note/reminder/'+noteid,{ headers: {token:token.token} })
+     .this(response=>{alert(response)
+    })
+     .catch(error=>{alert(error)})
     },
     // collaborator(){
     //  const token = {

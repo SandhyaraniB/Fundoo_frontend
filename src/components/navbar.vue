@@ -73,6 +73,14 @@
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right:300px;">
                         <md-icon class="icon">note</md-icon>
+                        <router-link to="/cards" tag="li"></router-link>
+                        <!-- <h2>{{  $route.params}}</h2> -->
+                     <!-- <ul>
+                       <li>
+                        <router-link :to="{ name: '/navbar/cards'}"></router-link>
+                       </li>
+                     </ul> -->
+                        <!-- <router-view></router-view> -->
                         <span>Notes</span>
                       </md-button>
                     </v-list-tile-title>
@@ -81,7 +89,7 @@
                 <div>
                   <v-list-tile-content>
                     <v-list-tile-title>
-                      <md-button style="width:100px;margin-right: 80px;">
+                      <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
                         <md-icon class="icon">notifications</md-icon>
                         <span>Reminder</span>
                       </md-button>
@@ -163,7 +171,9 @@
                   <CreateNote></CreateNote>
                 </div>
                 <div>
-                  <cards></cards>
+                    <router-view></router-view>
+                  <!-- <cards></cards> -->
+                  <!-- <router-view></router-view> -->
                 </div>
               </v-flex>
             </v-layout>
@@ -219,6 +229,16 @@ export default {
   },
 
   methods: {
+    notes(){
+  
+    },
+    reminder(){
+      console.log('====================================');
+      console.log("reminder clicked");
+      console.log('====================================');
+      window.location.href="/navbar/reminder"
+  this.$http.post('/navbar/reminder')
+    },
     // changes the drawer to permanent
     makeDrawerPermanent() {
       this.drawer.permanent = true;

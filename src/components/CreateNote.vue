@@ -1,7 +1,7 @@
 <template>
   <div class="createnote">
     <div @click="flagchange" v-if="flag" style="margin:14px">
-      <md-card style="width: 600px; height: 45px;    margin-top: -190px;margin-left:150px;">
+      <md-card style="width: 600px; height: 45px;    margin-top: -190px;margin-left:200px;">
         <div>
           <input
             type="text"
