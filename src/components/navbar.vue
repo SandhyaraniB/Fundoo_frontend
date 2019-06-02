@@ -14,12 +14,13 @@
           <img src="./../assets/keep.png" style="width:35px;margin-top:13px;">
 
           <span style="margin-left:20px;margin-top:45px;">
-            <span class="f">F</span>
+            <!-- <span class="f">F</span>
             <span class="u">u</span>
             <span class="n">n</span>
             <span class="d">d</span>
             <span class="o">o</span>
-            <span class="oo">o</span>
+            <span class="oo">o</span> -->
+            fundoo
           </span>
 
           <md-card class="card">

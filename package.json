@@ -25,6 +25,7 @@
     "vue-material": "^1.0.0-beta-11",
     "vue-material-design-icons": "^3.2.0",
     "vue-material-icon": "^1.0.1",
+    "vue-mq": "^1.0.1",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.6",
     "vuejs-console": "^0.1.1",

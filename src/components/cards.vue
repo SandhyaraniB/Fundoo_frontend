@@ -1,9 +1,10 @@
 <template>
-  <div class="cards">
-   <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
+  <div class="cards" style="margin-top:-300px;">
+   <vue-grid-item v-for= "result in allNotes" v-bind:key="result" class="getcards" >
    <!-- @click="showDialog = true"  -->
    <!-- //applying color for card result.colorChange put  in style with binding -->
-     <md-card>
+     <md-card md-with-hover>
+        <md-ripple>
         <div>
           <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
         </div>
@@ -14,7 +15,7 @@
         <md-chip class="md-accent" md-deletable>{{result.reminder}}</md-chip>
         </div>
         <div>
-        <iconlist :parentmessage=result.noteid style="color:white" ></iconlist>
+        <iconlist :parentmessage=result.noteid style="color:white" class="iconlist"></iconlist>
         </div>
         <!-- <div> -->
     <!-- <md-chip>Static</md-chip> -->
@@ -22,9 +23,10 @@
     
     <!-- <md-chip md-disabled>Disabled</md-chip> -->
   <!-- </div> -->
+   </md-ripple>
       </md-card >
     
-    </div>
+    </vue-grid-item>
     <div>
      <md-dialog :md-active.sync="showDialog">
       <!-- <md-dialog-title>Preferences</md-dialog-title> -->
@@ -111,6 +113,11 @@ data() {
 <style lang="scss" scoped>
 .cards{
   display: flex;
+  display: grid;
+/* flex-direction:row wrap; */
+grid-template-columns: repeat(3, 3fr);
+grid-auto-rows: 158px;
+grid-gap: 23px;
 }
 .md-card {
   border-radius: 10px;
@@ -159,5 +166,11 @@ data() {
   flex-direction:flex-row;
   //  flex-direction: column;
   
+}
+.iconlist{
+  margin-left: -15px
+}
+.md-card{
+    display: inline-block;
 }
 </style>

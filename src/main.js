@@ -21,6 +21,7 @@ import VueFlex from "vue-flex";
 // Also namespaced to avoid collisions.
 import "vue-flex/dist/vue-flex.css";
 //  import navbar from './components/navbar.vue'
+import VueMq from 'vue-mq'
 Vue.use(VueFlex);
 //  Vue.use(Vuetify)
 Vue.use(Vuetify, {
@@ -35,7 +36,13 @@ Vue.use(VueMaterial);
 Vue.use(VueRouter);
 Vue.component(VueMaterialIcon.name, VueMaterialIcon)
 Vue.config.productionTip = false;
-
+Vue.use(VueMq, {
+  breakpoints: {
+    sm: 450,
+    md: 1250,
+    lg: Infinity,
+  }
+})
 const router=new VueRouter({
   mode: 'history',
   routes:Routes,

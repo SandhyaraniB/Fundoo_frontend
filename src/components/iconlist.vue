@@ -14,7 +14,7 @@
       </md-menu-content>
     </md-menu> -->
 
-    <md-menu style="margin-left:-5px;">
+    <md-menu style="-5px">
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">notifications</md-icon>
         <md-tooltip md-direction="bottom">Remind me</md-tooltip>
@@ -33,7 +33,7 @@
           <md-menu-item class="moree" @click="weeklater()">weeklater</md-menu-item>
  
         <!-- </md-button> -->
-        <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button>
+        <!-- <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button> -->
         <md-menuone-item v-if="visible" class="dropdown">
           <md-menuone-content style="margin-left:200px;">
             <md-menuone-item>
@@ -42,11 +42,11 @@
             </md-menuone-item>
           </md-menuone-content>
         </md-menuone-item>
-           </md-list>
+           <!-- </md-list> -->
       </md-menu-content>
     </md-menu>
 
-    <md-menu style="margin-left:-5px;" class="mdcollaborator">
+    <md-menu class="mdcollaborator">
       <md-button md-menu-trigger class="md-icon-button" @click="collaborator()">
         <md-icon class="icon">person_add</md-icon>
         <md-tooltip md-direction="bottom">collaborator</md-tooltip>
@@ -65,7 +65,7 @@
       <md-icon >person_add</md-icon>
     </md-button>-->
 
-    <md-menu style="margin-left:-5px;">
+    <md-menu>
       <md-button md-menu-trigger class="md-icon-button" @click="addcolor()">
         <md-icon class="icon">color_lens</md-icon>
         <md-tooltip md-direction="bottom">add color</md-tooltip>
@@ -132,7 +132,7 @@
       <md-icon class="icon">archive</md-icon>
       <md-tooltip md-direction="bottom">archive</md-tooltip>
     </md-button>
-    <md-menu style="margin-left:-5px;">
+    <md-menu>
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">more_vert</md-icon>
         <md-tooltip md-direction="bottom">more</md-tooltip>
@@ -446,5 +446,9 @@ export default {
 }
 .mdcollaborator{
   display: flexbox
+}
+.md-icon-button
+{
+  // margin-left: 10px;
 }
 </style>
