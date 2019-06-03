@@ -69,7 +69,9 @@ data() {
       // userService.login(data)
       // .then('loginSuccess')
       //   .catch(error => {
-      // alert(error)
+    //  console.log('====================================');
+    //       console.log("error"+error);
+    //       console.log('====================================');
       // }) 
 
       axios
@@ -82,10 +84,14 @@ data() {
         console.log('====================================');
         localStorage.removeItem('token');
         localStorage.setItem('token',res.data.token);
-        
+        window.location.href="/user/navbar"
       }
       
-    }).catch(error => { alert(error)})
+    }).catch(error => { 
+       console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
+    })
 }
 
   }

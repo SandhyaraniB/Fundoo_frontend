@@ -1,10 +1,10 @@
 <template >
   <div class="getlabels">
-    <div v-for= "result in alllabels" v-bind:key="result">
+    <div v-for= "label in alllabels" v-bind:key="label">
       <div>
 
           <md-button>
-          <md-checkbox :value="true">{{result.labelname}}</md-checkbox>
+          <md-checkbox :value="true">{{label.labelname}}</md-checkbox>
           </md-button>
      </div>
     </div>
@@ -44,7 +44,11 @@ data() {
         
         
       }
-    }).catch(error => { alert(error)})
+    }).catch(error => { 
+       console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
+    })
     }
   }
 };

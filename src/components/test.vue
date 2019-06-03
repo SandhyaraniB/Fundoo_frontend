@@ -25,7 +25,9 @@ data() {
   },
     Test()
     {
-      alert("successfully  Login");
+       console.log('====================================');
+          console.log(login);
+          console.log('====================================');
     }
 
     

@@ -1,6 +1,6 @@
 <template>
-  <div style="width:100%;" class="iconlist">
-    <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div>
+  <div  class="iconlist">
+    <!-- <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div> -->
     <!-- <md-menu style="margin-left:-5px;" class="mdreminder">
       <md-button md-menu-trigger class="md-icon-button" @click="reminder()">
         <md-icon class="icon">notifications</md-icon>
@@ -14,7 +14,7 @@
       </md-menu-content>
     </md-menu> -->
 
-    <md-menu style="-5px">
+    <md-menu style="margin-left: 20px;">
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">notifications</md-icon>
         <md-tooltip md-direction="bottom">Remind me</md-tooltip>
@@ -66,59 +66,59 @@
     </md-button>-->
 
     <md-menu>
-      <md-button md-menu-trigger class="md-icon-button" @click="addcolor()">
+      <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">color_lens</md-icon>
         <md-tooltip md-direction="bottom">add color</md-tooltip>
       </md-button>
-      <!-- <md-menu-content style="width:200px;height:150px;">
+      <md-menu-content style="width:200px;height:150px;">
       <div>
-         <md-button class="md-icon-button" style="background-color:white;">
+         <md-button class="md-icon-button" style="background-color:white;" @click="addcolor('white')">
+         
+      <md-icon ></md-icon>
+     </md-button>
+    <md-button class="md-icon-button" style="background-color:red;" @click="addcolor('red')">
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:red;">
+    <md-button class="md-icon-button" style="background-color:orange; " @click="addcolor('orange')">
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:orange;">
+    <md-button class="md-icon-button" style="background-color:yellow;"  @click="addcolor('yellow')">
       <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:yellow;">
-      <md-icon ></md-icon>
-    </md-button>
+    </md-button> 
 
       </div>
       
        <div>
-         <md-button class="md-icon-button" style="background-color:green;">
+         <md-button class="md-icon-button" style="background-color:green;" @click="addcolor('green')" >
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:teal;">
+    <md-button class="md-icon-button" style="background-color:teal;" @click="addcolor('teal')" >
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:blue;">
+    <md-button class="md-icon-button" style="background-color:blue;" @click="addcolor('blue')">
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:darkblue;">
+    <md-button class="md-icon-button" style="background-color:darkblue;" @click="addcolor('darkblue')" >
       <md-icon ></md-icon>
     </md-button>
-
-      </div>
+    </div>
        <div>
-         <md-button class="md-icon-button" style="background-color:purple;">
+         <md-button class="md-icon-button" style="background-color:purple;" @click="addcolor('purple')" >
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:pink;">
+    <md-button class="md-icon-button" style="background-color:pink;" @click="addcolor('pink')" >
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:brown;">
+    <md-button class="md-icon-button" style="background-color:brown;" @click="addcolor('brown')">
       <md-icon ></md-icon>
     </md-button>
-    <md-button class="md-icon-button" style="background-color:grey;">
+    <md-button class="md-icon-button" style="background-color:grey;" @click="addcolor('grey')" >
       <md-icon ></md-icon>
     </md-button>
 
       </div>
         
-      </md-menu-content>-->
+      </md-menu-content>
     </md-menu>
 
     <!-- <md-button class="md-icon-button">
@@ -184,9 +184,11 @@ export default {
   // data: function(){
   //        return () =>{
   //          noteid: this.parentmessage
-  //          alert("RRRRRRR"+noteid)
-  //        }
-  //     },
+  //          console.log('====================================');
+  //         console.log("noteid);
+  //         console.log('====================================');
+  // //        }
+  // //     },
 
   methods: {
     
@@ -199,15 +201,15 @@ export default {
     // ............................................................deletenote.......................................................................................
     deletenote() {
       this.noteid = this.parentmessage;
-      // alert(this.noteid);
-      // alert("noteid" + this.noteid);
       const token = {
         token: localStorage.getItem("token")
       };
       // NoteService.DeleteNote(this.noteid, token)
       //   .then("notedeleted")
       //   .catch(error => {
-      //     alert(error);
+    //  console.log('====================================');
+    //       console.log("error"+error);
+    //       console.log('====================================');
       //   });
       axios
         .put("http://localhost:8080/note/trashnote/" + this.noteid, {},{
@@ -273,9 +275,16 @@ export default {
       console.log("253 line"+date)
       console.log('====================================')
      axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
-     .this(response=>{alert(response)
+     .this(response=>{
+      console.log('====================================');
+      console.log(response);
+      console.log('====================================');
     })
-     .catch(error=>{alert(error)})
+     .catch(error=>{
+      console.log('====================================');
+      console.log("error..."+error);
+      console.log('====================================');
+    })
   
     },
 
@@ -301,7 +310,7 @@ export default {
       console.log("====================================");
       console.log(data);
       console.log("====================================");
-      this.noteid= this.parentmessage;
+      this.noteid= this.parentmessage.noteid;
       console.log("====================================");
       console.log(this.noteid);
       console.log("====================================");
@@ -353,9 +362,16 @@ export default {
       console.log("253 line"+date)
       console.log('====================================')
      axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
-     .this(response=>{alert(response)
+     .this(response=>{
+        console.log('====================================');
+          console.log("response"+response);
+          console.log('====================================');
     })
-     .catch(error=>{alert(error)})
+     .catch(error=>{
+        console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
+     })
   },
    isArchive(){
      this.noteid = this.parentmessage;
@@ -371,21 +387,23 @@ export default {
       // NoteService.DeleteNote(this.noteid, token)
       //   .then("notedeleted")
       //   .catch(error => {
-      //     alert(error);
-      //   });
+      //     console.log('====================================');
+        //   console.log("error"+error);
+        //   console.log('====================================');
+        // });
       axios.put("http://localhost:8080/note/archivenote/" + this.noteid,{},{headers: { token: token.token }
         })
         .then(response => {
           console.log('====================================')
-          console.log('response ',response);
+          console.log('response ',response.data.message);
           console.log('====================================')
-          alert(response.data.message);
+         
         })
         .catch(error => {
           console.log('====================================')
           console.log('error ',error)
           console.log('====================================')
-          alert(error);
+         
         });
    },
 
@@ -396,19 +414,47 @@ export default {
       };
        NoteService.AddingCollaborator(noteid,emailid,token)
         .catch(error => {
-          alert(error);
+         console.log('====================================')
+         console.log("error"+error)
+         console.log('====================================')
         });
     },
-    // addcolor(){
-    //  const token = {
-    //     token: localStorage.getItem("token")
-    //   };
-    //    NoteService.addcolor(noteid,token,color)
-    //     .then("reminder done")
-    //     .catch(error => {
-    //       alert(error);
-    //     });
-    // },
+    addcolor(colore){
+      this.noteid=this.parentmessage.noteid;
+      // this.color=this.parentmessage.color;
+      // prentmessage.color=color
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      // var colorvalue=color;
+      // const colval={
+      //   color:color
+      // }
+      console.log('====================================');
+      console.log("id and color"+this.noteid+colore);
+      console.log('====================================');
+       axios.post("http://localhost:8080/note/addcolor/" +this.noteid+"?color="+colore,{},{headers: { token: token.token }
+        })
+        .then(response => {
+          console.log('====================================')
+          console.log('response ',response.data.message);
+          console.log('====================================')
+         
+        })
+        .catch(error => {
+          console.log('====================================')
+          console.log('error ',error)
+          console.log('====================================')
+         
+        });
+      //  NoteService.addcolor(noteid,token,color)
+      //   .then("reminder done")
+      //   .catch(error => {
+      //    console.log('====================================');
+      //     console.log("error"+error);
+      //     console.log('====================================');
+      //   });
+    },
     addimage(){
      const token = {
         token: localStorage.getItem("token")
@@ -416,9 +462,15 @@ export default {
        NoteService.AddImageToNote(noteid,token)
         .then("image added to the note")
         .catch(error => {
-          alert(error);
+          console.log('====================================')
+          console.log("error"+error)
+          console.log('====================================')
         });
     },
+    addlabeltonote()
+    {
+       this.noteid = this.parentmessage;
+    }
   }
 };
 </script>
@@ -430,8 +482,8 @@ export default {
   display: flex
 }
 .icon {
-  padding: 0px;
-  margin-left: 0px;
+  // padding: 0px;
+  // margin-left: 0px;
 }
 
 .reminder {

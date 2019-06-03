@@ -118,7 +118,9 @@ export default {
           }
         })
         .catch(error => {
-          alert(error);
+          console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
         });
     },
     noteinfo(note) {

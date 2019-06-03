@@ -13,6 +13,6 @@ export const NoteService =
     //  alert("AAAAA"+data.name);
     //  alert("Insied Servise......",tokenone)
      axios.post('http://localhost:8080/Label/createlabel',data,{ headers: {token:token.token} })
-     .this(response=>{alert(response.data.message)})
-     .catch(error=>{alert(error)})
+     .this(response=>{response.data.message})
+     .catch(error=>{error})
  }

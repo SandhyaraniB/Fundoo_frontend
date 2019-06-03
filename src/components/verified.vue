@@ -34,12 +34,16 @@ export default {
       .get('http://localhost:8080/user/validateEmailId/',{ headers: {token:this.$route.params.token} })
       .then(response => {
         window.location.href="/user/Login"
-       alert("successfully  verified");
+       console.log('====================================');
+       console.log(verified);
+       console.log('====================================');
       
          this.emailId=response.blog
 })
       .catch(error => {
-      alert(error)
+      console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
       })
   }
 }

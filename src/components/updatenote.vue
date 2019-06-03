@@ -1,0 +1,66 @@
+<template>
+  <div>
+     <md-card style="width:400px;height:300px;">
+        <div style="margin-left:20px;">
+          <input type="text" v-model="parentmessage.title" name="title" class="titleone" style="border: none; outline:none ">
+        </div>
+        <div style="margin-left:20px;">
+          <input type="text" v-model="parentmessage.content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
+        </div>
+        <!-- <div @click="noteinfo(noteid)"> -->
+        <iconlist :parentmessage=noteid style="color:white" >
+        </iconlist>
+          <md-button class="md-primary" @click="updatenote()" style="margin-top:0px;margin-left:270px">Close</md-button>
+        </md-card >
+  </div>
+</template>
+<script>
+import iconlist from "./../components/iconlist";
+import axios from 'axios'
+export default
+ {
+  props: ["parentmessage"],
+  data() {
+     return {
+      showDialog: false,
+      title:'',
+      contents:''
+     }
+    
+    },
+  components: {
+    iconlist,
+  } ,
+  methods:
+  {
+    updatenote(){
+     const data = {
+        title: this.parentmessage.title,
+        content: this.parentmessage.content
+      };
+     this.noteid = this.parentmessage.noteid;
+     const token = {
+        token: localStorage.getItem("token")
+      };
+        console.log('====================================');
+        console.log("noteid ......"+data.title);
+        console.log('====================================');  
+    axios.put('http://localhost:8080/note/updatenote/'+this.noteid,data,{ headers: {token:token.token} })
+    .then(res => {
+       //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log(res.message);
+        console.log('====================================');
+        
+        
+    
+    }).catch(error => { 
+      console.log('====================================')
+      console.log("error"+error)
+      console.log('====================================')})
+    },
+    
+  }
+
+ }
+</script>

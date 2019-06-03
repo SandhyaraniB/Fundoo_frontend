@@ -54,7 +54,10 @@ export default {
         
         
       }
-    }).catch(error => { alert(error)})
+    }).catch(error => {  
+      console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');})
     },
 }
 </script>

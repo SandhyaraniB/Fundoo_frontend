@@ -1,38 +1,47 @@
 <template>
   <div class="cards" style="margin-top:-250px;">
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
-   <!-- @click="showDialog = true"  -->
+  
    <!-- //applying color for card result.colorChange put  in style with binding -->
-   <div v-if="result.trashed==false" >
-     <md-card md-with-hover style="width: fit-content;height: auto;">
-        <!-- <md-ripple style=" height: 180px;"> -->
+   <div v-if="result.trashed==false" @click="showDialog = true" >
+     <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;
+    height: -webkit-fill-available;"   >
+     
         <div >
-          <textarea-autosize v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline:none; ">
-          </textarea-autosize>
+          <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline:none;"
+          v-bind:style="{ backgroundColor: result.color }" @click="update(result)">
+          <!-- </textarea> -->
 
           <!-- <md-icon style="margin-top: -90px; margin-left: 250px;" @click="pin()">
               <img src="../assets/pin.svg">
             </md-icon> -->
-            <md-button md-menu-trigger class="md-icon-button" @click="pin(result.noteid)" style="margin-top: -45px; margin-left: 250px;">
-         <md-icon >
-              <img src="../assets/pin.svg">
+            <md-button md-menu-trigger class="md-icon-button" @click="pin(result.noteid)" style="margin-top: -35px; margin-left: 250px;">
+         <md-icon v-if="result.pinned='false'" >
+            <img src="../assets/pinBeforeClick.svg" >
+         </md-icon>
+         <md-icon v-else> 
+              <img src="../assets/pin.svg" >
             </md-icon> 
+            
       </md-button>
         </div>
-        <div>
-       <textarea-autosize
+        <div v-bind:style="{ backgroundColor: result.color }">
+      <input type="text"
            v-model="result.content" 
-           name="content" placeholder="description"
+           name="content" 
+           placeholder="description"
             class="titletwo" 
-            style="border: none; outline:none;">
-       </textarea-autosize>
+            style="border: none; outline:none;"
+            v-bind:style="{ backgroundColor: result.color }"
+            @click="update(result)">
+       
         </div>
         <div v-if="result.reminder!=null">
         <md-chip class="md-accent" md-deletable>{{result.reminder}}</md-chip>
         </div>
-        <div>
-        <iconlist :parentmessage=result.noteid style="color:white" class="iconlist"></iconlist>
-        </div>
+        <!-- <div> -->
+        <iconlist :parentmessage=result style="color:white" class="iconlist"></iconlist>
+        <!-- </div> -->
         <!-- <div> -->
     <!-- <md-chip>Static</md-chip> -->
     <!-- <md-chip class="md-primary" md-deletable>Deletable</md-chip> -->
@@ -42,34 +51,38 @@
    <!-- </md-ripple> -->
       </md-card >
    </div>
-    </div>
+    <!-- </div> -->
     <div>
-     <md-dialog :md-active.sync="showDialog">
+     <md-dialog :md-active.sync="showDialog" style="width:400px;height:160px;">
       <!-- <md-dialog-title>Preferences</md-dialog-title> -->
-      <md-card class="takenote" >
-        <div>
-          <input type="text" v-model="title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
+      <!-- <md-card style="width:400px;height:300px;">
+        <div style="margin-left:20px;">
+          <input type="text" v-model=result.title name="title" class="titleone" style="border: none; outline=none ">
         </div>
-        <div>
+        <div style="margin-left:80px;">
           <input type="text" v-model="content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
         </div>
-        <div @click="noteinfo(noteid)">
-        <iconlist :parentmessage=noteid style="color:white" ></iconlist>
-        </div>
-          <md-dialog-actions>
+         <div @click="noteinfo(noteid)"> -->
+        <!-- <iconlist :parentmessage=noteid style="color:white" > -->
+          
+        <!-- </iconlist>
+          <md-button class="md-primary" @click="showDialog = false" style="margin-top:-40px;margin-left:270px">Close</md-button> -->
+        <!-- </div> -->
+          <!-- <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-      </md-dialog-actions>
-      </md-card >
-     
+      </md-dialog-actions> -->
+      <!-- </md-card >  -->
+     <updatenote :parentmessage=refval> </updatenote>
     </md-dialog>
     </div>
-  <!-- </div> -->
+  </div>
 </div>
 </template>
 <script>
 import iconlist from "./../components/iconlist";
 // import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import axios from 'axios'
+import updatenote from "./updatenote";
 export default {
 
 data() {
@@ -78,11 +91,13 @@ data() {
      return {
       showDialog: false,
       parentmessage:'',
-     allNotes:[]
+     allNotes:[],
+     refval:''
     } 
   },
   components: {
     iconlist,
+    updatenote,
   },
   methods: {
     // showDailogue(){
@@ -100,7 +115,7 @@ data() {
     .then(res => {
        //VmUser.$bus.$emit('add-user', { user: user})
         console.log('====================================');
-        console.log(res.sendMessage);
+        console.log(res.message);
         console.log('====================================');
         
         
@@ -116,6 +131,11 @@ data() {
             },
     onClickButton (event) {
       this.$emit('clicked', event)
+    },
+    update:function(note){
+      this.showDialog=false;
+      this.refval=note;
+      // alert(note.noteid)
     },
     getnotes() {
       const token = {
@@ -211,6 +231,7 @@ grid-gap: 30px;
   
 }
 .iconlist{
+  margin-top: 45px;
   margin-left: -15px
 }
 .md-card{

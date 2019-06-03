@@ -65,13 +65,15 @@ export default {
     //axios.post('http://localhost:8080/user/resetPassword/{token}',data)
     axios.put(`http://localhost:8080/user/resetPassword`,data,{ headers: {token:this.$route.params.token} })
       .then(response => {
-        this.confirmpassword=response.data;
-        alert("nnnnnnnnnnnnnnnnnnnnnnn")
-        alert(response.data.message)
+      
+        console.log('====================================');
+        console.log(reponse.data.message);
+        console.log('====================================');
        })
       .catch(error => {
-       alert(error)
-      })
+          console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');      })
   }
 }
 }

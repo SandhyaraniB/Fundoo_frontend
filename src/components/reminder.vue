@@ -1,9 +1,9 @@
 <template>
   <div class="cards">
-    <div v-for="result in allNotes" v-bind:key="result" class="getcards">
+    <div v-for="note in allNotes" v-bind:key="note" class="getcards">
       <!-- @click="showDialog = true"  -->
       <!-- //applying color for card result.colorChange put  in style with binding -->
-      <div v-if="result.reminder!=null">
+      <div v-if="note.reminder!=null">
       <md-card class="takenote">
         <div>
           <input
@@ -25,11 +25,11 @@
             style="border: none; outline=none margin-left: 10px;"
           >
         </div>
-        <div v-if="result.reminder!=null">
-        <md-chip class="md-accent" md-deletable>{{result.reminder}}</md-chip>
+        <div v-if="note.reminder!=null">
+        <md-chip class="md-accent" md-deletable>{{note.reminder}}</md-chip>
         </div>
         <div>
-          <iconlist :parentmessage="result.noteid" style="color:white"></iconlist>
+          <iconlist :parentmessage="note.noteid" style="color:white"></iconlist>
         </div>
       </md-card>
       </div>
@@ -103,7 +103,9 @@ export default {
       // NoteService.GetAllNotes(token)
       //   .then("cards.")
       //   .catch(error => {
-      //     alert(error);
+      //    console.log('====================================');
+          // console.log("error"+error);
+          // console.log('====================================');
       //   });
 
       axios
@@ -120,7 +122,9 @@ export default {
           }
         })
         .catch(error => {
-          alert(error);
+          console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
         });
     },
     noteinfo(note) {

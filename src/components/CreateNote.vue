@@ -89,32 +89,19 @@ export default {
       const token = {
         token: localStorage.getItem("token")
       };
-      alert(token);
+     
+     console.log('====================================');
+     console.log("token"+token);
+     console.log('====================================');
 
       NoteService.CreateNote(data, token.token)
         .then("created successfully")
         .catch(error => {
-          alert(error);
+          console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
         });
     },
-    updatenote() {
-      const data = {
-        title: this.title,
-        content: this.content
-      };
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      NoteService.update(data, token)
-        .then("created successfully")
-        .catch(error => {
-          alert(error);
-        });
-    },
-    pin(){
-
-
-    }
   },
   components: {
     iconlist

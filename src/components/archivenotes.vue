@@ -117,9 +117,12 @@ export default {
           }
         })
         .catch(error => {
-          alert(error);
+          console.log('====================================');
+          console.log("error in archive"+error);
+          console.log('====================================');
         });
     },
+    
     noteinfo(note) {
       console.log("====================================");
       // console.log("Particular Note"+note)

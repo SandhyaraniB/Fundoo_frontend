@@ -57,12 +57,15 @@ data() {
       .post('http://localhost:8080/user/forgotpassword',data)
       .then(response => {
         this.emailId=response.data;
-        alert(response.data.satusmessage)
-       alert("emailId is present in database");
-       //  this.emailId=response.blog
+        console.log('====================================');
+        console.log(response.data.satusmessage);
+        console.log('====================================');
+
 })
       .catch(error => {
-      alert(error)
+       console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
       })
   }
 }

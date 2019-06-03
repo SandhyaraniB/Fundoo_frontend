@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="dashboard" style="margin-top:-60px;background-color: antiquewhite;">
+  <div id="app" class="dashboard" style="margin-top:-60px;">
     <!-- <v-flex xs6> -->
       <div style="width:100%">
       <v-app id="inspire" dark>
@@ -291,11 +291,11 @@ export default {
         })
         .then(res => {
           if (res) {
-            // alert(res);
+          
             //VmUser.$bus.$emit('add-user', { user: user})
-            // console.log('====================================');
-            // console.log("AAAAAAAAAA",res);
-            // console.log('====================================');
+            console.log('====================================');
+            console.log("AAAAAAAAAA",res);
+            console.log('====================================');
           }
         })
         .catch(error => {

@@ -57,7 +57,6 @@ data() {
   },
   methods: {
     Register(){
-     alert(this.emailId)
      const data={
         emailId:this.emailId,
         name:this.name,
@@ -70,7 +69,9 @@ data() {
       
       // this.$router.push('http://localhost:8081/Login')
         .catch(error => {
-      alert(error)
+   console.log('====================================');
+          console.log("error"+error);
+          console.log('====================================');
       });
   }
 }
