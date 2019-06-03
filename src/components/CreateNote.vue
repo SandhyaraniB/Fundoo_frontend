@@ -1,49 +1,54 @@
 <template>
-  <div class="createnote">
+  <div class="createnote" style="height:auto;">
     <div @click="flagchange" v-if="flag" style="margin:14px">
-      <md-card style="width: 600px; height: 45px;    margin-top: -490px;margin-left:180px;">
-        <div>
-          <input
-            type="text"
+      <md-card style="width: 600px; height:auto;    margin-top: -490px;margin-left:180px;">
+        <!-- <div> -->
+         <textarea-autosize 
             placeholder="Take a note..."
-            style="margin: 10px;border:none;width:350px;height:30px; outline=none">
-          <md-button class="md-icon-button" style="margin-left:20px;">
+            class="takenote"
+            style="margin:10px;">
+         </textarea-autosize>
+          <md-button class="md-icon-button" style="margin-left:400px;margin-top:-53px;">
             <md-icon>list</md-icon>
             <md-tooltip md-direction="bottom">new list</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" style="margin-top:-53px;">
             <md-icon>create</md-icon>
             <md-tooltip md-direction="bottom">new note with drawing</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button">
+          <md-button class="md-icon-button" style="margin-top:-53px;">
             <md-icon>crop_original</md-icon>
             <md-tooltip md-direction="bottom">new note with image</md-tooltip>
           </md-button>
-        </div>
+        <!-- </div> -->
       </md-card>
     </div>
 
     <div v-else>
-      <md-card class="takenote" style="    margin-top: -470px;;margin-left: 130px;">
+      <md-card class="takenote" style="margin-top: -470px;;margin-left: 130px;height: auto;width: 600px;  ">
         <div>
-          <input type="text" v-model="title" name="title" placeholder="title" class="titleone">
-
-          <md-button class="md-icon-button">
-            <md-icon>location_on</md-icon>
+          <textarea-autosize 
+          v-model="title"
+           name="title" 
+           placeholder="title" 
+           class="titleone">
+          </textarea-autosize>
+          <md-button class="md-icon-button" @click="pin()">
+            <md-icon>
+              <img src="../assets/pin.svg">
+            </md-icon>
             <md-tooltip md-direction="bottom">pin</md-tooltip>
           </md-button>
         </div>
         <div>
-          <input
-            type="text"
+         <textarea-autosize
             v-model="content"
             name="content"
             placeholder="description"
             class="titletwo"
-            style="border: none; outline=none"
-          >
+          ></textarea-autosize>
         </div>
-        <div></div>
+        <!-- <div></div> -->
         <div>
           <iconlist></iconlist>
         </div>
@@ -105,6 +110,10 @@ export default {
         .catch(error => {
           alert(error);
         });
+    },
+    pin(){
+
+
     }
   },
   components: {
@@ -151,6 +160,8 @@ export default {
   // margin-top: 15px;
   width: 80%;
   margin-left: -50px;
+   border: none;
+  outline: none;
 }
 .icon {
   display: -webkit-flex;
@@ -160,6 +171,12 @@ export default {
 .close {
   margin-top: -40px;
   margin-left: 80%;
+}
+.takenote{
+width:350px;
+height:30px;
+border:none; 
+outline:none;
 }
 </style>
 

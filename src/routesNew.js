@@ -11,9 +11,10 @@ import navbar from './components/navbar.vue'
 // import iconlist from './components/iconlist.vue';
 // import cards from './components/cards.vue';
 // import getlabels from './components/getlabels.vue';
-// import reminder from './components/reminder.vue'
+import reminder from './components/reminder.vue'
 import dashboard from './components/dashboard.vue'
 import archive from './components/archivenotes.vue'
+import trashed from './components/trashnotes.vue'
 export default
  [
     { 
@@ -70,6 +71,16 @@ export default
             {
                 path:'archive',
                 component:archive,
+               
+            },
+            {
+                path:'reminder',
+                component:reminder,
+               
+            },
+            {
+                path:'trashed',
+                component:trashed,
                
             },
             // {

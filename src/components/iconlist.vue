@@ -180,7 +180,6 @@ export default {
       labelname: "",
       visible: false
     };
-    nnoteid=this.parentmessage
   },
   // data: function(){
   //        return () =>{
@@ -215,10 +214,14 @@ export default {
           headers: { token: token.token }
         })
         .this(response => {
-          alert(response.data.message);
+          console.log('====================================')
+          console.log(response.data.message);
+          console.log('====================================')
         })
         .catch(error => {
-          alert(error);
+        console.log('====================================')
+        console.log(error)
+        console.log('====================================')
         });
     },
 
@@ -370,8 +373,7 @@ export default {
       //   .catch(error => {
       //     alert(error);
       //   });
-      axios.put("http://localhost:8080/note/archivenote/" + this.noteid,{}, {
-          headers: { token: token.token }
+      axios.put("http://localhost:8080/note/archivenote/" + this.noteid,{},{headers: { token: token.token }
         })
         .then(response => {
           console.log('====================================')

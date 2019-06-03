@@ -1,15 +1,31 @@
 <template>
-  <div class="cards" style="margin-top:-300px;">
-   <vue-grid-item v-for= "result in allNotes" v-bind:key="result" class="getcards" >
+  <div class="cards" style="margin-top:-250px;">
+   <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
    <!-- @click="showDialog = true"  -->
    <!-- //applying color for card result.colorChange put  in style with binding -->
-     <md-card md-with-hover>
-        <md-ripple>
-        <div>
-          <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline=none ">
+   <div v-if="result.trashed==false" >
+     <md-card md-with-hover style="width: fit-content;height: auto;">
+        <!-- <md-ripple style=" height: 180px;"> -->
+        <div >
+          <textarea-autosize v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline:none; ">
+          </textarea-autosize>
+
+          <!-- <md-icon style="margin-top: -90px; margin-left: 250px;" @click="pin()">
+              <img src="../assets/pin.svg">
+            </md-icon> -->
+            <md-button md-menu-trigger class="md-icon-button" @click="pin(result.noteid)" style="margin-top: -45px; margin-left: 250px;">
+         <md-icon >
+              <img src="../assets/pin.svg">
+            </md-icon> 
+      </md-button>
         </div>
         <div>
-          <input type="text" v-model="result.content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
+       <textarea-autosize
+           v-model="result.content" 
+           name="content" placeholder="description"
+            class="titletwo" 
+            style="border: none; outline:none;">
+       </textarea-autosize>
         </div>
         <div v-if="result.reminder!=null">
         <md-chip class="md-accent" md-deletable>{{result.reminder}}</md-chip>
@@ -23,10 +39,10 @@
     
     <!-- <md-chip md-disabled>Disabled</md-chip> -->
   <!-- </div> -->
-   </md-ripple>
+   <!-- </md-ripple> -->
       </md-card >
-    
-    </vue-grid-item>
+   </div>
+    </div>
     <div>
      <md-dialog :md-active.sync="showDialog">
       <!-- <md-dialog-title>Preferences</md-dialog-title> -->
@@ -47,6 +63,7 @@
      
     </md-dialog>
     </div>
+  <!-- </div> -->
 </div>
 </template>
 <script>
@@ -71,6 +88,29 @@ data() {
     // showDailogue(){
     //   this.Dialog=!this.Dialog  
     // },
+   pin(noteid){
+  // this.noteid = this.parentmessage;
+     const token = {
+        token: localStorage.getItem("token")
+      };
+        console.log('====================================');
+        console.log("noteid ......"+noteid);
+        console.log('====================================');  
+    axios.put('http://localhost:8080/note/pinnote/'+noteid,{},{ headers: {token:token.token} })
+    .then(res => {
+       //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log(res.sendMessage);
+        console.log('====================================');
+        
+        
+    
+    }).catch(error => { 
+      console.log('====================================')
+      console.log("error"+error)
+      console.log('====================================')})
+    },
+    
      sendMessage() {
                 // this.parentmessage = '<b>Message From Parent:</b> Do Your Homework'
             },
@@ -99,7 +139,10 @@ data() {
         
         
       }
-    }).catch(error => { alert(error)})
+    }).catch(error => { 
+      console.log('====================================')
+      console.log("error"+error)
+      console.log('====================================')})
     },
     noteinfo(note){
       console.log('====================================')
@@ -117,14 +160,14 @@ data() {
 /* flex-direction:row wrap; */
 grid-template-columns: repeat(3, 3fr);
 grid-auto-rows: 158px;
-grid-gap: 23px;
+grid-gap: 30px;
 }
 .md-card {
   border-radius: 10px;
   display: flex;
   width: 250px;
   height: 105px;
-  margin: 4px;
+  margin: px;
   display: inline-block;
   vertical-align: top;
   color: aliceblue;

@@ -12,7 +12,11 @@ import MenuIcon from "vue-material-design-icons/Menu.vue"
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import VueTextareaAutosize from 'vue-textarea-autosize'
+
+Vue.use(VueTextareaAutosize)
  Vue.component("menu-icon", MenuIcon);
+
  Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
 library.add(fas) // Include needed icons.
 

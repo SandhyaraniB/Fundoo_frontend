@@ -1,19 +1,21 @@
 <template>
-  <div id="app" class="dashboard" style="margin-top:-60px;">
-    <v-flex xs6>
+  <div id="app" class="dashboard" style="margin-top:-60px;background-color: antiquewhite;">
+    <!-- <v-flex xs6> -->
+      <div style="width:100%">
       <v-app id="inspire" dark>
-        <v-toolbar style=" background: beige;">
+        <v-toolbar style=" display: flex;flex-direction: row;" >
+          <div flex layout="row" layout-align="space-between center">
           <md-button
             class="md-icon-button"
             @click="toggleDrawer"
-            style="margin-left:-1050px;margin-top:10px;"
+            style="margin-left:-900px;margin-top:10px;"
           >
             <md-icon>menu</md-icon>
           </md-button>
 
           <img src="./../assets/keep.png" style="width:35px;margin-top:13px;">
 
-          <span style="margin-left:20px;margin-top:45px;">
+          <span >
             <!-- <span class="f">F</span>
             <span class="u">u</span>
             <span class="n">n</span>
@@ -22,6 +24,7 @@
             <span class="oo">o</span> -->
             fundoo
           </span>
+          </div>
 
           <md-card class="card">
             <md-icon style="margin-left:5px; outline=none">search</md-icon>
@@ -38,9 +41,10 @@
           </md-button>
 
           <md-button
-            style="color:black;margin-top: -45px;margin-left: 10px;"
+            style="color:black;margin-top: -45px;margin-left: 10px;flex-direction:column"
             class="md-icon-button"
             width="-30px"
+            
           >
             <md-icon style="color:black">settings</md-icon>
             <md-tooltip md-direction="bottom">settings</md-tooltip>
@@ -92,8 +96,10 @@
                   <v-list-tile-content>
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
+                         <router-link class="nav-link" to="/navbar/reminder">
                         <md-icon class="icon">notifications</md-icon>
                         <span>Reminder</span>
+                        </router-link>
                       </md-button>
                     </v-list-tile-title>
                   </v-list-tile-content>
@@ -158,8 +164,9 @@
               <v-list-tile-content>
                 <v-list-tile-title>
                   <md-button style="width:100px;margin-left:-80px;margin-right: 20px;">
+                     <router-link class="nav-link" to="/navbar/trashed">
                     <md-icon class="icon">delete</md-icon>
-                    <span>Trash</span>
+                    <span>Trash</span></router-link>
                   </md-button>
                 </v-list-tile-title>
               </v-list-tile-content>
@@ -186,7 +193,8 @@
           </v-container>
         </v-content>
       </v-app>
-    </v-flex>
+      </div>
+    <!-- </v-flex> -->
   </div>
 </template>
 <script>
@@ -308,6 +316,8 @@ export default {
 <style lang="scss" scoped>
 .dashboard{
   // display: flex;
+  flex-direction: row;
+  width: 100%;
   margin-top:-60px;
 }
 .f {

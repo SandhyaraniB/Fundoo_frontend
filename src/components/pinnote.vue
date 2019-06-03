@@ -3,7 +3,7 @@
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
       <!-- @click="showDialog = true"  -->
       <!-- //applying color for card result.colorChange put  in style with binding -->
-      <div v-if="result.archived==true">
+      <div v-if="result.pinned==true">
       <md-card class="takenote">
         <div>
           <input

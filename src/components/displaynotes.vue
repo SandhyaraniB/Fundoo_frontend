@@ -3,7 +3,7 @@
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
       <!-- @click="showDialog = true"  -->
       <!-- //applying color for card result.colorChange put  in style with binding -->
-      <div v-if="result.archived==true">
+      <div v-if="result.trashed!=false">
       <md-card class="takenote">
         <div>
           <input
@@ -12,7 +12,7 @@
             name="title"
             placeholder="title"
             class="titleone"
-            style="border: none; outline=none "
+            style="border: none; outline=none"
           >
         </div>
         <div>
@@ -56,7 +56,8 @@
             >
           </div>
           <div @click="noteinfo(noteid)">
-            <iconlist :parentmessage="noteid" style="color:white"></iconlist>
+            <!-- <iconlist :parentmessage="noteid" style="color:white"></iconlist> -->
+            
           </div>
           <md-dialog-actions>
             <md-button class="md-primary" @click="showDialog = false">Close</md-button>
