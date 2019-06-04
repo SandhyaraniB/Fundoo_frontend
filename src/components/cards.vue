@@ -2,8 +2,7 @@
   <div class="cards" style="margin-top:-250px;">
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
    <div v-if="result.trashed==false">
-     <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;
-    height:auto;"   >
+     <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;height:auto;"   >
      
         <div @click="showDialog = true" >
         <div v-if="result.imageToNote!=null">
@@ -37,7 +36,7 @@
         </div>
         <div v-for="label in result.labell" v-bind:key="label">
         <div v-if="label.labelname!=null" style=" width: 50px;margin-left:10px;">
-        <md-chip class="md-accent" md-deletable style="width: auto;">{{label.labelname}}</md-chip>
+        <md-chip class="md-accent" md-deletable style="width: auto;" @click="deletelabel(label)">{{label.labelname}}</md-chip>
         </div>
         </div>
  
@@ -143,18 +142,35 @@ data() {
       // console.log("Particular Note"+note)
        this.parentmessage = note
       console.log('====================================')
+    },
+    deletelabel(label)
+    {
+      console.log('====================================');
+      console.log(label.labelid);
+      console.log('====================================');
+       axios.delete('http://localhost:8080/Label/deletelabel/'+label.labelid)
+       .then(res => {
+         console.log('====================================');
+        console.log("deleted",res);
+        console.log('====================================');
+        
+    }).catch(error => { 
+      console.log('====================================')
+      console.log("error"+error)
+      console.log('====================================')})
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .cards{
-  display: flex;
-  display: grid;
-/* flex-direction:row wrap; */
-grid-template-columns: repeat(3, 3fr);
-grid-auto-rows: 158px;
-grid-gap: 30px;
+  display:flex;
+  // display: grid;
+//  flex-direction:row wrap; 
+ flex-wrap: wrap;
+// grid-template-columns: repeat(3, 3fr);
+// grid-auto-rows: 158px;
+// grid-gap: 30px;
 }
 .md-card {
   border-radius: 10px;

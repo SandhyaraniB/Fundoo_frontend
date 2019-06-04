@@ -449,16 +449,20 @@ export default {
         });
     },
 
-    collaborator() {
+    addcollaborator() {
       this.noteid = this.parentmessage.noteid;
       const token = {
         token: localStorage.getItem("token")
       };
-      NoteService.AddingCollaborator(noteid, emailid, token).catch(error => {
-        console.log("====================================");
-        console.log("error" + error);
-        console.log("====================================");
-      });
+       axios.post('http://localhost:8080/note/addingCollaborator',noteid,emailId,{ headers: {token:token.token} })
+     .this(response=>{response
+    })
+     .catch(error=>{error})
+      // NoteService.AddingCollaborator(noteid, emailid, token).catch(error => {
+      //   console.log("====================================");
+      //   console.log("error" + error);
+      //   console.log("====================================");
+      // });
     },
     addcolor(colore) {
       this.noteid = this.parentmessage.noteid;

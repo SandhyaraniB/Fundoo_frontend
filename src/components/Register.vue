@@ -34,7 +34,7 @@
           <button style="background-color:#87ceeb" @click="Register">Register</button>
           <div>
           </div>
-        <router-link to="/Login" class="btn btn-link">click to login</router-link>
+        <router-link to="/" class="btn btn-link">click to login</router-link>
         <div>
         </div>
         </md-card-content>

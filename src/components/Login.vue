@@ -25,7 +25,7 @@
         <router-link to="/forgotpassword" class="btn btn-link">forgot password</router-link>
         <div>
         </div>
-        <!-- <router-link to="/register" class="btn btn-link">Click to register</router-link> -->
+        <router-link to="/register" class="btn btn-link">Click to register</router-link>
         </md-card-content>
 
        </md-ripple>
@@ -84,7 +84,7 @@ data() {
         console.log('====================================');
         localStorage.removeItem('token');
         localStorage.setItem('token',res.data.token);
-        window.location.href="/user/navbar"
+        window.location.href="navbar/dashboard"
       }
       
     }).catch(error => { 

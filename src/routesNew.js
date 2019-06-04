@@ -14,7 +14,7 @@ import trashed from './components/trashnotes.vue'
 export default
  [
     { 
-        path: '/Login',
+        path: '/',
         component: Login
     },
     
@@ -27,7 +27,7 @@ export default
     //     component: child
     // },
      { 
-        path: '/', 
+        path: '/register', 
         component: Register
     },
     { 
