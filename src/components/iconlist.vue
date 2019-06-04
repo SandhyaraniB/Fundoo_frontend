@@ -49,12 +49,23 @@
         <md-icon class="icon">person_add</md-icon>
         <md-tooltip md-direction="bottom">collaborator</md-tooltip>
       </md-button>
-      <md-menu-content style="width:200px;height:500px;">
+      <md-menu-content style=" width:auto;height:auto">
         <md-menu-item>Collabrators :</md-menu-item>
+        <div>
         <md-button class="md-icon-button">
           <md-icon class="icon">person_add</md-icon>
+        </md-button>{{emailid}}
+        </div>
+        <div v-if="newmail==null">
+          
+        <md-button class="md-icon-button" @click="addcollaborator()">
+          <md-icon class="icon">person_add</md-icon>
+          
         </md-button>
+        <input type="text" v-model="newmail" placeholder="newemailid" style="border:none;outline:none;width:auto;">
+        </div>
       </md-menu-content>
+      
     </md-menu>
 
     <md-menu>
@@ -204,14 +215,17 @@ export default {
     getlabelsfornote
   },
   data() {
+    this.emailid=localStorage.getItem(emailid)
     return {
+      newmail:'',
       noteid: this.parentmessage.noteid,
       noteidinstr: "",
       labelname: "",
+      emailid:'',
       visible: false
     };
   },
-
+  // emailid:localStorage.getItem(emailid),
   methods: {
     getnoteid() {
       console.log("====================================");
@@ -448,13 +462,23 @@ export default {
           console.log("====================================");
         });
     },
-
+    collaborator(){
+     
+        this.emailid=localStorage.getItem("emailid");
+        console.log('====================================');
+        console.log("ahghshag",this.emailid);
+        console.log('====================================');
+      
+    },
     addcollaborator() {
+     console.log('====================================');
+     console.log("eeeeeee"+ this.newmail);
+     console.log('====================================');
       this.noteid = this.parentmessage.noteid;
       const token = {
         token: localStorage.getItem("token")
       };
-       axios.post('http://localhost:8080/note/addingCollaborator',noteid,emailId,{ headers: {token:token.token} })
+       axios.post('http://localhost:8080/note/addingCollaborator/'+this.noteid,this.newmail,{},{ headers: {token:token.token} })
      .this(response=>{response
     })
      .catch(error=>{error})

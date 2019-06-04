@@ -166,8 +166,13 @@ data() {
 .cards{
   display:flex;
   // display: grid;
-//  flex-direction:row wrap; 
+//  flex-direction:row ; 
  flex-wrap: wrap;
+ justify-content: space-between;
+ 
+ 
+ 
+ 
 // grid-template-columns: repeat(3, 3fr);
 // grid-auto-rows: 158px;
 // grid-gap: 30px;

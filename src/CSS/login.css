@@ -1,0 +1,9 @@
+.md-card {
+    width: 320px;
+    height:350px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+    /* display:flex, */
+    
+  }

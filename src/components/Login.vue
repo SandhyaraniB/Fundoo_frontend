@@ -84,6 +84,8 @@ data() {
         console.log('====================================');
         localStorage.removeItem('token');
         localStorage.setItem('token',res.data.token);
+        localStorage.removeItem('emailid');
+        localStorage.setItem('emailid',res.data.emailid);
         window.location.href="navbar/dashboard"
       }
       
