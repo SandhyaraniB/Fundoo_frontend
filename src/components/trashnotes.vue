@@ -123,12 +123,6 @@ export default {
           console.log('====================================');
         });
     },
-    noteinfo(note) {
-      console.log("====================================");
-      // console.log("Particular Note"+note)
-      this.parentmessage = note;
-      console.log("====================================");
-    }
   }
 };
 </script>

@@ -14,7 +14,7 @@ function login(data)
                // alert(response.data.satusmessage)
            localStorage.removeItem('token');
            localStorage.setItem('token',response.data.token);
-           window.location.href="http://localhost:8081/navbar"
+           window.location.href="http://localhost:8081/navbar/dashboard"
         }).catch(error => { 
              error
           //    alert(error)

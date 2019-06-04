@@ -1,5 +1,5 @@
 <template>
-  <div  class="iconlist">
+  <div class="iconlist">
     <!-- <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div> -->
     <!-- <md-menu style="margin-left:-5px;" class="mdreminder">
       <md-button md-menu-trigger class="md-icon-button" @click="reminder()">
@@ -12,7 +12,7 @@
         <md-menu-item class="dates" @click="tomorrow()">Tomorrow</md-menu-item>
         <md-menu-item class="dates">Next week</md-menu-item>
       </md-menu-content>
-    </md-menu> -->
+    </md-menu>-->
 
     <md-menu style="margin-left: 20px;">
       <md-button md-menu-trigger class="md-icon-button">
@@ -22,27 +22,25 @@
       <md-menu-content style="width:200px;height:500px;">
         <span>Reminder:</span>
         <!-- <md-button> -->
-           
-          <md-menu-item class="more" @click="today()">Later today</md-menu-item>
+
+        <md-menu-item class="more" @click="today()">Later today</md-menu-item>
         <!-- </md-button> -->
-         <!-- <md-button> -->
-          
-          <md-menu-item class="moree" @click="tomorrow()">Tomorrow</md-menu-item>
-          
-           
-          <md-menu-item class="moree" @click="weeklater()">weeklater</md-menu-item>
- 
+        <!-- <md-button> -->
+
+        <md-menu-item class="moree" @click="tomorrow()">Tomorrow</md-menu-item>
+
+        <md-menu-item class="moree" @click="weeklater()">weeklater</md-menu-item>
+
         <!-- </md-button> -->
         <!-- <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button> -->
         <md-menuone-item v-if="visible" class="dropdown">
           <md-menuone-content style="margin-left:200px;">
             <md-menuone-item>
-              
               <getlabelsfornote></getlabelsfornote>
             </md-menuone-item>
           </md-menuone-content>
         </md-menuone-item>
-           <!-- </md-list> -->
+        <!-- </md-list> -->
       </md-menu-content>
     </md-menu>
 
@@ -51,19 +49,13 @@
         <md-icon class="icon">person_add</md-icon>
         <md-tooltip md-direction="bottom">collaborator</md-tooltip>
       </md-button>
-      <!-- <md-menu-content style="width:200px;height:500px;">
-        <md-menu-item>Collabrators : </md-menu-item>
+      <md-menu-content style="width:200px;height:500px;">
+        <md-menu-item>Collabrators :</md-menu-item>
         <md-button class="md-icon-button">
-          
-           <md-icon class="icon"> person_add</md-icon>
-         
-           </md-button>
-      </md-menu-content>-->
+          <md-icon class="icon">person_add</md-icon>
+        </md-button>
+      </md-menu-content>
     </md-menu>
-    <!-- <md-button class="md-icon-button">
-
-      <md-icon >person_add</md-icon>
-    </md-button>-->
 
     <md-menu>
       <md-button md-menu-trigger class="md-icon-button">
@@ -71,53 +63,93 @@
         <md-tooltip md-direction="bottom">add color</md-tooltip>
       </md-button>
       <md-menu-content style="width:200px;height:150px;">
-      <div>
-         <md-button class="md-icon-button" style="background-color:white;" @click="addcolor('white')">
-         
-      <md-icon ></md-icon>
-     </md-button>
-    <md-button class="md-icon-button" style="background-color:red;" @click="addcolor('red')">
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:orange; " @click="addcolor('orange')">
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:yellow;"  @click="addcolor('yellow')">
-      <md-icon ></md-icon>
-    </md-button> 
+        <div>
+          <md-button
+            class="md-icon-button"
+            style="background-color:white;"
+            @click="addcolor('white')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" style="background-color:red;" @click="addcolor('red')">
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:orange; "
+            @click="addcolor('orange')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:yellow;"
+            @click="addcolor('yellow')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+        </div>
 
-      </div>
-      
-       <div>
-         <md-button class="md-icon-button" style="background-color:green;" @click="addcolor('green')" >
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:teal;" @click="addcolor('teal')" >
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:blue;" @click="addcolor('blue')">
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:darkblue;" @click="addcolor('darkblue')" >
-      <md-icon ></md-icon>
-    </md-button>
-    </div>
-       <div>
-         <md-button class="md-icon-button" style="background-color:purple;" @click="addcolor('purple')" >
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:pink;" @click="addcolor('pink')" >
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:brown;" @click="addcolor('brown')">
-      <md-icon ></md-icon>
-    </md-button>
-    <md-button class="md-icon-button" style="background-color:grey;" @click="addcolor('grey')" >
-      <md-icon ></md-icon>
-    </md-button>
-
-      </div>
-        
+        <div>
+          <md-button
+            class="md-icon-button"
+            style="background-color:green;"
+            @click="addcolor('green')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:teal;"
+            @click="addcolor('teal')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:blue;"
+            @click="addcolor('blue')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:darkblue;"
+            @click="addcolor('darkblue')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+        </div>
+        <div>
+          <md-button
+            class="md-icon-button"
+            style="background-color:purple;"
+            @click="addcolor('purple')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:pink;"
+            @click="addcolor('pink')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:brown;"
+            @click="addcolor('brown')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+          <md-button
+            class="md-icon-button"
+            style="background-color:grey;"
+            @click="addcolor('grey')"
+          >
+            <md-icon></md-icon>
+          </md-button>
+        </div>
       </md-menu-content>
     </md-menu>
 
@@ -133,30 +165,28 @@
       <md-tooltip md-direction="bottom">archive</md-tooltip>
     </md-button>
     <md-menu>
-      <md-button md-menu-trigger class="md-icon-button">
-        <md-icon class="icon">more_vert</md-icon>
+      <md-button md-menu-trigger class="md-icon-button" >
+        <md-icon class="icon" style="margin-right: 20px;">more_vert</md-icon>
         <md-tooltip md-direction="bottom">more</md-tooltip>
       </md-button>
-      <md-menu-content style="width:200px;height:500px;">
+     
+      <md-menu-content style="width:200px;height:700px;">
         <md-button>
           <md-menu-item class="more" @click="deletenote()">Delete note</md-menu-item>
         </md-button>
         <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button>
+         <md-card style="width:200px;height:1000px;">
         <md-menuone-item v-if="visible" class="dropdown">
           <md-menuone-content style="margin-left:200px;">
             <md-menuone-item>
-              
-              <getlabelsfornote></getlabelsfornote>
+                 <getlabelsfornote :parentmessage="parentmessage"></getlabelsfornote>
             </md-menuone-item>
           </md-menuone-content>
         </md-menuone-item>
+         </md-card>
       </md-menu-content>
+     
     </md-menu>
-    <!-- <md-button @click="getnoteid()">
-      <md-icon>menu</md-icon>
-    </md-button>
-    <blog-post post-title=parentmessage></blog-post>
-    <h3>{{ parentmessage }}</h3>-->
   </div>
 </template>
 <script>
@@ -175,23 +205,14 @@ export default {
   },
   data() {
     return {
-      noteid: this.parentmessage,
+      noteid: this.parentmessage.noteid,
       noteidinstr: "",
       labelname: "",
       visible: false
     };
   },
-  // data: function(){
-  //        return () =>{
-  //          noteid: this.parentmessage
-  //          console.log('====================================');
-  //         console.log("noteid);
-  //         console.log('====================================');
-  // //        }
-  // //     },
 
   methods: {
-    
     getnoteid() {
       console.log("====================================");
       console.log("Dhatri:" + noteid);
@@ -200,30 +221,34 @@ export default {
 
     // ............................................................deletenote.......................................................................................
     deletenote() {
-      this.noteid = this.parentmessage;
+      this.noteid = this.parentmessage.noteid;
       const token = {
         token: localStorage.getItem("token")
       };
       // NoteService.DeleteNote(this.noteid, token)
       //   .then("notedeleted")
       //   .catch(error => {
-    //  console.log('====================================');
-    //       console.log("error"+error);
-    //       console.log('====================================');
+      //  console.log('====================================');
+      //       console.log("error"+error);
+      //       console.log('====================================');
       //   });
       axios
-        .put("http://localhost:8080/note/trashnote/" + this.noteid, {},{
-          headers: { token: token.token }
-        })
+        .put(
+          "http://localhost:8080/note/trashnote/" + this.noteid,
+          {},
+          {
+            headers: { token: token.token }
+          }
+        )
         .this(response => {
-          console.log('====================================')
+          console.log("====================================");
           console.log(response.data.message);
-          console.log('====================================')
+          console.log("====================================");
         })
         .catch(error => {
-        console.log('====================================')
-        console.log(error)
-        console.log('====================================')
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
         });
     },
 
@@ -238,9 +263,9 @@ export default {
       Labelservice.CreateLabel(data, token)
         .then("labeladded")
         .catch(error => {
-          console.log('====================================')
-          console.log(error)
-          console.log('====================================')
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
         });
     },
     today() {
@@ -251,176 +276,192 @@ export default {
       var day = date.getDate();
       var month = date.getMonth();
       var year = date.getFullYear();
-      var data = year+'-'+month+'-'+day;
-          Vue.filter('formatDate', function(data) {
-      if (date) {
-        return moment(String(data)).format('yyyy-mm-dd')
-        console.log("====================================");
-      console.log(moment(String(data)).format('yyyy-mm-dd'));
-      console.log("====================================");
-        console.log("DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm"));
+      var data = year + "-" + month + "-" + day;
+      Vue.filter("formatDate", function(data) {
+        if (date) {
+          return moment(String(data)).format("yyyy-mm-dd");
+          console.log("====================================");
+          console.log(moment(String(data)).format("yyyy-mm-dd"));
+          console.log("====================================");
+          console.log(
+            "DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm")
+          );
         }
       });
       console.log("====================================");
       console.log(data);
       console.log("====================================");
-      this.noteid= this.parentmessage;
+      this.noteid = this.parentmessage.noteid;
       console.log("====================================");
       console.log(this.noteid);
       console.log("====================================");
       const token = {
-        token: localStorage.getItem("token") 
+        token: localStorage.getItem("token")
       };
-      console.log('====================================')
-      console.log("253 line"+date)
-      console.log('====================================')
-     axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
-     .this(response=>{
-      console.log('====================================');
-      console.log(response);
-      console.log('====================================');
-    })
-     .catch(error=>{
-      console.log('====================================');
-      console.log("error..."+error);
-      console.log('====================================');
-    })
-  
+      console.log("====================================");
+      console.log("253 line" + this.noteid);
+      console.log("====================================");
+      axios
+        .post("http://localhost:8080/note/reminder/" + this.noteid, date, {
+          headers: { token: token.token }
+        })
+        .this(response => {
+          console.log("====================================");
+          console.log(response);
+          console.log("====================================");
+        })
+        .catch(error => {
+          console.log("====================================");
+          console.log("error..." + error);
+          console.log("====================================");
+        });
     },
 
-
-  tomorrow() {
+    tomorrow() {
       //  this.noteid = this.parentmessage;
       var date = new Date();
-      date.setDate(date.getDate() + 1)
+      date.setDate(date.getDate() + 1);
       // var endDate = new Date(date.getDate() + 1);
       var day = date.getDate();
       var month = date.getMonth();
       var year = date.getFullYear();
-      var data = year+'-'+month+'-'+day;
-          Vue.filter('formatDate', function(data) {
-      if (date) {
-        return moment(String(data)).format('yyyy-mm-dd')
-        console.log("====================================");
-      console.log(moment(String(data)).format('yyyy-mm-dd'));
-      console.log("====================================");
-        console.log("DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm"));
+      var data = year + "-" + month + "-" + day;
+      Vue.filter("formatDate", function(data) {
+        if (date) {
+          return moment(String(data)).format("yyyy-mm-dd");
+          console.log("====================================");
+          console.log(moment(String(data)).format("yyyy-mm-dd"));
+          console.log("====================================");
+          console.log(
+            "DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm")
+          );
         }
       });
       console.log("====================================");
       console.log(data);
       console.log("====================================");
-      this.noteid= this.parentmessage.noteid;
+      this.noteid = this.parentmessage.noteid;
       console.log("====================================");
       console.log(this.noteid);
       console.log("====================================");
       const token = {
-        token: localStorage.getItem("token") 
+        token: localStorage.getItem("token")
       };
-      console.log('====================================')
-      console.log("253 line"+date)
-      console.log('====================================')
-     axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
-     .this(response=>{
-       console.log('====================================');
-       console.log(response);
-       console.log('====================================');
-    })
-     .catch(error=>{console.log('====================================');
-     console.log( error);
-     console.log('====================================');})
-  },
-  weeklater(){
-    //  this.noteid = this.parentmessage;
+      console.log("====================================");
+      console.log("253 line" + date);
+      console.log("====================================");
+      axios
+        .put("http://localhost:8080/note/reminder/" + this.noteid, date, {
+          headers: { token: token.token }
+        })
+        .this(response => {
+          console.log("====================================");
+          console.log(response);
+          console.log("====================================");
+        })
+        .catch(error => {
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
+        });
+    },
+    weeklater() {
+      //  this.noteid = this.parentmessage;
       var date = new Date();
-      date.setDate(date.getDate() + 7)
+      date.setDate(date.getDate() + 7);
       // var endDate = new Date(date.getDate() + 1);
       var day = date.getDate();
       var month = date.getMonth();
       var year = date.getFullYear();
-      var data = year+'-'+month+'-'+day;
-          Vue.filter('formatDate', function(data) {
-      if (date) {
-        return moment(String(data)).format('yyyy-mm-dd')
-        console.log("====================================");
-      console.log(moment(String(data)).format('yyyy-mm-dd'));
-      console.log("====================================");
-        console.log("DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm"));
+      var data = year + "-" + month + "-" + day;
+      Vue.filter("formatDate", function(data) {
+        if (date) {
+          return moment(String(data)).format("yyyy-mm-dd");
+          console.log("====================================");
+          console.log(moment(String(data)).format("yyyy-mm-dd"));
+          console.log("====================================");
+          console.log(
+            "DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm")
+          );
         }
       });
       console.log("====================================");
       console.log(data);
       console.log("====================================");
-      this.noteid= this.parentmessage;
+      this.noteid = this.parentmessage.noteid;
       console.log("====================================");
       console.log(this.noteid);
       console.log("====================================");
       const token = {
-        token: localStorage.getItem("token") 
+        token: localStorage.getItem("token")
       };
-      console.log('====================================')
-      console.log("253 line"+date)
-      console.log('====================================')
-     axios.put('http://localhost:8080/note/reminder/'+this.noteid,date,{ headers: {token:token.token} })
-     .this(response=>{
-        console.log('====================================');
-          console.log("response"+response);
-          console.log('====================================');
-    })
-     .catch(error=>{
-        console.log('====================================');
-          console.log("error"+error);
-          console.log('====================================');
-     })
-  },
-   isArchive(){
-     this.noteid = this.parentmessage;
-     console.log("noteid==>", this.noteid);
-     
+      console.log("====================================");
+      console.log("253 line" + date);
+      console.log("====================================");
+      axios
+        .put("http://localhost:8080/note/reminder/" + this.noteid, date, {
+          headers: { token: token.token }
+        })
+        .this(response => {
+          console.log("====================================");
+          console.log("response" + response);
+          console.log("====================================");
+        })
+        .catch(error => {
+          console.log("====================================");
+          console.log("error" + error);
+          console.log("====================================");
+        });
+    },
+    isArchive() {
+      this.noteid = this.parentmessage.noteid;
+      console.log("noteid==>", this.noteid);
+
       // alert(this.noteid);
       // alert("noteid" + this.noteid);
       const token = {
         token: localStorage.getItem("token")
       };
-      console.log("token==>",token);
-      
+      console.log("token==>", token);
+
       // NoteService.DeleteNote(this.noteid, token)
       //   .then("notedeleted")
       //   .catch(error => {
       //     console.log('====================================');
-        //   console.log("error"+error);
-        //   console.log('====================================');
-        // });
-      axios.put("http://localhost:8080/note/archivenote/" + this.noteid,{},{headers: { token: token.token }
-        })
+      //   console.log("error"+error);
+      //   console.log('====================================');
+      // });
+      axios
+        .put(
+          "http://localhost:8080/note/archivenote/" + this.noteid,
+          {},
+          { headers: { token: token.token } }
+        )
         .then(response => {
-          console.log('====================================')
-          console.log('response ',response.data.message);
-          console.log('====================================')
-         
+          console.log("====================================");
+          console.log("response ", response.data.message);
+          console.log("====================================");
         })
         .catch(error => {
-          console.log('====================================')
-          console.log('error ',error)
-          console.log('====================================')
-         
-        });
-   },
-
-    collaborator(){
-       this.noteid = this.parentmessage;
-     const token = {
-        token: localStorage.getItem("token")
-      };
-       NoteService.AddingCollaborator(noteid,emailid,token)
-        .catch(error => {
-         console.log('====================================')
-         console.log("error"+error)
-         console.log('====================================')
+          console.log("====================================");
+          console.log("error ", error);
+          console.log("====================================");
         });
     },
-    addcolor(colore){
-      this.noteid=this.parentmessage.noteid;
+
+    collaborator() {
+      this.noteid = this.parentmessage.noteid;
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      NoteService.AddingCollaborator(noteid, emailid, token).catch(error => {
+        console.log("====================================");
+        console.log("error" + error);
+        console.log("====================================");
+      });
+    },
+    addcolor(colore) {
+      this.noteid = this.parentmessage.noteid;
       // this.color=this.parentmessage.color;
       // prentmessage.color=color
       const token = {
@@ -430,22 +471,27 @@ export default {
       // const colval={
       //   color:color
       // }
-      console.log('====================================');
-      console.log("id and color"+this.noteid+colore);
-      console.log('====================================');
-       axios.post("http://localhost:8080/note/addcolor/" +this.noteid+"?color="+colore,{},{headers: { token: token.token }
-        })
+      console.log("====================================");
+      console.log("id and color" + this.noteid + colore);
+      console.log("====================================");
+      axios
+        .post(
+          "http://localhost:8080/note/addcolor/" +
+            this.noteid +
+            "?color=" +
+            colore,
+          {},
+          { headers: { token: token.token } }
+        )
         .then(response => {
-          console.log('====================================')
-          console.log('response ',response.data.message);
-          console.log('====================================')
-         
+          console.log("====================================");
+          console.log("response ", response.data.message);
+          console.log("====================================");
         })
         .catch(error => {
-          console.log('====================================')
-          console.log('error ',error)
-          console.log('====================================')
-         
+          console.log("====================================");
+          console.log("error ", error);
+          console.log("====================================");
         });
       //  NoteService.addcolor(noteid,token,color)
       //   .then("reminder done")
@@ -455,31 +501,46 @@ export default {
       //     console.log('====================================');
       //   });
     },
-    addimage(){
-     const token = {
+    addimage() {
+      const token = {
         token: localStorage.getItem("token")
       };
-       NoteService.AddImageToNote(noteid,token)
-        .then("image added to the note")
+       axios
+        .post(
+          "http://localhost:8080/note/addImageToNote/" +
+            this.noteid+{},
+          { headers: { token: token.token } }
+        )
+        .then(response => {
+          console.log("====================================");
+          console.log("response ", response.data.message);
+          console.log("====================================");
+        })
         .catch(error => {
-          console.log('====================================')
-          console.log("error"+error)
-          console.log('====================================')
+          console.log("====================================");
+          console.log("error ", error);
+          console.log("====================================");
         });
+      // NoteService.AddImageToNote(noteid, token)
+      //   .then("image added to the note")
+      //   .catch(error => {
+      //     console.log("====================================");
+      //     console.log("error" + error);
+      //     console.log("====================================");
+      //   });
     },
-    addlabeltonote()
-    {
-       this.noteid = this.parentmessage;
+    addlabeltonote() {
+      this.noteid = this.parentmessage.noteid;
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.mdreminder{
-  display: flexbox
+.mdreminder {
+  display: flexbox;
 }
-.iconlist{
-  display: flex
+.iconlist {
+  display: flex;
 }
 .icon {
   // padding: 0px;
@@ -498,11 +559,10 @@ export default {
 .more {
   margin-top: -20px;
 }
-.mdcollaborator{
-  display: flexbox
+.mdcollaborator {
+  display: flexbox;
 }
-.md-icon-button
-{
+.md-icon-button {
   // margin-left: 10px;
 }
 </style>

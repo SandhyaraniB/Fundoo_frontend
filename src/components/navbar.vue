@@ -1,38 +1,42 @@
 <template>
   <div id="app" class="dashboard" style="margin-top:-60px;">
     <!-- <v-flex xs6> -->
-      <div style="width:100%">
-      <v-app id="inspire" dark>
-        <v-toolbar style=" display: flex;flex-direction: row;" >
-          <div flex layout="row" layout-align="space-between center">
+    <div style=" width:-webkit-fill-available;">
+      <!-- <v-app id="inspire" dark> -->
+        <v-toolbar style=" display: flex;flex-direction: row; width:-webkit-fill-available;">
+          <!-- <div flex layout="row" layout-align="space-between center"> -->
+
           <md-button
             class="md-icon-button"
             @click="toggleDrawer"
-            style="margin-left:-900px;margin-top:10px;"
+            style=" margin-left: -1075px;;
+                   margin-top: 10px;"
           >
             <md-icon>menu</md-icon>
           </md-button>
 
-          <img src="./../assets/keep.png" style="width:35px;margin-top:13px;">
-
-          <span >
-            <!-- <span class="f">F</span>
+          <img src="./../assets/keep.png" style="width:35px;margin-top:13px;margin-left: 10px;} ">
+          <label style=" margin-left: 20px;">Fundoo</label>
+          <!-- <div style="    width: 40px;
+    margin-top: -30px;
+          margin-left: 140px;">-->
+          <!-- <span    style=" margin-left: 20px;"> -->
+          <!-- <span class="f">F</span>
             <span class="u">u</span>
             <span class="n">n</span>
             <span class="d">d</span>
             <span class="o">o</span>
-            <span class="oo">o</span> -->
-            fundoo
-          </span>
-          </div>
+          <span class="oo">o</span>-->
+          <!-- </span> -->
+          <!-- </div> -->
 
           <md-card class="card">
-            <md-icon style="margin-left:5px; outline=none">search</md-icon>
-            <input class="input" placeholder="Search">
+            <md-icon style="margin-left:5px;">search</md-icon>
+            <input class="input" placeholder="Search"  style="border: none; outline:none;" @click="search()">
           </md-card>
 
           <md-button
-            style="color:black;margin-left: 820px;margin-top: -45px;"
+            style="color:black;margin-left: 1000px;margin-top: -45px;"
             class="md-icon-button"
             width="-30px"
           >
@@ -41,26 +45,27 @@
           </md-button>
 
           <md-button
-            style="color:black;margin-top: -45px;margin-left: 10px;flex-direction:column"
+            style="color:black;margin-top: -45px;margin-left:0px;flex-direction:column"
             class="md-icon-button"
-            width="-30px"
-            
-          >
+            width="-30px">
             <md-icon style="color:black">settings</md-icon>
             <md-tooltip md-direction="bottom">settings</md-tooltip>
           </md-button>
 
           <md-button
-            style="color:black;margin-top: -45px;margin-left: 30px;"
+            style="color:black;margin-top: -45px;margin-left:20px;"
             class="md-icon-button"
             width="-30px"
           >
             <md-icon style="color:black">apps</md-icon>
           </md-button>
-
-          <md-button style="margin-top:-45px; margin-left: 40px;" class="md-icon-button">
-            <img src="./../assets/dhatri.png" width="20px" style="color:pink;border-radius:20px;">
+          <!-- <form @submit.prevent="onsubmit" enctype="multipart/form-data"> -->
+          <md-button style="    margin-top: -65px;
+           margin-left: 1200px;;background-color:pink" class="md-icon-button">
+          <input type="file" @change="processFile($event)" style="width:20px">
+            <!-- <img src="./../assets/dhatri.png" width="150px" style="color:pink;border-radius:60px;"> -->
           </md-button>
+          <!-- </form> -->
         </v-toolbar>
         <v-divider></v-divider>
         <!-- ===================================================================================================================================================== -->
@@ -68,7 +73,8 @@
           :clipped="drawer.clipped"
           :permanent="drawer.permanent"
           v-model="drawer.open"
-          app>
+          app
+        >
           <v-list style="width:200px;">
             <v-list-tile>
               <!-- v-if="!drawer.permanent" @click="makeDrawerPermanent" -->
@@ -78,16 +84,17 @@
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right:300px;">
                         <router-link class="nav-link" to="/navbar/dashboard">
-                        <md-icon class="icon">note</md-icon>
-                        <!-- <router-link to="/cards" tag="li"></router-link> -->
-                        <!-- <h2>{{  $route.params}}</h2> -->
-                     <!-- <ul>
+                          <md-icon class="icon">note</md-icon>
+                          <!-- <router-link to="/cards" tag="li"></router-link> -->
+                          <!-- <h2>{{  $route.params}}</h2> -->
+                          <!-- <ul>
                        <li>
                         <router-link :to="{ name: '/navbar/cards'}"></router-link>
                        </li>
-                     </ul> -->
-                        <!-- <router-view></router-view> -->
-                        <span>Notes</span></router-link>
+                          </ul>-->
+                          <!-- <router-view></router-view> -->
+                          <span>Notes</span>
+                        </router-link>
                       </md-button>
                     </v-list-tile-title>
                   </v-list-tile-content>
@@ -96,9 +103,9 @@
                   <v-list-tile-content>
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
-                         <router-link class="nav-link" to="/navbar/reminder">
-                        <md-icon class="icon">notifications</md-icon>
-                        <span>Reminder</span>
+                        <router-link class="nav-link" to="/navbar/reminder">
+                          <md-icon class="icon">notifications</md-icon>
+                          <span>Reminder</span>
                         </router-link>
                       </md-button>
                     </v-list-tile-title>
@@ -114,29 +121,43 @@
               </v-list-tile-action>
               <getlabels></getlabels>
               <v-list-tile-action>
-                <div style="margin-right: 200px;" >
-                  <md-dialog :md-active.sync="showDialog" >
+                <div style="margin-right: 200px;">
+                  <md-dialog :md-active.sync="showDialog">
                     <md-dialog-title>Edit Labels</md-dialog-title>
-<!-- 
-                    <md-field md-clearable> -->
-                       <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
+                    <!-- 
+                    <md-field md-clearable>-->
+                    <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
 
-                      <!-- <md-select v-model="labelname"
+                    <!-- <md-select v-model="labelname"
                         name="labelname"
                         placeholder="select label name"
                         id="labelname">
                         <md-option value="fight-club">Fight Club</md-option>
                         <md-option value="godfather">Godfather</md-option>
                       </md-select>
-                    </md-field> -->
+                    </md-field>-->
 
                     <md-dialog-actions>
-                       <input type="text" v-model="labelname"  placeholder="labelname" style="border:none,margin-bottom: 300px;" >
-                    <getlabels></getlabels>
-                   <md-button type="submit" class="md-primary md-raised" @click="showDialog = false">Close</md-button>
-                      <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration" :md-active.sync="showSnackbar" md-persistent>
-                      <span>Connection timeout. Showing limited messages!</span>
-                      <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
+                      <input
+                        type="text"
+                        v-model="labelname"
+                        placeholder="labelname"
+                        style="border:none,margin-bottom: 300px;"
+                      >
+                      <getlabels></getlabels>
+                      <md-button
+                        type="submit"
+                        class="md-primary md-raised"
+                        @click="showDialog = false"
+                      >Close</md-button>
+                      <md-snackbar
+                        :md-position="position"
+                        :md-duration="isInfinity ? Infinity : duration"
+                        :md-active.sync="showSnackbar"
+                        md-persistent
+                      >
+                        <span>Connection timeout. Showing limited messages!</span>
+                        <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
                       </md-snackbar>
                       <md-button class="md-primary" @click="submit()">Save</md-button>
                     </md-dialog-actions>
@@ -154,19 +175,20 @@
             <v-list-tile>
               <v-list-tile-action>
                 <md-button style="width:100px;margin-left:-80px;">
-                   <router-link class="nav-link" to="/navbar/archive">
-                  <md-icon class="icon">archive</md-icon>
-                  <span>Archive</span>
-                   </router-link>
+                  <router-link class="nav-link" to="/navbar/archive">
+                    <md-icon class="icon">archive</md-icon>
+                    <span>Archive</span>
+                  </router-link>
                 </md-button>
               </v-list-tile-action>
               <!-- ------------------------------------------------------------------------------------------------------------------->
               <v-list-tile-content>
                 <v-list-tile-title>
                   <md-button style="width:100px;margin-left:-80px;margin-right: 20px;">
-                     <router-link class="nav-link" to="/navbar/trashed">
-                    <md-icon class="icon">delete</md-icon>
-                    <span>Trash</span></router-link>
+                    <router-link class="nav-link" to="/navbar/trashed">
+                      <md-icon class="icon">delete</md-icon>
+                      <span>Trash</span>
+                    </router-link>
                   </md-button>
                 </v-list-tile-title>
               </v-list-tile-content>
@@ -182,9 +204,9 @@
                 <!-- <div style="margin-top:-230px;">
                   <router-view></router-view>
                   <CreateNote></CreateNote>
-                </div> -->
+                </div>-->
                 <div>
-                    <!-- <router-view></router-view> -->
+                  <!-- <router-view></router-view> -->
                   <!-- <cards></cards> -->
                   <router-view></router-view>
                 </div>
@@ -192,8 +214,8 @@
             </v-layout>
           </v-container>
         </v-content>
-      </v-app>
-      </div>
+      <!-- </v-app> -->
+    </div>
     <!-- </v-flex> -->
   </div>
 </template>
@@ -202,6 +224,7 @@ import CreateNote from "./CreateNote";
 import getlabels from "./../components/getlabels";
 import axios from "axios";
 import cards from "./../components/cards";
+import { async } from 'q';
 export default {
   components: {
     CreateNote,
@@ -209,13 +232,14 @@ export default {
     getlabels
   },
   data: () => ({
+   someData:'',
     showSnackbar: false,
-    position: 'center',
+    position: "center",
     duration: 4000,
     isInfinity: false,
     showDialog: false,
     labelname: "",
-    results:[],
+    results: [],
     drawer: {
       // sets the open status of the drawer
       open: true,
@@ -243,16 +267,7 @@ export default {
   },
 
   methods: {
-    notes(){
-  
-    },
-    reminder(){
-      console.log('====================================');
-      console.log("reminder clicked");
-      console.log('====================================');
-      // window.location.href="/navbar/reminder"
-  this.$http.post('/navbar/reminder')
-    },
+   
     // changes the drawer to permanent
     makeDrawerPermanent() {
       this.drawer.permanent = true;
@@ -291,34 +306,53 @@ export default {
         })
         .then(res => {
           if (res) {
-          
             //VmUser.$bus.$emit('add-user', { user: user})
-            console.log('====================================');
-            console.log("AAAAAAAAAA",res);
-            console.log('====================================');
+            console.log("====================================");
+            console.log("AAAAAAAAAA", res);
+            console.log("====================================");
           }
         })
         .catch(error => {
-         console.log('====================================');
-         console.log(error);
-         console.log('====================================');
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
         });
     },
-    addReference: function(e) {
-  e.preventDefault();
-  // console.log(this.references);
-  var inputEl = '<input v-model="references" type="text">';
-  ('#references').append(inputEl);
-}
+   
+    processFile(event) {
+    this.someData = event.target.files[0]
+  
+    console.log('====================================');
+    console.log("this.someData",event);
+    console.log('====================================');
+   
+     const token = {
+        token: localStorage.getItem("token")
+      };
+     console.log('====================================');
+     console.log("image;"+this.someData+""+token.token);
+     console.log('====================================');
+      axios
+        .post("http://localhost:8080/user/uploadProfilePic","?file=" +this.someData,{
+          headers: { token: token.token }})
+        .then(res => {
+          res
+        })
+        .catch(error => {
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
+        });
+  }
   }
 };
 </script>
 <style lang="scss" scoped>
-.dashboard{
+.dashboard {
   // display: flex;
   flex-direction: row;
   width: 100%;
-  margin-top:-60px;
+  margin-top: -60px;
 }
 .f {
   color: blue;
@@ -366,7 +400,7 @@ export default {
   margin-top: -45px;
   margin-left: 265px;
   height: 50px;
-  width: 50%;
+  width: 60%;
   border-radius: 8px;
 }
 .input {

@@ -1,20 +1,16 @@
 <template>
   <div class="cards" style="margin-top:-250px;">
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
-  
-   <!-- //applying color for card result.colorChange put  in style with binding -->
-   <div v-if="result.trashed==false" @click="showDialog = true" >
+   <div v-if="result.trashed==false">
      <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;
-    height: -webkit-fill-available;"   >
+    height:auto;"   >
      
-        <div >
+        <div @click="showDialog = true" >
+        <div v-if="result.imageToNote!=null">
+        <img src="result.imageToNote">
+        </div>
           <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline:none;"
           v-bind:style="{ backgroundColor: result.color }" @click="update(result)">
-          <!-- </textarea> -->
-
-          <!-- <md-icon style="margin-top: -90px; margin-left: 250px;" @click="pin()">
-              <img src="../assets/pin.svg">
-            </md-icon> -->
             <md-button md-menu-trigger class="md-icon-button" @click="pin(result.noteid)" style="margin-top: -35px; margin-left: 250px;">
          <md-icon v-if="result.pinned='false'" >
             <img src="../assets/pinBeforeClick.svg" >
@@ -25,8 +21,8 @@
             
       </md-button>
         </div>
-        <div v-bind:style="{ backgroundColor: result.color }">
-      <input type="text"
+        <div v-bind:style="{ backgroundColor: result.color }" @click="showDialog = true" >
+        <input type="text"
            v-model="result.content" 
            name="content" 
            placeholder="description"
@@ -36,42 +32,20 @@
             @click="update(result)">
        
         </div>
-        <div v-if="result.reminder!=null">
-        <md-chip class="md-accent" md-deletable>{{result.reminder}}</md-chip>
+        <div v-if="result.reminder!=null " style=" width: 100px;">
+        <md-chip class="md-accent" md-deletable style="width: auto;margin-left:10px;">{{result.reminder}}</md-chip>
         </div>
-        <!-- <div> -->
-        <iconlist :parentmessage=result style="color:white" class="iconlist"></iconlist>
-        <!-- </div> -->
-        <!-- <div> -->
-    <!-- <md-chip>Static</md-chip> -->
-    <!-- <md-chip class="md-primary" md-deletable>Deletable</md-chip> -->
-    
-    <!-- <md-chip md-disabled>Disabled</md-chip> -->
-  <!-- </div> -->
-   <!-- </md-ripple> -->
+        <div v-for="label in result.labell" v-bind:key="label">
+        <div v-if="label.labelname!=null" style=" width: 50px;margin-left:10px;">
+        <md-chip class="md-accent" md-deletable style="width: auto;">{{label.labelname}}</md-chip>
+        </div>
+        </div>
+ 
+        <iconlist :parentmessage=result style="color:white; margin-top: 10px;" class="iconlist"></iconlist>
       </md-card >
    </div>
-    <!-- </div> -->
     <div>
      <md-dialog :md-active.sync="showDialog" style="width:400px;height:160px;">
-      <!-- <md-dialog-title>Preferences</md-dialog-title> -->
-      <!-- <md-card style="width:400px;height:300px;">
-        <div style="margin-left:20px;">
-          <input type="text" v-model=result.title name="title" class="titleone" style="border: none; outline=none ">
-        </div>
-        <div style="margin-left:80px;">
-          <input type="text" v-model="content"  name="content" placeholder="description" class="titletwo" style="border: none; outline=none margin-left: 10px;">
-        </div>
-         <div @click="noteinfo(noteid)"> -->
-        <!-- <iconlist :parentmessage=noteid style="color:white" > -->
-          
-        <!-- </iconlist>
-          <md-button class="md-primary" @click="showDialog = false" style="margin-top:-40px;margin-left:270px">Close</md-button> -->
-        <!-- </div> -->
-          <!-- <md-dialog-actions>
-        <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-      </md-dialog-actions> -->
-      <!-- </md-card >  -->
      <updatenote :parentmessage=refval> </updatenote>
     </md-dialog>
     </div>
