@@ -143,7 +143,8 @@ export default {
       //   });
       axios
         .delete(
-          "http://localhost:8080/note/deletenote/" +noteid,{
+          "http://localhost:8080/note/deletenote/" +noteid,
+          {
             headers: { token: token.token }
           }
         )
@@ -190,7 +191,7 @@ export default {
 .takenote {
   width: 275px;
   margin-left: 50px;
-  margin-top: -400px;
+  margin-top: -350px;
 }
 .titleone {
   margin-top: 15px;

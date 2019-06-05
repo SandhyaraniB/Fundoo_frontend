@@ -1,19 +1,7 @@
 <template>
   <div class="iconlist">
-    <!-- <div v-if="parentmessage" class="card-text alert alert-warning" v-html="parentmessage"></div> -->
-    <!-- <md-menu style="margin-left:-5px;" class="mdreminder">
-      <md-button md-menu-trigger class="md-icon-button" @click="reminder()">
-        <md-icon class="icon">notifications</md-icon>
-        <md-tooltip md-direction="bottom">Remind me</md-tooltip>
-      </md-button>
-      <md-menu-content style="width:200px;height:500px;">
-        <md-menu-item>Reminder : </md-menu-item>
-        <md-menu-item class="dates" @click="today()">Later today</md-menu-item>
-        <md-menu-item class="dates" @click="tomorrow()">Tomorrow</md-menu-item>
-        <md-menu-item class="dates">Next week</md-menu-item>
-      </md-menu-content>
-    </md-menu>-->
 
+<!-- ///////////////////////////////////////////////Reminder///////////////////////////////////////////////////// -->
     <md-menu style="margin-left: 20px;">
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">notifications</md-icon>
@@ -30,21 +18,10 @@
         <md-menu-item class="moree" @click="tomorrow()">Tomorrow</md-menu-item>
 
         <md-menu-item class="moree" @click="weeklater()">weeklater</md-menu-item>
-
-        <!-- </md-button> -->
-        <!-- <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button> -->
-        <md-menuone-item v-if="visible" class="dropdown">
-          <md-menuone-content style="margin-left:200px;">
-            <md-menuone-item>
-              <getlabelsfornote></getlabelsfornote>
-            </md-menuone-item>
-          </md-menuone-content>
-        </md-menuone-item>
-        <!-- </md-list> -->
       </md-menu-content>
     </md-menu>
-
-    <md-menu class="mdcollaborator">
+<!-- /////////////////////////////////////////////////////Collabrators///////////////////////////////////////////////////////// -->
+    <!-- <md-menu class="md-collaborator">
       <md-button md-menu-trigger class="md-icon-button" @click="collaborator()">
         <md-icon class="icon">person_add</md-icon>
         <md-tooltip md-direction="bottom">collaborator</md-tooltip>
@@ -54,20 +31,24 @@
         <div>
         <md-button class="md-icon-button">
           <md-icon class="icon">person_add</md-icon>
-        </md-button>{{emailid}}
+        </md-button>{{this.emailid}}
         </div>
         <div v-if="newmail==null">
           
-        <md-button class="md-icon-button" @click="addcollaborator()">
+        <a class="md-icon-button" @click="addcollaborator()">
           <md-icon class="icon">person_add</md-icon>
-          
-        </md-button>
+        </a>
         <input type="text" v-model="newmail" placeholder="newemailid" style="border:none;outline:none;width:auto;">
         </div>
+      </md-menu-content>      
       </md-menu-content>
-      
-    </md-menu>
-
+    </md-menu> -->
+    <!-- <md-button md-menu-trigger class="md-icon-button"> -->
+        <!-- <md-icon class="icon">person_add</md-icon> -->
+        <addcollaborator :note=parentmessage></addcollaborator>
+        <!-- <md-tooltip md-direction="bottom">collaborator</md-tooltip> -->
+      <!-- </md-button> -->
+<!-- ////////////////////////////////////////////////////////////////addcolor///////////////////////////////////////////////////////// -->
     <md-menu>
       <md-button md-menu-trigger class="md-icon-button">
         <md-icon class="icon">color_lens</md-icon>
@@ -163,7 +144,7 @@
         </div>
       </md-menu-content>
     </md-menu>
-
+    <!-- ////////////////////////////////////////////////////////////////////addimage///////////////////////////////////////////////////////////// -->
     <!-- <md-button class="md-icon-button">
       <md-icon class="icon">color_lens</md-icon>
     </md-button>-->
@@ -171,10 +152,13 @@
       <md-icon class="icon">crop_original</md-icon>
       <md-tooltip md-direction="bottom">add image</md-tooltip>
     </md-button>
+
+    <!-- ///////////////////////////////////////////////////////////////////archive////////////////////////////////////////////////////////// -->
     <md-button class="md-icon-button" @click="isArchive()" v-model="noteid">
       <md-icon class="icon">archive</md-icon>
       <md-tooltip md-direction="bottom">archive</md-tooltip>
     </md-button>
+    <!-- /////////////////////////////////////////////////////////////////////more///////////////////////////////////////////////////////////////// -->
     <md-menu>
       <md-button md-menu-trigger class="md-icon-button" >
         <md-icon class="icon" style="margin-right: 20px;">more_vert</md-icon>
@@ -185,9 +169,10 @@
          <md-button>
           <md-menu-item class="more" @click="deletenote()">Delete note</md-menu-item>
         </md-button>
-        <md-button md-menu-trigger @click="visible = !visible">add labels</md-button>
-         <!-- <md-menu-content> -->
-         <!-- <md-card style="width:200px;height:1000px;"> -->
+        <md-button md-menuoo-trigger @click="visible = !visible">add labels</md-button>
+         <md-menuoo-content>
+            <getlabelsfornote :parentmessage="parentmessage"></getlabelsfornote>
+         <!-- <md-card style="width:200px;height:1000px;">
         <md-menu-item class="dropdown" v-if="visible" >
           <md-menu-content style="margin-left:200px;">
             <md-menu-item>
@@ -195,40 +180,32 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu-item>
-         <!-- </md-card>  -->
-         <!-- </md-menu-content> -->
-         <!-- <md-menu md-direction="top-end">
-      <md-button md-menu-trigger>Top End</md-button>
-
-      <md-menu-content>
-        <md-menu-item>My Item 1</md-menu-item>
-        <md-menu-item>My Item 2</md-menu-item>
-        <md-menu-item>My Item 3</md-menu-item>
-      </md-menu-content>
-    </md-menu> -->
+         </md-card>  -->
+         </md-menuoo-content>
       </md-menu-content>
      
     </md-menu>
   </div>
 </template>
 <script>
-import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+// import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import { Labelservice } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
 import getlabelsfornote from "./../components/getlabelsfornote.vue";
 import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
+import addcollaborator from "./addcollaborator.vue";
 export default {
   props: ["parentmessage"],
 
   // flag: true,
   components: {
-    getlabelsfornote
+    getlabelsfornote,
+    addcollaborator
   },
   data() {
-    this.emailid=localStorage.getItem(emailid)
     return {
-      newmail:'',
+      newuser:'',
       noteid: this.parentmessage.noteid,
       noteidinstr: "",
       labelname: "",
@@ -240,7 +217,7 @@ export default {
   methods: {
     getnoteid() {
       console.log("====================================");
-      console.log("Dhatri:" + noteid);
+      console.log("Dhatri:" + this.noteid);
       console.log("====================================");
     },
 
@@ -438,6 +415,7 @@ export default {
           console.log("====================================");
         });
     },
+// .......................................................................archive..................................................................................
     isArchive() {
       this.noteid = this.parentmessage;
       console.log("noteid==>", this.noteid);
@@ -473,32 +451,8 @@ export default {
           console.log("====================================");
         });
     },
-    collaborator(){
-     
-        this.emailid=localStorage.getItem("emailid");
-        console.log('====================================');
-        console.log("ahghshag",this.emailid);
-        console.log('====================================');
-      
-    },
-    addcollaborator() {
-     console.log('====================================');
-     console.log("eeeeeee"+ this.newmail);
-     console.log('====================================');
-      this.noteid = this.parentmessage.noteid;
-      const token = {
-        token: localStorage.getItem("token")
-      };
-       axios.post('http://localhost:8080/note/addingCollaborator/'+this.noteid,this.newmail,{},{ headers: {token:token.token} })
-     .this(response=>{response
-    })
-     .catch(error=>{error})
-      // NoteService.AddingCollaborator(noteid, emailid, token).catch(error => {
-      //   console.log("====================================");
-      //   console.log("error" + error);
-      //   console.log("====================================");
-      // });
-    },
+  // ...........................................................................collaborator.......................................................................................................................
+    
     addcolor(colore) {
       this.noteid = this.parentmessage.noteid;
       // this.color=this.parentmessage.color;

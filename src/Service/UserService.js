@@ -28,7 +28,7 @@ function login(data)
           .then(response => {
                response.data
                // alert(response.data.message)},
-          window.location.href="http://localhost:8081/user/Login"})
+          window.location.href="http://localhost:8081/"})
           .catch(error => { 
                // alert(error)
                error.data

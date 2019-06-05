@@ -1,7 +1,7 @@
 <template>
   <div class="cards" style="margin-top:-150px;">
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
-   <div v-if="result.trashed==false">
+   <div v-if="result.trashed==false ||result.archived==false">
      <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;height:auto;"   >
      
         <div @click="showDialog = true" >
@@ -166,7 +166,7 @@ data() {
 .cards{
   display:flex;
   // display: grid;
- flex-direction:row ; 
+//  flex-direction:row ; 
  flex-wrap: wrap;
  justify-content: space-between;
  

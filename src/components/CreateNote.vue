@@ -1,7 +1,7 @@
 <template>
   <div class="createnote" style="height:auto;     margin-bottom: -200px;">
     <div @click="flagchange" v-if="flag" style="margin:14px">
-      <md-card style="width: 600px; height:auto;margin-top:-400px;;margin-left:180px;">
+      <md-card style="width: 600px; height:auto;margin-top:-350px;;margin-left:180px;">
         <!-- <div> -->
         <textarea-autosize placeholder="Take a note..." class="takenote" style="margin:10px;"></textarea-autosize>
         <md-button class="md-icon-button" style="margin-left:400px;margin-top:-53px;">
@@ -23,7 +23,7 @@
     <div v-else>
       <md-card
         class="takenote"
-        style="margin-top:-400px;margin-left: 130px;height: auto;width: 600px;  "
+        style="margin-top:-350px;margin-left: 130px;height: auto;width: 600px;  "
       >
         <div>
           <textarea-autosize v-model="title" name="title" placeholder="title" class="titleone"></textarea-autosize>
