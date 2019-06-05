@@ -122,25 +122,23 @@ export default {
           console.log('====================================');
         });
     },
-    
-    noteinfo(note) {
-      console.log("====================================");
-      // console.log("Particular Note"+note)
-      this.parentmessage = note;
-      console.log("====================================");
-    }
   }
 };
 </script>
 <style lang="scss" scoped>
 .cards {
   display: flex;
-  display: grid;
-  /* flex-direction:row wrap; */
-  grid-template-columns: repeat(3, 3fr);
-  grid-auto-rows: 158px;
-  grid-gap: 23px;
-}
+ 
+  // display: grid;
+ flex-direction:row ; 
+ flex-wrap: wrap;
+ justify-content: space-between;
+//   display: grid;
+//   /* flex-direction:row wrap; */
+//   grid-template-columns: repeat(3, 3fr);
+//   grid-auto-rows: 158px;
+//   grid-gap: 23px;
+ }
 .md-card {
   border-radius: 10px;
   display: flex;

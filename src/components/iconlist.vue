@@ -182,19 +182,30 @@
       </md-button>
      
       <md-menu-content style="width:200px;height:700px;">
-        <md-button>
+         <md-button>
           <md-menu-item class="more" @click="deletenote()">Delete note</md-menu-item>
         </md-button>
-        <md-button md-menuone-trigger @click="visible = !visible">add labels</md-button>
-         <md-card style="width:200px;height:1000px;">
-        <md-menuone-item v-if="visible" class="dropdown">
-          <md-menuone-content style="margin-left:200px;">
-            <md-menuone-item>
+        <md-button md-menu-trigger @click="visible = !visible">add labels</md-button>
+         <!-- <md-menu-content> -->
+         <!-- <md-card style="width:200px;height:1000px;"> -->
+        <md-menu-item class="dropdown" v-if="visible" >
+          <md-menu-content style="margin-left:200px;">
+            <md-menu-item>
                  <getlabelsfornote :parentmessage="parentmessage"></getlabelsfornote>
-            </md-menuone-item>
-          </md-menuone-content>
-        </md-menuone-item>
-         </md-card>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu-item>
+         <!-- </md-card>  -->
+         <!-- </md-menu-content> -->
+         <!-- <md-menu md-direction="top-end">
+      <md-button md-menu-trigger>Top End</md-button>
+
+      <md-menu-content>
+        <md-menu-item>My Item 1</md-menu-item>
+        <md-menu-item>My Item 2</md-menu-item>
+        <md-menu-item>My Item 3</md-menu-item>
+      </md-menu-content>
+    </md-menu> -->
       </md-menu-content>
      
     </md-menu>
@@ -428,7 +439,7 @@ export default {
         });
     },
     isArchive() {
-      this.noteid = this.parentmessage.noteid;
+      this.noteid = this.parentmessage;
       console.log("noteid==>", this.noteid);
 
       // alert(this.noteid);

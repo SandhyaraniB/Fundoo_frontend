@@ -4,7 +4,7 @@
       <!-- @click="showDialog = true"  -->
       <!-- //applying color for card result.colorChange put  in style with binding -->
       <div v-if="result.trashed==true">
-      <md-card class="takenote">
+      <md-card class="takenote" style="width:auto; ">
         <div>
           <input
             type="text"
@@ -27,6 +27,10 @@
         </div>
         <div>
           <iconlist :parentmessage="result.noteid" style="color:white"></iconlist>
+         <md-button class="md-icon-button" @click="deletenote(result.noteid)">
+      <md-icon class="icon">delete</md-icon>
+      <md-tooltip md-direction="bottom">Delete</md-tooltip>
+    </md-button>
         </div>
       </md-card>
       </div>
@@ -123,23 +127,55 @@ export default {
           console.log('====================================');
         });
     },
+     deletenote(noteid) {
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      console.log('====================================');
+      console.log("nnnnnnnnnnnnnnnn"+noteid);
+      console.log('====================================');
+      // NoteService.DeleteNote(this.noteid, token)
+      //   .then("notedeleted")
+      //   .catch(error => {
+      //  console.log('====================================');
+      //       console.log("error"+error);
+      //       console.log('====================================');
+      //   });
+      axios
+        .delete(
+          "http://localhost:8080/note/deletenote/" +noteid,{
+            headers: { token: token.token }
+          }
+        )
+        .this(response => {
+          console.log("====================================");
+          console.log(response.data.message);
+          console.log("====================================");
+        })
+        .catch(error => {
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
+        });
+    },
   }
 };
 </script>
 <style lang="scss" scoped>
 .cards {
   display: flex;
-  display: grid;
-  /* flex-direction:row wrap; */
-  grid-template-columns: repeat(3, 3fr);
-  grid-auto-rows: 158px;
-  grid-gap: 23px;
+  // display: grid;
+   flex-direction:row wrap; 
+  // grid-template-columns: repeat(3, 3fr);
+  // grid-auto-rows: 158px;
+  // grid-gap: 23px;
+ 
 }
 .md-card {
   border-radius: 10px;
   display: flex;
-  width: 250px;
-  height: 105px;
+  width: auto;
+  // height: auto;
   margin: 4px;
   display: inline-block;
   vertical-align: top;

@@ -1,10 +1,8 @@
 <template>
-  <div class="cards">
-    <div v-for="note in allNotes" v-bind:key="note" class="getcards">
-      <!-- @click="showDialog = true"  -->
-      <!-- //applying color for card result.colorChange put  in style with binding -->
-      <div v-if="note.reminder!=null">
-      <md-card class="takenote">
+ <div class="cards">
+    <div v-for="result in allNotes" v-bind:key="result" class="getcards">
+       <div v-if="result.reminder!=null"> 
+      <md-card class="takenote" style="height:auto; width:300px">
         <div>
           <input
             type="text"
@@ -25,11 +23,11 @@
             style="border: none; outline=none margin-left: 10px;"
           >
         </div>
-        <div v-if="note.reminder!=null">
-        <md-chip class="md-accent" md-deletable>{{note.reminder}}</md-chip>
+         <div v-if="result.reminder!=null " style=" width: 100px;">
+        <md-chip class="md-accent" md-deletable style="width: auto;margin-left:10px;">{{result.reminder}}</md-chip>
         </div>
         <div>
-          <iconlist :parentmessage="note.noteid" style="color:white"></iconlist>
+          <iconlist :parentmessage="result.noteid" style="color:white"></iconlist>
         </div>
       </md-card>
       </div>
@@ -77,6 +75,7 @@ export default {
   data() {
     this.getnotes();
     return {
+      noteid:0,
       showDialog: false,
       parentmessage: "",
       allNotes: []
@@ -89,13 +88,14 @@ export default {
     // showDailogue(){
     //   this.Dialog=!this.Dialog
     // },
-    sendMessage() {
-      // this.parentmessage = '<b>Message From Parent:</b> Do Your Homework'
-    },
-    onClickButton(event) {
-      this.$emit("clicked", event);
-    },
-    getnotes() {
+    // sendMessage() {
+    //   // this.parentmessage = '<b>Message From Parent:</b> Do Your Homework'
+    // },
+    // onClickButton(event) {
+    //   this.$emit("clicked", event);
+    // },
+    getnotes()
+     {
       const token = {
         token: localStorage.getItem("token")
       };
@@ -103,29 +103,24 @@ export default {
       // NoteService.GetAllNotes(token)
       //   .then("cards.")
       //   .catch(error => {
-      //    console.log('====================================');
-          // console.log("error"+error);
-          // console.log('====================================');
+      //     alert(error);
       //   });
-
-      axios
-        .get("http://localhost:8080/note/getAllNotes", {
-          headers: { token: token.token }
-        })
-        .then(res => {
-          this.allNotes = res.data;
-          if (res) {
-            //VmUser.$bus.$emit('add-user', { user: user})
-            console.log("====================================");
-            console.log("Get All Notes", res);
-            console.log("====================================");
-          }
-        })
-        .catch(error => {
-          console.log('====================================');
-          console.log("error"+error);
-          console.log('====================================');
-        });
+       
+    axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
+    .then(res => {
+      this.allNotes=res.data;
+      if (res){
+        //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log("Get All Notes",res);
+        console.log('====================================');
+        
+        
+      }
+    }).catch(error => { 
+      console.log('====================================')
+      console.log("error"+error)
+      console.log('====================================')})
     },
     noteinfo(note) {
       console.log("====================================");
@@ -139,11 +134,11 @@ export default {
 <style lang="scss" scoped>
 .cards {
   display: flex;
-  display: grid;
-  /* flex-direction:row wrap; */
-  grid-template-columns: repeat(3, 3fr);
-  grid-auto-rows: 158px;
-  grid-gap: 23px;
+  // display: grid;
+   flex-direction:row wrap; 
+  // grid-template-columns: repeat(3, 3fr);
+  // grid-auto-rows: 158px;
+  // grid-gap: 23px;
 }
 .md-card {
   border-radius: 10px;

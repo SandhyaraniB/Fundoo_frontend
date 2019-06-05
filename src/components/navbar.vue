@@ -83,16 +83,8 @@
                   <v-list-tile-content>
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right:300px;">
-                        <router-link class="nav-link" to="/navbar/dashboard">
-                          <md-icon class="icon">note</md-icon>
-                          <!-- <router-link to="/cards" tag="li"></router-link> -->
-                          <!-- <h2>{{  $route.params}}</h2> -->
-                          <!-- <ul>
-                       <li>
-                        <router-link :to="{ name: '/navbar/cards'}"></router-link>
-                       </li>
-                          </ul>-->
-                          <!-- <router-view></router-view> -->
+                         <md-icon class="icon">note</md-icon>
+                        <router-link class="nav-link" to="/navbar/dashboard" style="color:black">
                           <span>Notes</span>
                         </router-link>
                       </md-button>
@@ -103,8 +95,8 @@
                   <v-list-tile-content>
                     <v-list-tile-title>
                       <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
-                        <router-link class="nav-link" to="/navbar/reminder">
-                          <md-icon class="icon">notifications</md-icon>
+                         <md-icon class="icon">notifications</md-icon>
+                        <router-link class="nav-link" to="/navbar/reminder" style="  color:black">
                           <span>Reminder</span>
                         </router-link>
                       </md-button>
@@ -175,8 +167,9 @@
             <v-list-tile>
               <v-list-tile-action>
                 <md-button style="width:100px;margin-left:-80px;">
-                  <router-link class="nav-link" to="/navbar/archive">
-                    <md-icon class="icon">archive</md-icon>
+                  <md-icon class="icon">archive</md-icon>
+                  <router-link class="nav-link" to="/navbar/archive" style="  color:black">
+                    
                     <span>Archive</span>
                   </router-link>
                 </md-button>
@@ -185,8 +178,8 @@
               <v-list-tile-content>
                 <v-list-tile-title>
                   <md-button style="width:100px;margin-left:-80px;margin-right: 20px;">
-                    <router-link class="nav-link" to="/navbar/trashed">
-                      <md-icon class="icon">delete</md-icon>
+                     <md-icon class="icon">delete</md-icon>
+                    <router-link class="nav-link" to="/navbar/trashed" style="  color:black" >
                       <span>Trash</span>
                     </router-link>
                   </md-button>

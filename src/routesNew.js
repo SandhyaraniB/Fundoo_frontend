@@ -5,27 +5,22 @@ import resetPassword from './components/resetPassword.vue';
 import test from './components/test.vue';
 import Verified from './components/verified.vue';
 import navbar from './components/navbar.vue'
-import reminder from './components/reminder.vue'
+import reminderr from './components/reminderr.vue'
 import dashboard from './components/dashboard.vue'
 import archive from './components/archivenotes.vue'
 import trashed from './components/trashnotes.vue'
-// import parent from './components/parent.vue'
-// import child from './components/child.vue'
+import getalllabelsfornote from './components/getlabelsfornote.vue'
 export default
  [
+    { 
+        path: '/getalllabelsfornote',
+        component: getalllabelsfornote
+    },
     { 
         path: '/',
         component: Login
     },
-    
-    // { 
-    //     path: '/parent', 
-    //     component: parent
-    // },
-    // { 
-    //     path: '/child', 
-    //     component: child
-    // },
+
      { 
         path: '/register', 
         component: Register
@@ -63,7 +58,7 @@ export default
             },
             {
                 path:'reminder',
-                component:reminder,
+                component:reminderr,
                
             },
             {
