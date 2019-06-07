@@ -18,7 +18,7 @@
         <img src="./../assets/keep.png" style="width:35px;margin-top:13px;margin-left: 10px;} ">
         <label style=" margin-left: 20px;">Fundoo</label>
         <!-- <div style="    width: 40px;
-       margin-top: -30px;
+    margin-top: -30px;
         margin-left: 140px;">-->
         <!-- <span    style=" margin-left: 20px;"> -->
         <!-- <span class="f">F</span>
@@ -30,14 +30,13 @@
         <!-- </span> -->
         <!-- </div> -->
 
-        <md-card class="card">
+        <md-card class="search">
           <md-icon style="margin-left:5px;">search</md-icon>
           <input
-           class="text"
-           v-model="text"
+            class="input"
             placeholder="Search"
             style="border: none; outline:none;"
-            @click="search(text)"
+            @click="search()"
           >
         </md-card>
 
@@ -79,144 +78,146 @@
       </v-toolbar>
       <v-divider></v-divider>
       <!-- ===================================================================================================================================================== -->
-      <div style="display: flex;
-    flex-direction: row wrap;
-    align-items: start;
-    height: -webkit-fill-available;">  
-            <div class="sushant">
-              <v-navigation-drawer :clipped="drawer.clipped" :permanent="drawer.permanent" v-model="drawer.open" app>
-                <v-list style="width:200px;">
-                  <v-list-tile>
-                    <!-- v-if="!drawer.permanent" @click="makeDrawerPermanent" -->
-                    <FlexboxLayout flexDirection="column" backgroundColor="#3c495e">
-                      <div>
-                        <v-list-tile-content>
-                          <v-list-tile-title>
-                            <md-button style="width:100px;margin-right:300px;">
-                              <md-icon class="icon">note</md-icon>
-                              <router-link class="nav-link" to="/navbar/dashboard" style="color:black">
-                                <span>Notes</span>
-                              </router-link>
-                            </md-button>
-                          </v-list-tile-title>
-                        </v-list-tile-content>
-                      </div>
-                      <div>
-                        <v-list-tile-content>
-                          <v-list-tile-title>
-                            <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
-                              <md-icon class="icon">notifications</md-icon>
-                              <router-link class="nav-link" to="/navbar/reminder" style="  color:black">
-                                <span>Reminder</span>
-                              </router-link>
-                            </md-button>
-                          </v-list-tile-title>
-                        </v-list-tile-content>
-                      </div>
-                    </FlexboxLayout>
-                  </v-list-tile>
-                  <md-divider></md-divider>
-                  <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <span style="width:100px;margin-left:-120px;">Labels</span>
-                    </v-list-tile-action>
+      <v-navigation-drawer
+        :clipped="drawer.clipped"
+        :permanent="drawer.permanent"
+        v-model="drawer.open"
+        app
+      >
+        <v-list style="width:200px;">
+          <v-list-tile>
+            <!-- v-if="!drawer.permanent" @click="makeDrawerPermanent" -->
+            <FlexboxLayout flexDirection="column" backgroundColor="#3c495e">
+              <div>
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    <md-button style="width:100px;margin-right:300px;">
+                      <md-icon class="icon">note</md-icon>
+                      <router-link class="nav-link" to="/navbarr/dashboard" style="color:black">
+                        <span>Notes</span>
+                      </router-link>
+                    </md-button>
+                  </v-list-tile-title>
+                </v-list-tile-content>
+              </div>
+              <div>
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
+                      <md-icon class="icon">notifications</md-icon>
+                      <router-link class="nav-link" to="/navbar/reminder" style="  color:black">
+                        <span>Reminder</span>
+                      </router-link>
+                    </md-button>
+                  </v-list-tile-title>
+                </v-list-tile-content>
+              </div>
+            </FlexboxLayout>
+          </v-list-tile>
+          <md-divider></md-divider>
+          <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
+          <v-list-tile>
+            <v-list-tile-action>
+              <span style="width:100px;margin-left:-120px;">Labels</span>
+            </v-list-tile-action>
+            <getlabels></getlabels>
+            <v-list-tile-action>
+              <div style="margin-right: 200px;">
+                <md-dialog :md-active.sync="showDialog">
+                  <md-dialog-title>Edit Labels</md-dialog-title>
+                  <!-- 
+                  <md-field md-clearable>-->
+                  <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
+
+                  <!-- <md-select v-model="labelname"
+                        name="labelname"
+                        placeholder="select label name"
+                        id="labelname">
+                        <md-option value="fight-club">Fight Club</md-option>
+                        <md-option value="godfather">Godfather</md-option>
+                      </md-select>
+                  </md-field>-->
+
+                  <md-dialog-actions>
+                    <input
+                      type="text"
+                      v-model="labelname"
+                      placeholder="labelname"
+                      style="border:none,margin-bottom: 300px;"
+                    >
                     <getlabels></getlabels>
-                    <v-list-tile-action>
-                      <div style="margin-right: 200px;">
-                        <md-dialog :md-active.sync="showDialog">
-                          <md-dialog-title>Edit Labels</md-dialog-title>
-                          <!-- 
-                          <md-field md-clearable>-->
-                          <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
+                    <md-button
+                      type="submit"
+                      class="md-primary md-raised"
+                      @click="showDialog = false"
+                    >Close</md-button>
+                    <md-snackbar
+                      :md-position="position"
+                      :md-duration="isInfinity ? Infinity : duration"
+                      :md-active.sync="showSnackbar"
+                      md-persistent
+                    >
+                      <span>Connection timeout. Showing limited messages!</span>
+                      <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
+                    </md-snackbar>
+                    <md-button class="md-primary" @click="submit()">Save</md-button>
+                  </md-dialog-actions>
+                </md-dialog>
 
-                          <!-- <md-select v-model="labelname"
-                              name="labelname"
-                              placeholder="select label name"
-                              id="labelname">
-                              <md-option value="fight-club">Fight Club</md-option>
-                              <md-option value="godfather">Godfather</md-option>
-                            </md-select>
-                          </md-field>-->
+                <md-button @click="showDialog = true">
+                  <md-icon class="icon">create</md-icon>Edit Labels
+                </md-button>
+              </div>
+            </v-list-tile-action>
+          </v-list-tile>
+          <div></div>
+          <md-divider></md-divider>
+          <!----------------------------------------------------------------------------------------------------------------- -->
+          <v-list-tile>
+            <v-list-tile-action>
+              <md-button style="width:100px;margin-left:-80px;">
+                <md-icon class="icon">archive</md-icon>
+                <router-link class="nav-link" to="/navbarr/archive" style="  color:black">
+                  <span>Archive</span>
+                </router-link>
+              </md-button>
+            </v-list-tile-action>
+            <!-- ------------------------------------------------------------------------------------------------------------------->
+            <v-list-tile-content>
+              <v-list-tile-title>
+                <md-button style="width:100px;margin-left:-80px;margin-right: 20px;">
+                  <md-icon class="icon">delete</md-icon>
+                  <router-link class="nav-link" to="/navbarr/trashed" style="  color:black">
+                    <span>Trash</span>
+                  </router-link>
+                </md-button>
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-navigation-drawer>
+      <!-- ========================================================================================================================================== -->
 
-                          <md-dialog-actions>
-                            <input
-                              type="text"
-                              v-model="labelname"
-                              placeholder="labelname"
-                              style="border:none,margin-bottom: 300px;"
-                            >
-                            <getlabels></getlabels>
-                            <md-button
-                              type="submit"
-                              class="md-primary md-raised"
-                              @click="showDialog = false"
-                            >Close</md-button>
-                            <md-snackbar
-                              :md-position="position"
-                              :md-duration="isInfinity ? Infinity : duration"
-                              :md-active.sync="showSnackbar"
-                              md-persistent
-                            >
-                              <span>Connection timeout. Showing limited messages!</span>
-                              <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
-                            </md-snackbar>
-                            <md-button class="md-primary" @click="submit()">Save</md-button>
-                          </md-dialog-actions>
-                        </md-dialog>
-
-                        <md-button @click="showDialog = true">
-                          <md-icon class="icon">create</md-icon>Edit Labels
-                        </md-button>
-                      </div>
-                    </v-list-tile-action>
-                  </v-list-tile>
-                  <div></div>
-                  <md-divider></md-divider>
-                  <!----------------------------------------------------------------------------------------------------------------- -->
-                  <v-list-tile>
-                    <v-list-tile-action>
-                      <md-button style="width:100px;margin-left:-80px;">
-                        <md-icon class="icon">archive</md-icon>
-                        <router-link class="nav-link" to="/navbar/archive" style="  color:black">
-                          <span>Archive</span>
-                        </router-link>
-                      </md-button>
-                    </v-list-tile-action>
-                    <!-- ------------------------------------------------------------------------------------------------------------------->
-                    <v-list-tile-content>
-                      <v-list-tile-title>
-                        <md-button style="width:100px;margin-left:-80px;margin-right: 20px;">
-                          <md-icon class="icon">delete</md-icon>
-                          <router-link class="nav-link" to="/navbar/trashed" style="  color:black">
-                            <span>Trash</span>
-                          </router-link>
-                        </md-button>
-                      </v-list-tile-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-navigation-drawer>
-            </div>
-              <!-- ========================================================================================================================================== -->
-            <div style="height: -webkit-fill-available;
- width: fit-content;">
-              <v-content style="padding: 0;"> 
-                <!-- <v-container fluid fill-height> -->
-                  <!-- <v-layout justify-center align-center> -->
-                  <!-- <v-flex shrink> -->
-                  <div>
-                    <router-view></router-view>
-                  </div>
-                  <!-- </v-flex> -->
-                  <!-- </v-layout> -->
-                <!-- </v-container> -->
-              </v-content>
-              <!-- </v-app> -->
-            </div>
-      </div>
-      <!-- </v-flex> -->
+      <v-content>
+        <v-container fluid fill-height>
+          <v-layout justify-center align-center>
+            <v-flex shrink>
+              <!-- <div style="margin-top:-230px;">
+                  <router-view></router-view>
+                  <CreateNote></CreateNote>
+              </div>-->
+              <div>
+                <!-- <router-view></router-view> -->
+                <!-- <cards></cards> -->
+                <router-view></router-view>
+              </div>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-content>
+      <!-- </v-app> -->
     </div>
+    <!-- </v-flex> -->
   </div>
 </template>
 <script>
@@ -227,9 +228,9 @@ import axios from "axios";
 import { async } from "q";
 export default {
   components: {
-    getlabels
     // CreateNote,
     // cards,
+    getlabels
   },
   data: () => ({
     someData: "",
@@ -347,15 +348,6 @@ export default {
           console.log(error);
           console.log("====================================");
         });
-    },
-    search(text)
-    {
-        const token = {
-        token: localStorage.getItem("token")
-      };
-      http://localhost:8080/note/searchNoteByTitle?title=text
-      axios.post(" http://localhost:8080/note/searchNoteByTitle/"+"?title="+text,{ headers: {token:token.token} } ).
-      this(res=>{res}).catch(error=>{error})
     }
   }
 };
@@ -363,7 +355,7 @@ export default {
 <style lang="scss" scoped>
 .dashboard {
   // display: flex;
-  flex-direction: row;
+  // flex-direction: row;
   width: 100%;
   margin-top: -60px;
 }
@@ -409,7 +401,9 @@ export default {
   /* // font-family: sans-serif; */
   text-align: center;
 }
-.card {
+.search {
+  display: flex;
+  flex-direction: row;
   margin-top: -45px;
   margin-left: 265px;
   height: 50px;
@@ -427,5 +421,4 @@ export default {
   max-width: 768px;
 }
 </style>
-
 

@@ -3,7 +3,8 @@
     <div v-for="label in alllabels" v-bind:key="label">
       <div>
         <md-button @click="addlabeltonote(label.labelid)">
-          <md-checkbox :value="true">{{label.labelname}}</md-checkbox>
+          <!-- <md-checkbox :value="true">{{label.labelname}}</md-checkbox> -->
+           <md-checkbox v-model="array" :value="true">{{label.labelname}}</md-checkbox>
         </md-button>
       </div>
     </div>

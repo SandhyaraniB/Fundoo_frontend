@@ -1,7 +1,7 @@
 <template>
-  <div class="createnote" style="height:auto;     margin-bottom: -200px;">
-    <div @click="flagchange" v-if="flag" style="margin:14px">
-      <md-card style="width: 600px; height:auto;margin-top:-350px;;margin-left:180px;">
+  <div class="createnote" style=" margin-bottom: -200px;">
+    <div @click="flagchange" v-if="flag" >
+      <md-card style="width: 600px;margin-left: 130px; height:50px;margin-top: -350px;">
         <!-- <div> -->
         <textarea-autosize placeholder="Take a note..." class="takenote" style="margin:10px;"></textarea-autosize>
         <md-button class="md-icon-button" style="margin-left:400px;margin-top:-53px;">
@@ -23,7 +23,7 @@
     <div v-else>
       <md-card
         class="takenote"
-        style="margin-top:-350px;margin-left: 130px;height: auto;width: 600px;  "
+        style="margin-left: 130px;width: 600px; height: auto;     margin-top: -350px;"
       >
         <div>
           <textarea-autosize v-model="title" name="title" placeholder="title" class="titleone"></textarea-autosize>
@@ -42,7 +42,7 @@
             class="titletwo"
           ></textarea-autosize>
         </div>
-        <!-- <div></div> -->
+      
         <div>
           <iconlist></iconlist>
         </div>
@@ -50,18 +50,18 @@
           Close
           <md-tooltip md-direction="bottom">close</md-tooltip>
         </md-button>
-        <!-- <md-button class="close" @click="updatenote()">
-          Updatenote
-          <md-tooltip md-direction="bottom">Updatenote</md-tooltip>
-        </md-button>-->
+       
       </md-card>
     </div>
+   
   </div>
 </template>
 
 <script>
 import iconlist from "./../components/iconlist";
-import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+// import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+import {createNote} from "/home/admin1/Desktop/fundoo/src/Service/noteservice.js"
+// import cards from "./cards"
 export default {
   data() {
     return {
@@ -70,12 +70,14 @@ export default {
       flag: true
     };
   },
-
+components:{
+  // cards
+},
   methods: {
     flagchange() {
       this.flag = !this.flag;
     },
-    createnote() {
+   async  createnote() {
       const data = {
         title: this.title,
         content: this.content
@@ -88,13 +90,14 @@ export default {
       console.log("token" + token);
       console.log("====================================");
 
-      NoteService.CreateNote(data, token.token)
-        .then("created successfully")
-        .catch(error => {
-          console.log("====================================");
-          console.log("error" + error);
-          console.log("====================================");
-        });
+    var dataa =  await createNote(data, token.token)
+    this.$emit("createnote",dataa)
+        // .then("created successfully")
+        // .catch(error => {
+        //   console.log("====================================");
+        //   console.log("error" + error);
+        //   console.log("====================================");
+        // });
     }
   },
   components: {
@@ -104,11 +107,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .createnote {
-  display: flex;
+  // display: flex;
 }
 .md-card {
   border-radius: 10px;
-  display: flex;
+  // display: flex;
   width: 420px;
   height: 105px;
   margin: 4px;
@@ -121,23 +124,23 @@ export default {
   border: none;
 }
 .card-note {
-  display: flexbox;
+  // display: flexbox;
   border: none;
 }
 .takenote {
-  flex-direction: column;
-  display: flex;
+  // flex-direction: column;
+  // display: flex;
   width: 600px;
 }
 .titleone {
-  flex-direction: column;
+  // flex-direction: column;
   margin-top: 15px;
   width: 80%;
   border: none;
   outline: none;
 }
 .titletwo {
-  flex-direction: column;
+  // flex-direction: column;
   // margin-top: 15px;
   width: 80%;
   margin-left: -50px;
@@ -145,7 +148,7 @@ export default {
   outline: none;
 }
 .icon {
-  display: -webkit-flex;
+  // display: -webkit-flex;
   margin-left: -25px;
 }
 

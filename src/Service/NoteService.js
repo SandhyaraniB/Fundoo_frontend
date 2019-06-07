@@ -23,10 +23,9 @@ export const NoteService =
     //  var token=localStorage.getItem('token');
     // var tokenone=localStorage.getItem('token');
     //  alert("Insied Servise......",tokenone)
-     axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token} })
-     .this(response=>{response.data.message})
-     .catch(error=>{
-         error})
+
+   return  axios.post('http://localhost:8080/note/createnote',data,{ headers: {token:token} })
+     
  }
  function DeleteNote(noteid,token)
  {

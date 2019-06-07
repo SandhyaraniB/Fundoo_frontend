@@ -4,12 +4,14 @@ import ForgotPassword from './components/ForgotPassword.vue';
 import resetPassword from './components/resetPassword.vue';
 import test from './components/test.vue';
 import Verified from './components/verified.vue';
-import navbar from './components/navbar.vue'
+// import navbar from './components/navbar.vue'
 import reminderr from './components/reminderr.vue'
 import dashboard from './components/dashboard.vue'
 import archive from './components/archivenotes.vue'
 import trashed from './components/trashnotes.vue'
 import getalllabelsfornote from './components/getlabelsfornote.vue'
+import cards from './components/cards.vue'
+import navbarr from './components/navbarr.vue'
 export default
  [
     { 
@@ -42,8 +44,12 @@ export default
         component:Verified
     },
     {
-        path:'/navbar',
-        component:navbar,
+        path:'./cards',
+        component:cards
+    },
+    {
+        path:'/navbarr',
+        component:navbarr,
         children:
           [
             {

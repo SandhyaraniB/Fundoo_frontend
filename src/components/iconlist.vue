@@ -227,6 +227,9 @@ export default {
       const token = {
         token: localStorage.getItem("token")
       };
+      console.log('====================================');
+      console.log("..........."+this.noteid);
+      console.log('====================================');
       // NoteService.DeleteNote(this.noteid, token)
       //   .then("notedeleted")
       //   .catch(error => {
@@ -236,8 +239,7 @@ export default {
       //   });
       axios
         .put(
-          "http://localhost:8080/note/trashnote/" + this.noteid,
-          {},
+          "http://localhost:8080/note/trashnote/" + this.noteid,'',
           {
             headers: { token: token.token }
           }
@@ -272,26 +274,29 @@ export default {
     },
     today() {
       //  this.noteid = this.parentmessage;
-      var date = new Date();
-      // date.setDate(date.getDate() + 1)
-      // var endDate = new Date(date.getDate() + 1);
-      var day = date.getDate();
-      var month = date.getMonth();
-      var year = date.getFullYear();
-      var data = year + "-" + month + "-" + day;
-      Vue.filter("formatDate", function(data) {
-        if (date) {
-          return moment(String(data)).format("yyyy-mm-dd");
-          console.log("====================================");
-          console.log(moment(String(data)).format("yyyy-mm-dd"));
-          console.log("====================================");
-          console.log(
-            "DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm")
-          );
-        }
-      });
+      var value = new Date();
+      this.Date=moment(String(value)).format("YYYY-MM-DD");
+      var datemsg =this.Date + "T" + "8:00:00";
+      let dates=new Date(datemsg);
+
+
+      // var day = date.getDate();
+      // var month = date.getMonth();
+      // var year = date.getFullYear();
+      // var data = year + "-" + month + "-" + day;
+      // Vue.filter("formatDate", function(data) {
+      //   if (date) {
+      //     return moment(String(data)).format("yyyy-mm-dd");
+      //     console.log("====================================");
+      //     console.log(moment(String(data)).format("yyyy-mm-dd"));
+      //     console.log("====================================");
+      //     console.log(
+      //       "DATEEEEE" + moment(String(data)).format("YYYY-MM-DD")
+      //     );
+      //   }
+      // });
       console.log("====================================");
-      console.log(data);
+      console.log(dates);
       console.log("====================================");
       this.noteid = this.parentmessage.noteid;
       console.log("====================================");
@@ -304,7 +309,7 @@ export default {
       console.log("253 line" + this.noteid);
       console.log("====================================");
       axios
-        .post("http://localhost:8080/note/reminder/" + this.noteid, date, {
+        .post("http://localhost:8080/note/reminder/" + this.noteid,value,{
           headers: { token: token.token }
         })
         .this(response => {
@@ -417,7 +422,7 @@ export default {
     },
 // .......................................................................archive..................................................................................
     isArchive() {
-      this.noteid = this.parentmessage;
+      this.noteid = this.parentmessage.noteid;
       console.log("noteid==>", this.noteid);
 
       // alert(this.noteid);
@@ -436,7 +441,7 @@ export default {
       // });
       axios
         .put(
-          "http://localhost:8080/note/archivenote/" + this.noteid,
+          "http://localhost:8080/note/archivenote/" +this.noteid,
           {},
           { headers: { token: token.token } }
         )

@@ -1,20 +1,24 @@
 <template>
-  <div>
-    <md-dialog :md-active.sync="showDialog">
+  <div >
+    <md-dialog :md-active.sync="showDialog" style="width: 500px;">
       <md-dialog-title>Collaborator:</md-dialog-title>
        <md-button class="md-icon-button" @click="collaborator()" >
-          <md-icon class="icon">person_add</md-icon>{{this.emailid}}
+       <md-icon class="icon">person_add</md-icon>{{emailid}}
         </md-button>
+        <div>
+        <!-- <md-icon class="icon" style="margin-left: 15px; ">person_add</md-icon> -->
+        <getcollaborateduser :note="note"></getcollaborateduser>
+        </div>
        <div>
-          
-        <md-button class="md-icon-button" @click="addcollaborator(newmail)">
-          <md-icon class="icon">person_add</md-icon>
-        </md-button>
-        <input type="text" v-model="newmail" placeholder="newemailid" style="border:none;outline:none;width:auto;">
+         <md-icon class="icon" style=" margin-left: 15px; ">person_add</md-icon>
+       <input type="text" v-model="newmail" placeholder="newemailid" style="border:none;outline:none;width:auto;">
+        <md-icon>
+       
+       </md-icon>
         </div>
       <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="showDialog = false">Save</md-button>
+        <md-button class="md-primary" @click="addcollaborator(newmail)">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
 
@@ -28,15 +32,21 @@
 <script>
 import { METHODS } from 'http';
 import axios from "axios";
+import getcollaborateduser from './getcollaborateduser'
   export default {
     // emailid:localStorage.getItem("emailid"),
     props:["note"],
     name: 'DialogCustom',
+    emailid:localStorage.getItem("emailId"),
+    
     data: () => ({
       showDialog: false,
       emailid:'',
       newmail:''
     }),
+    components:{
+    getcollaborateduser
+    },
     methods: 
    {
         collaborator(){
@@ -67,6 +77,7 @@ import axios from "axios";
       //   console.log("====================================");
       // });
     },
+   
     }
   }
 </script>

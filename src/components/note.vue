@@ -1,7 +1,7 @@
 <template>
-  <div class="cards" >
+  <div class="cards" style="margin-top:-150px;">
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
-   <div v-if="result.trashed==false ||result.archived==false">
+   <div v-if="result.trashed==true || result.archived!=true">
      <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;height:auto;"   >
      
         <div @click="showDialog = true" >
@@ -10,13 +10,13 @@
         </div>
           <input type="text" v-model="result.title" name="title" placeholder="title" class="titleone" style="border: none; outline:none;"
           v-bind:style="{ backgroundColor: result.color }" @click="update(result)">
-          
             <md-button md-menu-trigger class="md-icon-button" @click="pin(result.noteid)" style="margin-top: -35px; margin-left: 250px;">
-         <md-icon v-if="result.pinned=false" >
-            <img  v-if="result.pinned=false" src="../assets/pinBeforeClick.svg" >
-    
-              <img v-if="result.pinned=true" src="../assets/pin.svg" >
-         </md-icon> 
+         <md-icon v-if="result.pinned='false'" >
+            <img src="../assets/pinBeforeClick.svg" >
+         </md-icon>
+         <md-icon v-else> 
+              <img src="../assets/pin.svg" >
+            </md-icon> 
             
       </md-button>
         </div>
@@ -32,11 +32,12 @@
        
         </div>
         <div v-if="result.reminder!=null " style=" width: 100px;">
-        <md-chip class="md-accent" md-deletable style="width: auto;margin-left:10px;">{{result.reminder}}</md-chip>
+        <md-chip class="md-accent" md-deletable style="width: auto;margin-left:10px;" @click="deletereminder(result.noteid)">{{result.reminder}}
+        </md-chip>
         </div>
-        <div v-for="label in note.labell" v-bind:key="label">
+        <div v-for="label in result.labell" v-bind:key="label">
         <div v-if="label.labelname!=null" style=" width: 50px;margin-left:10px;">
-        <md-chip class="md-accent" md-deletable style="width: auto;" @click="deletelabel(label)">{{result.labelname}}</md-chip>
+        <md-chip class="md-accent" md-deletable style="width: auto;" @click="deletelabel(label)">{{label.labelname}}</md-chip>
         </div>
         </div>
  
@@ -59,7 +60,7 @@ import updatenote from "./updatenote";
 export default {
 
 data() {
- 
+ props:["msg"]
   this.getnotes()
      return {
       showDialog: false,
@@ -73,9 +74,9 @@ data() {
     updatenote,
   },
   methods: {
-    showDailogue(){
-      this.Dialog=!this.Dialog  
-    },
+    // showDailogue(){
+    //   this.Dialog=!this.Dialog  
+    // },
    pin(noteid){
   // this.noteid = this.parentmessage;
      const token = {
@@ -120,11 +121,12 @@ data() {
       //   .catch(error => {
       //     alert(error);
       //   });
-    
+       
     axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
     .then(res => {
       this.allNotes=res.data;
       if (res){
+         this.$emit('createnote',this.allNotes)
         //VmUser.$bus.$emit('add-user', { user: user})
         console.log('====================================');
         console.log("Get All Notes",res);
@@ -158,26 +160,38 @@ data() {
       console.log('====================================')
       console.log("error"+error)
       console.log('====================================')})
+    },
+    deletereminder(noteid){
+ const token = {
+        token: localStorage.getItem("token")
+      };
+        console.log('====================================');
+        console.log("noteid ......"+noteid);
+        console.log('====================================');  
+    axios.delete('http://localhost:8080/note/deletereminder/'+noteid,{ headers: {token:token.token} })
+    .then(res => {
+       //VmUser.$bus.$emit('add-user', { user: user})
+        console.log('====================================');
+        console.log(res.message);
+        console.log('====================================');
+        
+        
+    
+    }).catch(error => { 
+      console.log('====================================')
+      console.log("error"+error)
+      console.log('====================================')})
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .cards{
-  // display:flex;
- 
+  display:flex;
+  display: grid;
 //  flex-direction:row ; 
 //  flex-wrap: wrap;
 //  justify-content: space-between;
-//  padding-top: 22px;
-    display: flex;
-    flex-direction: row wrap;
-     justify-content: space-between;
-    // justify-content: space-evenly;
-    // align-items: start;
-    margin-top: 124px;
-   height: -webkit-fill-available;
-    display: grid;
  grid-template-columns: repeat(3, 3fr);
 grid-auto-rows: 158px;
 grid-gap: 30px;
