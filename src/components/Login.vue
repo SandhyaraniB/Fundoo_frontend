@@ -86,7 +86,7 @@ data() {
         localStorage.setItem('token',res.data.token);
         localStorage.removeItem('emailid');
         localStorage.setItem('emailid',res.data.emailid);
-        window.location.href="navbar/dashboard"
+        window.location.href="navbarr/dashboard"
       }
       
     }).catch(error => { 

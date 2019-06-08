@@ -12,11 +12,16 @@ import trashed from './components/trashnotes.vue'
 import getalllabelsfornote from './components/getlabelsfornote.vue'
 import cards from './components/cards.vue'
 import navbarr from './components/navbarr.vue'
+import uploadprofilepic from './components/uploadprofilepic.vue'
 export default
  [
     { 
         path: '/getalllabelsfornote',
         component: getalllabelsfornote
+    },
+    { 
+        path: '/uploadprofilepic',
+        component: uploadprofilepic
     },
     { 
         path: '/',

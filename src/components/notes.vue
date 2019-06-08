@@ -22,7 +22,7 @@
 <script>
 export default {
   data() {
- this.getnotes()
+//  this.getnotes()
      return {
     //   showDialog: false,
     //   parentmessage:'',
@@ -46,8 +46,8 @@ export default {
     axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
     .then(res => {
       this.allNotes=res.data;
+      this.$emit("gett")
       if (res){
-        //VmUser.$bus.$emit('add-user', { user: user})
         console.log('====================================');
         console.log("Get All Notes",res);
         console.log('====================================');
@@ -62,5 +62,25 @@ export default {
 }
 </script>
 <style scoped>
-
+.cards{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  height: 200px;
+  
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+}
 </style>

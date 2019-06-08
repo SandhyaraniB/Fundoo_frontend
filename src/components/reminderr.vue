@@ -2,7 +2,11 @@
  <div class="cards">
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
        <div v-if="result.reminder!=null"> 
-      <md-card class="takenote" style="height:auto; width:300px">
+      <md-card class="takenote" style="height:auto; width:300px margin-top: -299px;
+    /* margin-left: 500px; */
+    margin-right: 600px;
+    /* margin-bottom: 1000px; */
+    -webkit-margin-after-collapse: inherit;">
         <div>
           <input
             type="text"
@@ -134,11 +138,13 @@ export default {
 <style lang="scss" scoped>
 .cards {
   display: flex;
-  // display: grid;
-   flex-direction:row wrap; 
-  // grid-template-columns: repeat(3, 3fr);
-  // grid-auto-rows: 158px;
-  // grid-gap: 23px;
+  display: grid;
+   flex-direction:row ; 
+  //  flex-shrink: 
+  grid-template-columns: repeat(3, 3fr);
+  grid-auto-rows: 158px;
+  grid-gap: 23px;
+  
 }
 .md-card {
   border-radius: 10px;

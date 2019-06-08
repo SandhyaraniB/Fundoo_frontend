@@ -26,6 +26,7 @@
         <md-icon class="icon">person_add</md-icon>
         <md-tooltip md-direction="bottom">collaborator</md-tooltip>
     </md-button>
+    
   </div>
 </template>
 

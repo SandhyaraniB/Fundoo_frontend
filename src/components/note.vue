@@ -1,5 +1,5 @@
 <template>
-  <div class="cards" style="margin-top:-150px;">
+  <div class="cards" style="    margin-top: 200px;">
    <div v-for= "result in allNotes" v-bind:key="result" class="getcards" >
    <div v-if="result.trashed==true || result.archived!=true">
      <md-card md-with-hover v-bind:style="{ backgroundColor: result.color }" style="width: 300px;height:auto;"   >
@@ -191,7 +191,10 @@ data() {
   display: grid;
 //  flex-direction:row ; 
 //  flex-wrap: wrap;
-//  justify-content: space-between;
+  flex-direction: row wrap;
+  margin-top: 124px;
+ height: -webkit-fill-available;
+ justify-content: space-between;
  grid-template-columns: repeat(3, 3fr);
 grid-auto-rows: 158px;
 grid-gap: 30px;
@@ -205,6 +208,7 @@ grid-gap: 30px;
   display: inline-block;
   vertical-align: top;
   color: aliceblue;
+  
 }
 .card-title {
   border: none;

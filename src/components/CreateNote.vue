@@ -1,7 +1,7 @@
 <template>
-  <div class="createnote" style=" margin-bottom: -200px;">
+  <div class="createnote" >
     <div @click="flagchange" v-if="flag" >
-      <md-card style="width: 600px;margin-left: 130px; height:50px;margin-top: -350px;">
+      <md-card style="width: 600px;margin-left: 130px; height:50px;">
         <!-- <div> -->
         <textarea-autosize placeholder="Take a note..." class="takenote" style="margin:10px;"></textarea-autosize>
         <md-button class="md-icon-button" style="margin-left:400px;margin-top:-53px;">
@@ -23,8 +23,7 @@
     <div v-else>
       <md-card
         class="takenote"
-        style="margin-left: 130px;width: 600px; height: auto;     margin-top: -350px;"
-      >
+        style="margin-left: 130px;width: 600px; height: auto;" >
         <div>
           <textarea-autosize v-model="title" name="title" placeholder="title" class="titleone"></textarea-autosize>
           <md-button class="md-icon-button" @click="pin()">
@@ -43,13 +42,13 @@
           ></textarea-autosize>
         </div>
       
-        <div>
-          <iconlist></iconlist>
+        <div >
+          <iconlist ></iconlist>
         </div>
-        <md-button class="close" @click="createnote()">
+        <md-button class="close" @click="createnote()" >
           Close
           <md-tooltip md-direction="bottom">close</md-tooltip>
-        </md-button>
+        </md-button > 
        
       </md-card>
     </div>
@@ -67,7 +66,7 @@ export default {
     return {
       title: "",
       content: "",
-      flag: true
+      flag: true,
     };
   },
 components:{
@@ -77,21 +76,24 @@ components:{
     flagchange() {
       this.flag = !this.flag;
     },
-   async  createnote() {
+   async  createnote() 
+   {
       const data = {
         title: this.title,
         content: this.content
-      };
+         };
       const token = {
         token: localStorage.getItem("token")
-      };
+        };
 
       console.log("====================================");
-      console.log("token" + token);
+      console.log("token" + token.token);
       console.log("====================================");
 
-    var dataa =  await createNote(data, token.token)
-    this.$emit("createnote",dataa)
+    var dataa =  await createNote(data, token.token);
+    this.$emit("createnote",dataa);
+    this.flag = !this.flag;
+
         // .then("created successfully")
         // .catch(error => {
         //   console.log("====================================");

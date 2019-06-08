@@ -3,7 +3,7 @@
     <!-- <v-flex xs6> -->
     <div style=" width:-webkit-fill-available;">
       <!-- <v-app id="inspire" dark> -->
-      <v-toolbar style=" display: flex;flex-direction: row; width:-webkit-fill-available;">
+      <v-toolbar style=" display: flex;flex-direction: row; width:-webkit-fill-available;margin-left: -40px;">
         <!-- <div flex layout="row" layout-align="space-between center"> -->
 
         <md-button
@@ -66,24 +66,35 @@
           <md-icon style="color:black">apps</md-icon>
         </md-button>
         <!-- <form @submit.prevent="onsubmit" enctype="multipart/form-data"> -->
-        <md-button
-          style="    margin-top: -65px;
-           margin-left: 1200px;;background-color:pink"
-          class="md-icon-button"
-        >
-          <input type="file" @change="processFile($event)" style="width:20px">
-          <!-- <img src="./../assets/dhatri.png" width="150px" style="color:pink;border-radius:60px;"> -->
-        </md-button>
+        <!-- <md-button style="margin-top: -65px; margin-left: 1200px;;background-color:pink" class="md-icon-button"> -->
+         <!-- <input type="file" style="width:20px">
+         </md-button>  -->
+          <md-dialog :md-active.sync="show">
+      <md-dialog-title>UploadProfilepic</md-dialog-title>
+   <input type="file">
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="show = false">Close</md-button>
+        <md-button class="md-primary" @click="uploadpic(file)">Save</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+
+    <md-button  class="md-icon-button" @click="show = true" style="margin-top: -65px; margin-left: 1200px;">
+        <md-icon class="icon"></md-icon>
+        <md-tooltip md-direction="bottom">uploadimage</md-tooltip>
+    </md-button>
+        <!-- <uploadprofilepic>
+          <v-btn>s</v-btn>
+        </uploadprofilepic> -->
         <!-- </form> -->
       </v-toolbar>
       <v-divider></v-divider>
       <!-- ===================================================================================================================================================== -->
       <v-navigation-drawer
+      class="navdrawer"
         :clipped="drawer.clipped"
         :permanent="drawer.permanent"
         v-model="drawer.open"
-        app
-      >
+        app>
         <v-list style="width:200px;">
           <v-list-tile>
             <!-- v-if="!drawer.permanent" @click="makeDrawerPermanent" -->
@@ -105,7 +116,7 @@
                   <v-list-tile-title>
                     <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
                       <md-icon class="icon">notifications</md-icon>
-                      <router-link class="nav-link" to="/navbar/reminder" style="  color:black">
+                      <router-link class="nav-link" to="/navbarr/reminder" style="  color:black">
                         <span>Reminder</span>
                       </router-link>
                     </md-button>
@@ -155,8 +166,7 @@
                       :md-position="position"
                       :md-duration="isInfinity ? Infinity : duration"
                       :md-active.sync="showSnackbar"
-                      md-persistent
-                    >
+                      md-persistent>
                       <span>Connection timeout. Showing limited messages!</span>
                       <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
                     </md-snackbar>
@@ -198,7 +208,7 @@
       </v-navigation-drawer>
       <!-- ========================================================================================================================================== -->
 
-      <v-content>
+      <v-content style="margin-top: -350px;">
         <v-container fluid fill-height>
           <v-layout justify-center align-center>
             <v-flex shrink>
@@ -225,12 +235,14 @@
 import getlabels from "./../components/getlabels";
 import axios from "axios";
 // import cards from "./../components/cards";
+import uploadProfilePic from './uploadprofilepic'
 import { async } from "q";
 export default {
   components: {
     // CreateNote,
     // cards,
-    getlabels
+    getlabels,
+    uploadProfilePic
   },
   data: () => ({
     someData: "",
@@ -240,6 +252,7 @@ export default {
     isInfinity: false,
     showDialog: false,
     labelname: "",
+     show: false,
     results: [],
     drawer: {
       // sets the open status of the drawer
@@ -319,7 +332,7 @@ export default {
         });
     },
 
-    processFile(event) {
+    uploadpic(event) {
       this.someData = event.target.files[0];
 
       console.log("====================================");
@@ -332,14 +345,9 @@ export default {
       console.log("====================================");
       console.log("image;" + this.someData + "" + token.token);
       console.log("====================================");
-      axios
-        .post(
-          "http://localhost:8080/user/uploadProfilePic",
-          "?file=" + this.someData,
-          {
-            headers: { token: token.token }
-          }
-        )
+       axios.post("http://localhost:8080/user/uploadprofilepic",file,'',{
+          headers: { token: token.token }
+        })
         .then(res => {
           res;
         })
@@ -353,6 +361,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.search{
+  display: flex;
+  flex-direction: row;
+}
 .dashboard {
   // display: flex;
   // flex-direction: row;
@@ -420,5 +432,10 @@ export default {
 .md-dialog {
   max-width: 768px;
 }
+.navdrawer{
+  display: flex;
+  flex-direction: row;
+}
+
 </style>
 

@@ -4,7 +4,8 @@
       <div>
         <md-button @click="addlabeltonote(label.labelid)">
           <!-- <md-checkbox :value="true">{{label.labelname}}</md-checkbox> -->
-           <md-checkbox v-model="array" :value="true">{{label.labelname}}</md-checkbox>
+           <!-- <md-checkbox v-model="array" :value="true">{{label.labelname}}</md-checkbox> -->
+         <md-checkbox v-model="label.labelname" value="label.labelid">{{label.labelname}}</md-checkbox>
         </md-button>
       </div>
     </div>
@@ -13,9 +14,11 @@
 <script>
 // import iconlist from "./../components/iconlist";
 import { LabelService } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
+import labelchecbox from './labelcheckbox';
 import axios from "axios";
 export default {
   props: ["parentmessage"],
+  name: 'RegularCheckboxes',
   data() {
     this.getlabels();
     return {
@@ -25,6 +28,7 @@ export default {
   },
   components: {
     // iconlist
+    labelchecbox
   },
   methods: {
     getlabels() {
