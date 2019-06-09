@@ -1,9 +1,7 @@
 <template>
   <div class="cards">
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
-      <!-- @click="showDialog = true"  -->
-      <!-- //applying color for card result.colorChange put  in style with binding -->
-      <div v-if="result.trashed==true">
+      <div v-if="result.trashed=='true'">
       <md-card class="takenote" style="width:auto; ">
         <div>
           <input

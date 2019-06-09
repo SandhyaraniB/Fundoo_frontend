@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div style=" margin-right: 500px;">
-      <CreateNote v-on:createnote="createnotes($event)"></CreateNote>
-    </div>
+    <!-- <div style=" margin-right: 500px;">
+      <CreateNote v-on:createnotee="createnotes($event)"></CreateNote>
+    </div> -->
     <div style=" height:-webkit-fill-available;  margin-top: 228px;margin-top: -150px; ">
       <note v-on:gett="getting($event)"></note>
     </div>
@@ -18,9 +18,9 @@ import axios from "axios"
 // import reminder from './reminder'
 export default {
   data() {
-    this.getnotes()
+    // this.getnotes()
         return {
-      fromChild: "" // This value is set to the value emitted by the child
+      allNotes:[] // This value is set to the value emitted by the child
     };
   },
   components: {
@@ -31,39 +31,51 @@ export default {
   },
   methods: {
     // Triggered when `childToParent` event is emitted by the child.
-    createnotes() {
-      this.getnotes();
+    createnotes(e) {
+     this.getting();
+     console.log('====================================');
+     console.log("creatennnnnnnnnnnn",this.allNotes);
+     console.log('====================================');
     },
-   async getnotes() {
-    // alert('lll')
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      // alert(token.token);
-      // NoteService.GetAllNotes(token)
-      //   .then("cards.")
-      //   .catch(error => {
-      //     alert(error);
-      //   });
+    getting(e){
+    this.allNotes.push(e)
+     console.log('====================================');
+     console.log("getttnotessssssssssss",this.allNotes);
+     console.log('====================================');
+    },
+  //  async getnotes() {
+  //   // alert('lll')
+  //     const token = {
+  //       token: localStorage.getItem("token")
+  //     };
+  //     // alert(token.token);
+  //     // NoteService.GetAllNotes(token)
+  //     //   .then("cards.")
+  //     //   .catch(error => {
+  //     //     alert(error);
+  //     //   });
        
-    // await getnotes(token.token)
-   await  axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
-    .then(res => {
+  //   // await getnotes(token.token)
+  //  await  axios.get('http://localhost:8080/note/getAllNotes',{ headers: {token:token.token} })
+  //   .then(res => {
 
-      this.allNotes=res.data;
+  //     this.allNotes=res.data;
 
-      if (res){
-          console.log('====================================');
-        console.log(" dashboard",res);
-        console.log('====================================');
+  //     if (res){
+  //         console.log('====================================');
+  //       console.log(" dashboard",res);
+  //       console.log('====================================');
         
         
-      }
-    }).catch(error => { 
-      console.log('====================================')
-      console.log("error"+error)
-      console.log('====================================')})
-    },
+  //     }
+  //   }).catch(error => { 
+  //     console.log('====================================')
+  //     console.log("error"+error)
+  //     console.log('====================================')})
+  //   },
+   },
+   mounted(){
+this.getting();
    }
   
 };

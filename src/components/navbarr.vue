@@ -102,11 +102,11 @@
               <div>
                 <v-list-tile-content>
                   <v-list-tile-title>
-                    <md-button style="width:100px;margin-right:300px;">
+                    <md-button style="width:100px;margin-right:300px;" @click="note()">
                       <md-icon class="icon">note</md-icon>
-                      <router-link class="nav-link" to="/navbarr/dashboard" style="color:black">
+                      <!-- <router-link class="nav-link" to="/navbarr/dashboard" style="color:black"> -->
                         <span>Notes</span>
-                      </router-link>
+                      <!-- </router-link> -->
                     </md-button>
                   </v-list-tile-title>
                 </v-list-tile-content>
@@ -116,9 +116,9 @@
                   <v-list-tile-title>
                     <md-button style="width:100px;margin-right: 80px;" @click="reminder()">
                       <md-icon class="icon">notifications</md-icon>
-                      <router-link class="nav-link" to="/navbarr/reminder" style="  color:black">
+                      <!-- <router-link class="nav-link" to="/navbarr/reminder" style="  color:black"> -->
                         <span>Reminder</span>
-                      </router-link>
+                      <!-- </router-link> -->
                     </md-button>
                   </v-list-tile-title>
                 </v-list-tile-content>
@@ -185,21 +185,21 @@
           <!----------------------------------------------------------------------------------------------------------------- -->
           <v-list-tile>
             <v-list-tile-action>
-              <md-button style="width:100px;margin-left:-80px;">
+              <md-button style="width:100px;margin-left:-80px;" @click="archive()">
                 <md-icon class="icon">archive</md-icon>
-                <router-link class="nav-link" to="/navbarr/archive" style="  color:black">
+                <!-- <router-link class="nav-link" to="/navbarr/archive" style="  color:black"> -->
                   <span>Archive</span>
-                </router-link>
+                <!-- </router-link> -->
               </md-button>
             </v-list-tile-action>
             <!-- ------------------------------------------------------------------------------------------------------------------->
             <v-list-tile-content>
               <v-list-tile-title>
-                <md-button style="width:100px;margin-left:-80px;margin-right: 20px;">
+                <md-button style="width:100px;margin-left:-80px;margin-right: 20px;" @click="trash()">
                   <md-icon class="icon">delete</md-icon>
-                  <router-link class="nav-link" to="/navbarr/trashed" style="  color:black">
+                  <!-- <router-link class="nav-link" to="/navbarr/trashed" style="  color:black"> -->
                     <span>Trash</span>
-                  </router-link>
+                  <!-- </router-link> -->
                 </md-button>
               </v-list-tile-title>
             </v-list-tile-content>
@@ -234,6 +234,7 @@
 // import CreateNote from "./CreateNote";
 import getlabels from "./../components/getlabels";
 import axios from "axios";
+import {router} from '/home/admin1/Desktop/fundoo/src/routesNew.js'
 // import cards from "./../components/cards";
 import uploadProfilePic from './uploadprofilepic'
 import { async } from "q";
@@ -356,7 +357,22 @@ export default {
           console.log(error);
           console.log("====================================");
         });
-    }
+    },
+    note()
+    {
+       this.$router.push({ path: 'dashboard'})
+    },
+     reminder()
+    {
+       this.$router.push({ path: 'reminder'})
+    },
+    archive(){
+      this.$router.push({ path: 'archive'})
+    },
+    trash()
+    {
+     this.$router.push({ path: 'trashed'})
+      }
   }
 };
 </script>

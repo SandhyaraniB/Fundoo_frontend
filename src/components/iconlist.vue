@@ -206,7 +206,7 @@ export default {
   data() {
     return {
       newuser:'',
-      noteid: this.parentmessage.noteid,
+      noteid: 0,
       noteidinstr: "",
       labelname: "",
       emailid:'',

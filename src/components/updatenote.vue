@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <md-card style="width:400px;height:300px;" v-bind:style="{ backgroundColor: parentmessage.color }">
+  <div style="height:auto;">
+    <md-card style="width:400px;    height: 201px;" v-bind:style="{ backgroundColor: parentmessage.color }">
       <div style="margin-left:20px;width:350px;">
         <input
           type="text"
@@ -18,7 +18,7 @@
           name="content"
           placeholder="description"
           class="titletwo"
-          style="border: none; outline:none margin-left: 10px;width:300px;"
+          style="border: none; outline:none;width:300px;"
           v-bind:style="{ backgroundColor: parentmessage.color }"
         >
       </div>

@@ -3,7 +3,7 @@
     <div @click="flagchange" v-if="flag" >
       <md-card style="width: 600px;margin-left: 130px; height:50px;">
         <!-- <div> -->
-        <textarea-autosize placeholder="Take a note..." class="takenote" style="margin:10px;"></textarea-autosize>
+        <textarea-autosize placeholder="Take a note..." class="takenote" style="margin:10px;margin-left: -200px;"></textarea-autosize>
         <md-button class="md-icon-button" style="margin-left:400px;margin-top:-53px;">
           <md-icon>list</md-icon>
           <md-tooltip md-direction="bottom">new list</md-tooltip>
@@ -61,6 +61,7 @@ import iconlist from "./../components/iconlist";
 // import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import {createNote} from "/home/admin1/Desktop/fundoo/src/Service/noteservice.js"
 // import cards from "./cards"
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -76,7 +77,7 @@ components:{
     flagchange() {
       this.flag = !this.flag;
     },
-   async  createnote() 
+   createnote() 
    {
       const data = {
         title: this.title,
@@ -90,9 +91,29 @@ components:{
       console.log("token" + token.token);
       console.log("====================================");
 
-    var dataa =  await createNote(data, token.token);
-    this.$emit("createnote",dataa);
+    var notee=createNote(data, token.token);
+    this.$emit("createnotee1",notee);
+    console.log('====================================');
+    console.log("after emitttttttttt"+this.$emit("createnote"));
+    console.log('====================================');
     this.flag = !this.flag;
+    //  axios
+    //     .post("http://localhost:8080/note/createnote", data,{
+    //       headers: { token: token.token }
+    //     })
+    //     .this(res => {
+    //       this.$emit("createnote",res.data.message);
+    //     //  this.flag = !this.flag;
+    //       console.log("====================================");
+    //       console.log(res.data.message);
+    //       console.log("====================================");
+    //     });
+    //     this.flag = !this.flag;
+        // .catch(error => {
+        //   console.log("====================================");
+        //   console.log("error..." + error);
+        //   console.log("====================================");
+        // });
 
         // .then("created successfully")
         // .catch(error => {
