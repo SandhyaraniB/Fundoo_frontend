@@ -17,27 +17,15 @@
 
         <img src="./../assets/keep.png" style="width:35px;margin-top:13px;margin-left: 10px;} ">
         <label style=" margin-left: 20px;">Fundoo</label>
-        <!-- <div style="    width: 40px;
-    margin-top: -30px;
-        margin-left: 140px;">-->
-        <!-- <span    style=" margin-left: 20px;"> -->
-        <!-- <span class="f">F</span>
-            <span class="u">u</span>
-            <span class="n">n</span>
-            <span class="d">d</span>
-            <span class="o">o</span>
-        <span class="oo">o</span>-->
-        <!-- </span> -->
-        <!-- </div> -->
-
-        <md-card class="search">
-          <md-icon style="margin-left:5px;">search</md-icon>
+     <md-card  class="search">
+          
           <input
-            class="input"
+            type="text" v-model="msgg"
             placeholder="Search"
-            style="border: none; outline:none;"
-            @click="search()"
-          >
+            style="border: none; outline:none;margin-left: 70px;"
+            v-on:keyup.enter="search()"
+            @click="navigationdrawer()"
+           >
         </md-card>
 
         <md-button
@@ -133,51 +121,9 @@
             </v-list-tile-action>
             <getlabels></getlabels>
             <v-list-tile-action>
-              <div style="margin-right: 200px;">
-                <md-dialog :md-active.sync="showDialog">
-                  <md-dialog-title>Edit Labels</md-dialog-title>
-                  <!-- 
-                  <md-field md-clearable>-->
-                  <!-- <md-input v-model="result.labelname" placeholder="create new label"></md-input> -->
+              <createlabels
+              v-on:addremindertonote="craetelabel($event)"></createlabels>
 
-                  <!-- <md-select v-model="labelname"
-                        name="labelname"
-                        placeholder="select label name"
-                        id="labelname">
-                        <md-option value="fight-club">Fight Club</md-option>
-                        <md-option value="godfather">Godfather</md-option>
-                      </md-select>
-                  </md-field>-->
-
-                  <md-dialog-actions>
-                    <input
-                      type="text"
-                      v-model="labelname"
-                      placeholder="labelname"
-                      style="border:none,margin-bottom: 300px;"
-                    >
-                    <getlabels></getlabels>
-                    <md-button
-                      type="submit"
-                      class="md-primary md-raised"
-                      @click="showDialog = false"
-                    >Close</md-button>
-                    <md-snackbar
-                      :md-position="position"
-                      :md-duration="isInfinity ? Infinity : duration"
-                      :md-active.sync="showSnackbar"
-                      md-persistent>
-                      <span>Connection timeout. Showing limited messages!</span>
-                      <md-button class="md-primary" @click="showSnackbar = false">Retry</md-button>
-                    </md-snackbar>
-                    <md-button class="md-primary" @click="submit()">Save</md-button>
-                  </md-dialog-actions>
-                </md-dialog>
-
-                <md-button @click="showDialog = true">
-                  <md-icon class="icon">create</md-icon>Edit Labels
-                </md-button>
-              </div>
             </v-list-tile-action>
           </v-list-tile>
           <div></div>
@@ -234,18 +180,21 @@
 // import CreateNote from "./CreateNote";
 import getlabels from "./../components/getlabels";
 import axios from "axios";
-import {router} from '/home/admin1/Desktop/fundoo/src/routesNew.js'
+// import {router} from '/home/admin1/Desktop/fundoo/src/routesNew.js'
 // import cards from "./../components/cards";
 import uploadProfilePic from './uploadprofilepic'
 import { async } from "q";
+import {messageService} from "/home/admin1/Desktop/fundoo/src/dataservice/dataservice.js";
+import createlabels from './createlabels'
+
 export default {
   components: {
-    // CreateNote,
-    // cards,
     getlabels,
-    uploadProfilePic
+    uploadProfilePic,
+    createlabels,
   },
   data: () => ({
+    msgg:"",
     someData: "",
     showSnackbar: false,
     position: "center",
@@ -280,7 +229,14 @@ export default {
   props: {
     source: String
   },
-
+  
+   computed: {
+    // a computed getter
+    search:function(){
+      // `this` points to the vm instance
+      messageService.sendMessage();
+    }
+  },
   methods: {
     // changes the drawer to permanent
     makeDrawerPermanent() {
@@ -306,33 +262,11 @@ export default {
       }
     },
 
-    submit() {
-      const data = {
-        labelname: this.labelname
-      };
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      // alert("labelname");
-      axios
-        .post("http://localhost:8080/Label/createlabel", data, {
-          headers: { token: token.token }
-        })
-        .then(res => {
-          if (res) {
-            //VmUser.$bus.$emit('add-user', { user: user})
-            console.log("====================================");
-            console.log("AAAAAAAAAA", res);
-            console.log("====================================");
-          }
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log(error);
-          console.log("====================================");
-        });
-    },
-
+ craetelabel(event)
+ {
+   this.gettinglabels;
+ },
+    
     uploadpic(event) {
       this.someData = event.target.files[0];
 
@@ -346,7 +280,7 @@ export default {
       console.log("====================================");
       console.log("image;" + this.someData + "" + token.token);
       console.log("====================================");
-       axios.post("http://localhost:8080/user/uploadprofilepic",file,'',{
+       axios.post("http://localhost:8080/user/uploadprofilepic", this.someData,'',{
           headers: { token: token.token }
         })
         .then(res => {
@@ -372,7 +306,17 @@ export default {
     trash()
     {
      this.$router.push({ path: 'trashed'})
-      }
+      },
+       
+       search()
+       {
+          console.log("inserach navbar:",this.msgg)
+       messageService.sendMessage(this.msgg);
+      
+       },
+    navigationdrawer(){
+      this.$router.push({path:'search'})
+    }
   }
 };
 </script>

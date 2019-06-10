@@ -31,13 +31,13 @@
         <!-- </div> -->
 
         <md-card class="card">
-          <md-icon style="margin-left:5px;">search</md-icon>
+          <md-icon style="margin-left:-10px;">search</md-icon>
           <input
-           class="text"
+           type="text"
            v-model="text"
             placeholder="Search"
-            style="border: none; outline:none;"
-            @click="search(text)"
+            style="border: none; outline:none;margin-left: 60px; "
+            
           >
         </md-card>
 
@@ -223,8 +223,10 @@
 // import CreateNote from "./CreateNote";
 import getlabels from "./../components/getlabels";
 import axios from "axios";
+import { messageService } from '/home/admin1/Desktop/fundoo/src/dataservice/dataservice.js';
 // import cards from "./../components/cards";
 import { async } from "q";
+
 export default {
   components: {
     getlabels
@@ -240,6 +242,7 @@ export default {
     showDialog: false,
     labelname: "",
     results: [],
+    messages: [],
     drawer: {
       // sets the open status of the drawer
       open: true,
@@ -348,66 +351,16 @@ export default {
           console.log("====================================");
         });
     },
-    search(text)
-    {
-        const token = {
-        token: localStorage.getItem("token")
-      };
-      http://localhost:8080/note/searchNoteByTitle?title=text
-      axios.post(" http://localhost:8080/note/searchNoteByTitle/"+"?title="+text,{ headers: {token:token.token} } ).
-      this(res=>{res}).catch(error=>{error})
-    }
-  }
-};
+   
+}
 </script>
+
 <style lang="scss" scoped>
 .dashboard {
   // display: flex;
   flex-direction: row;
   width: 100%;
   margin-top: -60px;
-}
-.f {
-  color: blue;
-  font-weight: bold;
-  font-size: 30px;
-  font-family: "Times New Roman";
-  text-align: center;
-}
-.u {
-  color: red;
-  font-weight: bold;
-  font-size: 30px;
-  /* // font-family: sans-serif; */
-  text-align: center;
-}
-.n {
-  color: yellow;
-  font-weight: bold;
-  font-size: 30px;
-  /* // font-family: sans-serif; */
-  text-align: center;
-}
-.d {
-  color: blue;
-  font-weight: bold;
-  font-size: 30px;
-  /* // font-family: sans-serif; */
-  text-align: center;
-}
-.o {
-  color: green;
-  font-weight: bold;
-  font-size: 30px;
-  /* // font-family: sans-serif; */
-  text-align: center;
-}
-.oo {
-  color: red;
-  font-weight: bold;
-  font-size: 30px;
-  /* // font-family: sans-serif; */
-  text-align: center;
 }
 .card {
   margin-top: -45px;

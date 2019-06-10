@@ -1,7 +1,7 @@
 <template>
   <div class="cards">
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
-      <div v-if="result.archived=='true'">
+      <div v-if="result.archived==true">
       <md-card class="takenote">
         <div>
           <input
@@ -66,7 +66,6 @@
 </template>
 <script>
 import iconlist from "./../components/iconlist";
-// import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import axios from "axios";
 export default {
   data() {
@@ -127,15 +126,15 @@ export default {
 .cards {
   display: flex;
  
-  // display: grid;
- flex-direction:row ; 
- flex-wrap: wrap;
- justify-content: space-between;
+  display: grid;
+//  flex-direction:row ; 
+//  flex-wrap: wrap;
+//  justify-content: space-between;
 //   display: grid;
 //   /* flex-direction:row wrap; */
-//   grid-template-columns: repeat(3, 3fr);
-//   grid-auto-rows: 158px;
-//   grid-gap: 23px;
+  grid-template-columns: repeat(3, 3fr);
+  grid-auto-rows: 158px;
+  grid-gap: 23px;
  }
 .md-card {
   border-radius: 10px;
@@ -155,8 +154,8 @@ export default {
 }
 .takenote {
   width: 275px;
-  margin-left: 50px;
-  margin-top: -350px;
+     margin-left: -1500px;
+    margin-top: -150px;
 }
 .titleone {
   margin-top: 15px;

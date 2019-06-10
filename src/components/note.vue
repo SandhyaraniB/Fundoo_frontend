@@ -1,85 +1,93 @@
 <template>
- <div>
-    <CreateNote v-on:createnotee1="createnotes($event)"></CreateNote>
-  <div class="cards" style="margin-top: 200px;">
-    <!-- <div style=" margin-right: 500px;"> -->
-    <!-- </div> -->
-    <div v-for="result in allNotes" v-bind:key="result" class="getcards">
-      <div v-if="result.trashed==false || result.archived==false">
-        <md-card
-          md-with-hover
-          v-bind:style="{ backgroundColor: result.color }"
-          style="width: 300px;height:auto;"
-        >
-          <div @click="showDialog = true">
-            <div v-if="result.imageToNote!=null">
-              <img src="result.imageToNote">
-            </div>
-            <input
-              type="text"
-              v-model="result.title"
-              name="title"
-              placeholder="title"
-              class="titleone"
-              style="border: none; outline:none;"
+  <div>
+    <div style=" margin-right: 500px;">
+      <CreateNote v-on:notecreation="createnotes($event)"></CreateNote>
+    </div>
+    <div class="cards" style="margin-top: 50px;">
+      <div v-for="result in allNotes" v-bind:key="result" class="getcards">
+        <div v-if="result.trashed==false">
+          <v-flex xs12 md6>
+            <md-card
+              md-with-hover
               v-bind:style="{ backgroundColor: result.color }"
-              @click="update(result)"
+              style="width: 300px;height:auto;"
             >
-            <md-button
-              md-menu-trigger
-              class="md-icon-button"
-              @click="pin(result.noteid)"
-              style="margin-top: -35px; margin-left: 250px;"
-            >
-              <md-icon v-if="result.pinned='false'">
-                <img src="../assets/pinBeforeClick.svg">
-              </md-icon>
-              <md-icon v-else>
-                <img src="../assets/pin.svg">
-              </md-icon>
-            </md-button>
-          </div>
-          <div v-bind:style="{ backgroundColor: result.color }" @click="showDialog = true">
-            <input
-              type="text"
-              v-model="result.content"
-              name="content"
-              placeholder="description"
-              class="titletwo"
-              style="border: none; outline:none;"
-              v-bind:style="{ backgroundColor: result.color }"
-              @click="update(result)"
-            >
-          </div>
-          <div v-if="result.reminder!=null " style=" width: 100px;">
-            <md-chip
-              class="md-accent"
-              md-deletable
-              style="width: auto;margin-left:10px;"
-              @click="deletereminder(result.noteid)"
-            >{{result.reminder}}</md-chip>
-          </div>
-          <div v-for="label in result.labell" v-bind:key="label">
-            <div v-if="label.labelname!=null" style=" width: 50px;margin-left:10px;">
-              <md-chip
-                class="md-accent"
-                md-deletable
-                style="width: auto;"
-                @click="deletelabel(label)"
-              >{{label.labelname}}</md-chip>
-            </div>
-          </div>
+              <div @click="showDialog = true">
+                <div v-if="result.imageToNote!=null">
+                  <img src="result.imageToNote">
+                </div>
+                <input
+                  type="text"
+                  v-model="result.title"
+                  name="title"
+                  placeholder="title"
+                  class="titleone"
+                  style="border: none; outline:none;"
+                  v-bind:style="{ backgroundColor: result.color }"
+                  @click="update(result)"
+                >
+                <md-button
+                  md-menu-trigger
+                  class="md-icon-button"
+                  @click="pin(result.noteid)"
+                  style="margin-top: -35px; margin-left: 250px;"
+                >
+                  <md-icon v-if="result.pinned='false'">
+                    <img src="../assets/pinBeforeClick.svg">
+                  </md-icon>
+                  <md-icon v-else>
+                    <img src="../assets/pin.svg">
+                  </md-icon>
+                </md-button>
+              </div>
+              <div v-bind:style="{ backgroundColor: result.color }" @click="showDialog = true">
+                <input
+                  type="text"
+                  v-model="result.content"
+                  name="content"
+                  placeholder="description"
+                  class="titletwo"
+                  style="border: none; outline:none;"
+                  v-bind:style="{ backgroundColor: result.color }"
+                  @click="update(result)"
+                >
+              </div>
+              <div v-if="result.reminder!=null " style=" width: 100px;">
+                <md-chip
+                  class="md-accent"
+                  md-deletable
+                  style="width:200px;margin-left:10px;"
+                  @click="deletereminder(result.noteid)"
+                >{{result.reminder}}</md-chip>
+              </div>
+              <div v-for="label in result.labell" v-bind:key="label">
+                <div v-if="label.labelname!=null" style=" width: 50px;margin-left:10px;">
+                  <md-chip
+                    class="md-accent"
+                    md-deletable
+                    style="width: auto;"
+                    @click="deletelabel(label)"
+                  >{{label.labelname}}</md-chip>
+                </div>
+              </div>
 
-          <iconlist :parentmessage="result" style="color:white; margin-top: 10px;" class="iconlist"></iconlist>
-        </md-card>
-      </div>
-      <div>
-        <md-dialog :md-active.sync="showDialog" style="width:400px;height:160px;">
-          <updatenote :parentmessage="refval"></updatenote>
-        </md-dialog>
+              <iconlist
+                :parentmessage="result"
+                v-on:coloraddtonote="addcolortonote($event)"
+                v-on:addremindertonote="addremindertonote($event)"
+                style="color:white; margin-top: 10px;"
+                class="iconlist"
+              ></iconlist>
+            </md-card>
+          </v-flex>
+        </div>
+        <div>
+          <md-dialog :md-active.sync="showDialog" style="width:400px;height:160px;">
+            <updatenote :parentmessage="refval"></updatenote>
+          </md-dialog>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 <script>
@@ -90,7 +98,7 @@ import axios from "axios";
 import updatenote from "./updatenote";
 export default {
   data() {
-    props: ["msg"];
+    // props: ["msg"];
     // this.getnotes();
     return {
       showDialog: false,
@@ -106,19 +114,24 @@ export default {
   },
   mounted() {
     this.getnotes();
-    console.log("in mounted before emit");
+    console.log("in mounted before");
   },
   methods: {
-    // showDailogue(){
-    //   this.Dialog=!this.Dialog
-    // },
-   async createnotes(e) {
- console.log('====================================')
- console.log("in create notes",e)
-   await   this.getnotes();
-      console.log("=== after getnotes");
-      console.log("creatennnnnnnnnnnn" + this.allNotes);
-      console.log("====================================");
+    createnotes() {
+      //  console.log('====================================')
+      //  console.log("in create notes",e)
+      this.getnotes();
+      // console.log("=== after getnotes");
+      // console.log("creatennnnnnnnnnnn" + this.allNotes);
+      // console.log("====================================");
+    },
+    addcolortonote(event) {
+      console.log("in note adding color", event);
+      this.getnotes();
+    },
+    addremindertonote()
+    {
+      this.getnotes();
     },
     pin(noteid) {
       // this.noteid = this.parentmessage;
@@ -154,8 +167,8 @@ export default {
       this.refval = note;
       // alert(note.noteid)
     },
-    async getnotes() {
-      console.log("after emit in get notes")
+    getnotes() {
+      console.log("after emit in get notes");
       const token = {
         token: localStorage.getItem("token")
       };
@@ -165,8 +178,8 @@ export default {
       //   .catch(error => {
       //     alert(error);
       //   });
-    //  this.allNotes = [];
-    var data = await  axios
+       this.allNotes = [];
+       axios
         .get("http://localhost:8080/note/getAllNotes", {
           headers: { token: token.token }
         })
@@ -236,10 +249,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .cards {
+  position: relative;
   display: flex;
   display: grid;
   //  flex-direction:row ;
-  //  flex-wrap: wrap;
+  flex-wrap: wrap;
   flex-direction: row wrap;
   margin-top: 124px;
   height: -webkit-fill-available;
@@ -291,6 +305,10 @@ export default {
 }
 .getcards {
   flex-direction: flex-row;
+  display: block;
+  // position: absolute;
+  // z-index: 1;
+
   //  flex-direction: column;
 }
 .iconlist {

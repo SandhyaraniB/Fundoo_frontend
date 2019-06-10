@@ -22,7 +22,7 @@
           v-bind:style="{ backgroundColor: parentmessage.color }"
         >
       </div>
-      <!-- <div @click="noteinfo(noteid)"> -->
+ 
       <div style="margin-top:50px;">
         <iconlist :parentmessage="noteid" style="color:white margin-bottom:50px"></iconlist>
 

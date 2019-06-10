@@ -1,8 +1,8 @@
 <template>
   <div class="cards">
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
-      <div v-if="result.trashed=='true'">
-      <md-card class="takenote" style="width:auto; ">
+      <div v-if="result.trashed!=false">
+      <md-card class="takenote" style="width:auto; margin-top: 100px;">
         <div>
           <input
             type="text"
@@ -10,7 +10,7 @@
             name="title"
             placeholder="title"
             class="titleone"
-            style="border: none; outline=none "
+            style="border: none; outline:none; "
           >
         </div>
         <div>
@@ -20,13 +20,14 @@
             name="content"
             placeholder="description"
             class="titletwo"
-            style="border: none; outline=none margin-left: 10px;"
+            style="border: none; outline:none; margin-left: 10px;"
           >
         </div>
         <div>
-          <iconlist :parentmessage="result.noteid" style="color:white"></iconlist>
+          <!-- <iconlist :parentmessage="result.noteid" style="color:white"></iconlist> -->
          <md-button class="md-icon-button" @click="deletenote(result.noteid)">
-      <md-icon class="icon">delete</md-icon>
+      <md-icon class="icon" style="    margin-left: 3px;
+          ">delete</md-icon>
       <md-tooltip md-direction="bottom">Delete</md-tooltip>
     </md-button>
         </div>
@@ -44,7 +45,7 @@
               name="title"
               placeholder="title"
               class="titleone"
-              style="border: none; outline=none "
+              style="border: none; outline:none ;"
             >
           </div>
           <div>
@@ -54,13 +55,11 @@
               name="content"
               placeholder="description"
               class="titletwo"
-              style="border: none; outline=none margin-left: 10px;"
+              style="border: none; outline:none;margin-left: -55px;"
             >
           </div>
-          <div @click="noteinfo(noteid)">
-            <!-- <iconlist :parentmessage="noteid" style="color:white"></iconlist> -->
-
-          </div>
+          <!-- <div @click="noteinfo(noteid)">
+          </div> -->
           <md-dialog-actions>
             <md-button class="md-primary" @click="showDialog = false">Close</md-button>
           </md-dialog-actions>
@@ -70,7 +69,7 @@
   </div>
 </template>
 <script>
-import iconlist from "./../components/iconlist";
+// import iconlist from "./../components/iconlist";
 // import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import axios from "axios";
 export default {
@@ -83,7 +82,7 @@ export default {
     };
   },
   components: {
-    iconlist
+    // iconlist
   },
   methods: {
     // showDailogue(){
@@ -200,7 +199,7 @@ export default {
 .titletwo {
   // margin-top: 15px;
   width: 70%;
-  margin-left: -55px;
+  // margin-left: -55px;
   border: none;
 }
 .icon {

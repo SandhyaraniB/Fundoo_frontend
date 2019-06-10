@@ -13,6 +13,7 @@ import getalllabelsfornote from './components/getlabelsfornote.vue'
 import cards from './components/cards.vue'
 import navbarr from './components/navbarr.vue'
 import uploadprofilepic from './components/uploadprofilepic.vue'
+import search from'./components/searchcomp.vue'
 export default
  [
     { 
@@ -75,6 +76,11 @@ export default
             {
                 path:'trashed',
                 component:trashed,
+               
+            },
+            {
+                path:'search',
+                component:search,
                
             },
          ],

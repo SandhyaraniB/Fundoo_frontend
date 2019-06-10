@@ -1,5 +1,5 @@
 <template>
-  <div class="createnote" >
+  <div class="create" >
     <div @click="flagchange" v-if="flag" >
       <md-card style="width: 600px;margin-left: 130px; height:50px;">
         <!-- <div> -->
@@ -77,7 +77,7 @@ components:{
     flagchange() {
       this.flag = !this.flag;
     },
-   createnote() 
+   async createnote() 
    {
       const data = {
         title: this.title,
@@ -86,41 +86,10 @@ components:{
       const token = {
         token: localStorage.getItem("token")
         };
-
-      console.log("====================================");
-      console.log("token" + token.token);
-      console.log("====================================");
-
-    var notee=createNote(data, token.token);
-    this.$emit("createnotee1",notee);
-    console.log('====================================');
-    console.log("after emitttttttttt"+this.$emit("createnote"));
-    console.log('====================================');
+    var notes= await createNote(data, token.token);
+    this.$emit("notecreation",notes)
     this.flag = !this.flag;
-    //  axios
-    //     .post("http://localhost:8080/note/createnote", data,{
-    //       headers: { token: token.token }
-    //     })
-    //     .this(res => {
-    //       this.$emit("createnote",res.data.message);
-    //     //  this.flag = !this.flag;
-    //       console.log("====================================");
-    //       console.log(res.data.message);
-    //       console.log("====================================");
-    //     });
-    //     this.flag = !this.flag;
-        // .catch(error => {
-        //   console.log("====================================");
-        //   console.log("error..." + error);
-        //   console.log("====================================");
-        // });
-
-        // .then("created successfully")
-        // .catch(error => {
-        //   console.log("====================================");
-        //   console.log("error" + error);
-        //   console.log("====================================");
-        // });
+   
     }
   },
   components: {
@@ -129,7 +98,7 @@ components:{
 };
 </script>
 <style lang="scss" scoped>
-.createnote {
+.create {
   // display: flex;
 }
 .md-card {

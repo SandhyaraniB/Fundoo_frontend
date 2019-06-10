@@ -189,12 +189,12 @@
 </template>
 <script>
 // import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
-import { Labelservice } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
 import getlabelsfornote from "./../components/getlabelsfornote.vue";
 import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
 import addcollaborator from "./addcollaborator.vue";
+import {addcolortonote,addreminder} from '/home/admin1/Desktop/fundoo/src/Service/noteservice.js'
 export default {
   props: ["parentmessage"],
 
@@ -216,9 +216,9 @@ export default {
   // emailid:localStorage.getItem(emailid),
   methods: {
     getnoteid() {
-      console.log("====================================");
-      console.log("Dhatri:" + this.noteid);
-      console.log("====================================");
+      // console.log("====================================");
+      // console.log("Dhatri:" + this.noteid);
+      // console.log("====================================");
     },
 
     // ............................................................deletenote.......................................................................................
@@ -256,169 +256,57 @@ export default {
         });
     },
 
-    // ..............................................................addlabel..................................................................................................
-    addlabel() {
-      const data = {
-        labelname: this.labelname
-      };
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      Labelservice.CreateLabel(data, token)
-        .then("labeladded")
-        .catch(error => {
-          console.log("====================================");
-          console.log(error);
-          console.log("====================================");
-        });
-    },
-    today() {
-      //  this.noteid = this.parentmessage;
+    // .............................................................Reminder..................................................................................................
+   
+    async today() {
+     
       var value = new Date();
-      this.Date=moment(String(value)).format("YYYY-MM-DD");
-      var datemsg =this.Date + "T" + "8:00:00";
+     
+     this.Date=moment(String(value)).format("YYYY-MM-DD");
+      var datemsg =this.Date + 'T' + '08:00:00';
       let dates=new Date(datemsg);
-
-
-      // var day = date.getDate();
-      // var month = date.getMonth();
-      // var year = date.getFullYear();
-      // var data = year + "-" + month + "-" + day;
-      // Vue.filter("formatDate", function(data) {
-      //   if (date) {
-      //     return moment(String(data)).format("yyyy-mm-dd");
-      //     console.log("====================================");
-      //     console.log(moment(String(data)).format("yyyy-mm-dd"));
-      //     console.log("====================================");
-      //     console.log(
-      //       "DATEEEEE" + moment(String(data)).format("YYYY-MM-DD")
-      //     );
-      //   }
-      // });
-      console.log("====================================");
-      console.log(dates);
-      console.log("====================================");
       this.noteid = this.parentmessage.noteid;
-      console.log("====================================");
-      console.log(this.noteid);
-      console.log("====================================");
       const token = {
         token: localStorage.getItem("token")
       };
-      console.log("====================================");
-      console.log("253 line" + this.noteid);
-      console.log("====================================");
-      axios
-        .post("http://localhost:8080/note/reminder/" + this.noteid,value,{
-          headers: { token: token.token }
-        })
-        .this(response => {
-          console.log("====================================");
-          console.log(response);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log("error..." + error);
-          console.log("====================================");
-        });
+
+       var rem = await addreminder(this.noteid,dates, token.token);
+        this.$emit("addremindertonote",rem)
+       
     },
 
-    tomorrow() {
-      //  this.noteid = this.parentmessage;
-      var date = new Date();
-      date.setDate(date.getDate() + 1);
-      // var endDate = new Date(date.getDate() + 1);
-      var day = date.getDate();
-      var month = date.getMonth();
-      var year = date.getFullYear();
-      var data = year + "-" + month + "-" + day;
-      Vue.filter("formatDate", function(data) {
-        if (date) {
-          return moment(String(data)).format("yyyy-mm-dd");
-          console.log("====================================");
-          console.log(moment(String(data)).format("yyyy-mm-dd"));
-          console.log("====================================");
-          console.log(
-            "DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm")
-          );
-        }
-      });
-      console.log("====================================");
-      console.log(data);
-      console.log("====================================");
+   async tomorrow() {
+    var todaydate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    //  todaydate.getDate(todaydate.setDate() + 1)
+    console.log("sss",todaydate)
+    //  var value = new Date(values);
+    this.Date=moment(String(todaydate)).format("YYYY-MM-DD");
+    var datemsg =this.Date + 'T' + '08:00:00';
+    var dates=new Date(datemsg);
+    
       this.noteid = this.parentmessage.noteid;
-      console.log("====================================");
-      console.log(this.noteid);
-      console.log("====================================");
       const token = {
         token: localStorage.getItem("token")
       };
-      console.log("====================================");
-      console.log("253 line" + date);
-      console.log("====================================");
-      axios
-        .put("http://localhost:8080/note/reminder/" + this.noteid, date, {
-          headers: { token: token.token }
-        })
-        .this(response => {
-          console.log("====================================");
-          console.log(response);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log(error);
-          console.log("====================================");
-        });
+       var rem = await addreminder(this.noteid,dates, token.token);
+        this.$emit("addremindertonote",rem)
     },
-    weeklater() {
-      //  this.noteid = this.parentmessage;
-      var date = new Date();
-      date.setDate(date.getDate() + 7);
-      // var endDate = new Date(date.getDate() + 1);
-      var day = date.getDate();
-      var month = date.getMonth();
-      var year = date.getFullYear();
-      var data = year + "-" + month + "-" + day;
-      Vue.filter("formatDate", function(data) {
-        if (date) {
-          return moment(String(data)).format("yyyy-mm-dd");
-          console.log("====================================");
-          console.log(moment(String(data)).format("yyyy-mm-dd"));
-          console.log("====================================");
-          console.log(
-            "DATEEEEE" + moment(String(data)).format("DD/MM/YYYY hh:mm")
-          );
-        }
-      });
-      console.log("====================================");
-      console.log(data);
-      console.log("====================================");
+   async weeklater() 
+    {
+    var todaydate = new Date(new Date().getTime() + 7* 24 * 60 * 60 * 1000);
+    //  todaydate.getDate(todaydate.setDate() + 1)
+    console.log("sss",todaydate)
+    //  var value = new Date(values);
+    this.Date=moment(String(todaydate)).format("YYYY-MM-DD");
+    var datemsg =this.Date + 'T' + '08:00:00';
+    var dates=new Date(datemsg);
+    
       this.noteid = this.parentmessage.noteid;
-      console.log("====================================");
-      console.log(this.noteid);
-      console.log("====================================");
       const token = {
         token: localStorage.getItem("token")
       };
-      console.log("====================================");
-      console.log("253 line" + date);
-      console.log("====================================");
-      axios
-        .put("http://localhost:8080/note/reminder/" + this.noteid, date, {
-          headers: { token: token.token }
-        })
-        .this(response => {
-          console.log("====================================");
-          console.log("response" + response);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log("error" + error);
-          console.log("====================================");
-        });
+      var rem = await addreminder(this.noteid,dates, token.token);
+        this.$emit("addremindertonote",rem)
     },
 // .......................................................................archive..................................................................................
     isArchive() {
@@ -456,48 +344,21 @@ export default {
           console.log("====================================");
         });
     },
-  // ...........................................................................collaborator.......................................................................................................................
+  // ...........................................................................addcolor.......................................................................................................................
     
-    addcolor(colore) {
+    async addcolor(colore) {
       this.noteid = this.parentmessage.noteid;
-      // this.color=this.parentmessage.color;
-      // prentmessage.color=color
+      console.log("ssssssssssss",this.noteid)
       const token = {
         token: localStorage.getItem("token")
       };
-      // var colorvalue=color;
-      // const colval={
-      //   color:color
-      // }
-      console.log("====================================");
-      console.log("id and color" + this.noteid + colore);
-      console.log("====================================");
-      axios
-        .post(
-          "http://localhost:8080/note/addcolor/" +
-            this.noteid +
-            "?color=" +
-            colore,
-          {},
-          { headers: { token: token.token } }
-        )
-        .then(response => {
-          console.log("====================================");
-          console.log("response ", response.data.message);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log("error ", error);
-          console.log("====================================");
-        });
-      //  NoteService.addcolor(noteid,token,color)
-      //   .then("reminder done")
-      //   .catch(error => {
-      //    console.log('====================================');
-      //     console.log("error"+error);
-      //     console.log('====================================');
-      //   });
+      console.log("token....................",token.token)
+        var notes= await addcolortonote(this.noteid,colore, token.token);
+        this.$emit("coloraddtonote",notes)
+        console.log('====================================');
+        console.log("after color add emit", this.$emit("coloraddtonote",notes));
+        console.log('====================================');
+     
     },
     addimage() {
       const token = {
@@ -519,17 +380,7 @@ export default {
           console.log("error ", error);
           console.log("====================================");
         });
-      // NoteService.AddImageToNote(noteid, token)
-      //   .then("image added to the note")
-      //   .catch(error => {
-      //     console.log("====================================");
-      //     console.log("error" + error);
-      //     console.log("====================================");
-      //   });
     },
-    addlabeltonote() {
-      this.noteid = this.parentmessage.noteid;
-    }
   }
 };
 </script>

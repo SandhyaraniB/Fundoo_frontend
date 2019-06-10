@@ -1,7 +1,7 @@
-import { postServiceToken,getServiceToken,postServiceTokenfor}  from '/home/admin1/Desktop/fundoo/src/Service/Service.js'
+import { postServiceToken,postServiceTokenfor,getServiceTokenforlabel}  from '/home/admin1/Desktop/fundoo/src/Service/Service.js'
 
-export function createNote(data,token) {
-     return postServiceToken(`note/createnote`, data ,token)
+export function createLabel(data,token) {
+     return postServiceToken(`Label/createlabel`, data ,token)
     // .then(response => {
     // console.log(response.data)
     // console.log(response.data.statusMessage)
@@ -9,8 +9,8 @@ export function createNote(data,token) {
     // .catch(err => alert(err.message));
 }
 
-export function getNote(token) {
-    return getServiceToken(`note/getAllNotes`,token)
+export function gettinglabels() {
+    return getServiceTokenforlabel(`Label/getAllLabels`)
    
 }
 

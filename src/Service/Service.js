@@ -12,3 +12,13 @@ export function getServiceToken(url,token) {
     // console.log(data)
     return axios.get(`${BASE_URL}/${url}`,{ headers: {token:`${token}`}})
 }
+export function getServiceTokenforlabel(url) {
+    // console.log(`${BASE_URL}/${url}`)
+    // console.log(data)
+    return axios.get(`${BASE_URL}/${url}`)
+}
+export function postServiceTokenfor(url,token) {
+    // console.log(`${BASE_URL}/${url}`)
+    // console.log(token)
+    return axios.post(`${BASE_URL}/${url}`,{},{ headers: {token:`${token}`}})
+}

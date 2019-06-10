@@ -12,13 +12,11 @@
 
 </template>
 <script>
-// import iconlist from "./../components/iconlist";
-import { LabelService } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
-import axios from 'axios'
+import { gettinglabels} from "/home/admin1/Desktop/fundoo/src/Service/labelservice.js"
 export default {
 
 data() {
-  this.getlabels()
+  
      return {
       
    alllabels:[]
@@ -27,31 +25,18 @@ data() {
   components: {
     // iconlist
   },
+  mounted()
+  {
+   this.getlabels()
+  },
   methods: {
-    getlabels() {
-      const token = {
-        token: localStorage.getItem("token")
-      };
-      // alert(token.token)
-       
-    axios.get('http://localhost:8080/Label/getAllLabels')
-    .then(res => {
-      this.alllabels=res.data;
-      if (res){
-        //VmUser.$bus.$emit('add-user', { user: user})
-        console.log('====================================');
-        console.log("AAAAAAAAAA",res);
-        console.log('====================================');
-        
-        
-      }
-    }).catch(error => { 
-      console.log('====================================');
-          console.log("error"+error);
-          console.log('====================================');
-      }
-      )
+   async getlabels(){
+      
+    var labels = await gettinglabels()
+    this.alllabels=labels.data;
+    this.$emit("labelss",labels.data)
     }
+    
   }
 };
 </script>

@@ -15,7 +15,7 @@
 </template>
 <script>
 // import iconlist from "./../components/iconlist";
-import { LabelService } from "/home/admin1/Desktop/fundoo/src/Service/LabelService.js";
+
 import axios from 'axios'
 export default {
  props: ["note"],

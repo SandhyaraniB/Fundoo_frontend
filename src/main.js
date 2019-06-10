@@ -26,6 +26,9 @@ import VueFlex from "vue-flex";
 import "vue-flex/dist/vue-flex.css";
 //  import navbar from './components/navbar.vue'
 import VueMq from 'vue-mq'
+import VueRx from 'vue-rx'
+
+Vue.use(VueRx)
 Vue.use(VueFlex);
 //  Vue.use(Vuetify)
 Vue.use(Vuetify, {

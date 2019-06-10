@@ -73,7 +73,6 @@
 </template>
 <script>
 import iconlist from "./../components/iconlist";
-// import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import axios from "axios";
 export default {
   data() {
@@ -138,19 +137,18 @@ export default {
 <style lang="scss" scoped>
 .cards {
   display: flex;
-  display: grid;
-   flex-direction:row ; 
-  //  flex-shrink: 
-  grid-template-columns: repeat(3, 3fr);
-  grid-auto-rows: 158px;
-  grid-gap: 23px;
-  
+  // display: grid;
+   flex-direction:row wrap; 
+  // grid-template-columns: repeat(3, 3fr);
+  // grid-auto-rows: 158px;
+  // grid-gap: 23px;
+ 
 }
 .md-card {
   border-radius: 10px;
   display: flex;
-  width: 250px;
-  height: 105px;
+  width: auto;
+  // height: auto;
   margin: 4px;
   display: inline-block;
   vertical-align: top;
@@ -165,7 +163,7 @@ export default {
 .takenote {
   width: 275px;
   margin-left: 50px;
-  margin-top: -400px;
+  margin-top: -350px;
 }
 .titleone {
   margin-top: 15px;
