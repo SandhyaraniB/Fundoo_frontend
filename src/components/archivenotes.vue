@@ -154,8 +154,6 @@ export default {
 }
 .takenote {
   width: 275px;
-     margin-left: -1500px;
-    margin-top: -150px;
 }
 .titleone {
   margin-top: 15px;

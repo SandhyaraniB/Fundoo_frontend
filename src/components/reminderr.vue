@@ -1,7 +1,7 @@
 <template>
  <div class="cards">
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
-       <div v-if="result.reminder!='null'"> 
+       <div v-if="result.reminder!=null"> 
       <md-card class="takenote" style="height:auto; width:300px margin-top: -299px;
     /* margin-left: 500px; */
     margin-right: 600px;

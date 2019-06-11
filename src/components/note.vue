@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div style=" margin-right: 500px;">
+    <!-- <div style=" margin-right: 500px;">
       <CreateNote v-on:notecreation="createnotes($event)"></CreateNote>
-    </div>
-    <div class="cards" style="margin-top: 50px;">
-      <div v-for="result in allNotes" v-bind:key="result" class="getcards">
+    </div> -->
+    <div class="cards" :is-draggable="true" style="margin-top: 50px;">
+      <div v-for="result in allNotes" v-bind:key="result.noteId" class="getcards">
         <div v-if="result.trashed==false">
           <v-flex xs12 md6>
             <md-card
@@ -57,7 +57,7 @@
                   class="md-accent"
                   md-deletable
                   style="width:200px;margin-left:10px;"
-                  @click="deletereminder(result.noteid)"
+                  @click="deletereminderr(result.noteid)"
                 >{{result.reminder}}</md-chip>
               </div>
               <div v-for="label in result.labell" v-bind:key="label">
@@ -74,7 +74,7 @@
               <iconlist
                 :parentmessage="result"
                 v-on:coloraddtonote="addcolortonote($event)"
-                v-on:addremindertonote="addremindertonote($event)"
+                v-on:addremindertonote="addremindertonotee($event)"
                 style="color:white; margin-top: 10px;"
                 class="iconlist"
               ></iconlist>
@@ -93,17 +93,16 @@
 <script>
 import iconlist from "./../components/iconlist";
 import CreateNote from "./CreateNote";
-// import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
+import {deletereminder,deletelabel} from '/home/admin1/Desktop/fundoo/src/Service/noteservice.js';
 import axios from "axios";
 import updatenote from "./updatenote";
 export default {
+   props: ['allNotes'],
   data() {
-    // props: ["msg"];
-    // this.getnotes();
     return {
       showDialog: false,
       parentmessage: "",
-      allNotes: [],
+      // allNotes: [],
       refval: ""
     };
   },
@@ -112,25 +111,28 @@ export default {
     updatenote,
     CreateNote
   },
-  mounted() {
-    this.getnotes();
-    console.log("in mounted before");
-  },
+  // mounted() {
+  //   this.getnotes();
+  //   console.log("in mounted before");
+  // },
   methods: {
-    createnotes() {
-      //  console.log('====================================')
-      //  console.log("in create notes",e)
-      this.getnotes();
-      // console.log("=== after getnotes");
-      // console.log("creatennnnnnnnnnnn" + this.allNotes);
-      // console.log("====================================");
-    },
+    // createnotes() {
+    //   //  console.log('====================================')
+    //   //  console.log("in create notes",e)
+    //   this.getnotes();
+    //   // console.log("=== after getnotes");
+    //   // console.log("creatennnnnnnnnnnn" + this.allNotes);
+    //   // console.log("====================================");
+    // },
     addcolortonote(event) {
       console.log("in note adding color", event);
       this.getnotes();
     },
-    addremindertonote()
+    addremindertonotee()
     {
+      this.getnotes();
+    },
+    deletereminder(){
       this.getnotes();
     },
     pin(noteid) {
@@ -148,7 +150,6 @@ export default {
           { headers: { token: token.token } }
         )
         .then(res => {
-          //VmUser.$bus.$emit('add-user', { user: user})
           console.log("====================================");
           console.log(res.message);
           console.log("====================================");
@@ -159,34 +160,31 @@ export default {
           console.log("====================================");
         });
     },
-    onClickButton(event) {
-      this.$emit("clicked", event);
-    },
+  
     update: function(note) {
       this.showDialog = false;
       this.refval = note;
       // alert(note.noteid)
     },
-    getnotes() {
+   
+   
+   getnotes() {
       console.log("after emit in get notes");
       const token = {
         token: localStorage.getItem("token")
       };
-      // alert(token.token);
-      // NoteService.GetAllNotes(token)
-      //   .then("cards.")
-      //   .catch(error => {
-      //     alert(error);
-      //   });
-       this.allNotes = [];
+       //this.allNotes = [];
        axios
         .get("http://localhost:8080/note/getAllNotes", {
           headers: { token: token.token }
         })
         .then(res => {
           console.log("== in axios ", res.data);
+          if(result.trashed!=true)
+          {
           this.allNotes = res.data;
-          // this.$emit("gett", this.allNotes);
+          }
+          // this.$emit("gett");
 
           console.log("====================================");
           console.log("Get All Notes", this.allNotes);
@@ -204,45 +202,24 @@ export default {
       this.parentmessage = note;
       console.log("====================================");
     },
-    deletelabel(label) {
+
+   async deletelabel(label) {
       console.log("====================================");
       console.log(label.labelid);
       console.log("====================================");
-      axios
-        .delete("http://localhost:8080/Label/deletelabel/" + label.labelid)
-        .then(res => {
-          console.log("====================================");
-          console.log("deleted", res);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log("error" + error);
-          console.log("====================================");
-        });
+       var deletelabell= await deletelabel(label.labelid);
+    this.$emit("deletedlabel",deletelabell)
     },
-    deletereminder(noteid) {
+    // deletereminder
+    async deletereminderr(noteid) {
       const token = {
         token: localStorage.getItem("token")
       };
       console.log("====================================");
       console.log("noteid ......" + noteid);
       console.log("====================================");
-      axios
-        .delete("http://localhost:8080/note/deletereminder/" + noteid, {
-          headers: { token: token.token }
-        })
-        .then(res => {
-          //VmUser.$bus.$emit('add-user', { user: user})
-          console.log("====================================");
-          console.log(res.message);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log("error" + error);
-          console.log("====================================");
-        });
+    var deletedreminder= await deletereminder(noteid, token.token);
+    this.$emit("deletereminder",deletedreminder)
     }
   }
 };

@@ -2,7 +2,7 @@
   <div class="cards">
     <div v-for="result in allNotes" v-bind:key="result" class="getcards">
       <div v-if="result.trashed!=false">
-      <md-card class="takenote" style="width:auto; margin-top: 100px;">
+      <md-card class="takenote" style="width:250px; margin-top: 100px;">
         <div>
           <input
             type="text"
@@ -20,16 +20,44 @@
             name="content"
             placeholder="description"
             class="titletwo"
-            style="border: none; outline:none; margin-left: 10px;"
+            style="border: none; outline:none;"
           >
         </div>
         <div>
-          <!-- <iconlist :parentmessage="result.noteid" style="color:white"></iconlist> -->
-         <md-button class="md-icon-button" @click="deletenote(result.noteid)">
+          <!-- <iconlist :parentmessage="result" style="color:white"></iconlist> -->
+         <!-- <md-button class="md-icon-button" @click="deletenote(result.noteid)">
       <md-icon class="icon" style="    margin-left: 3px;
           ">delete</md-icon>
       <md-tooltip md-direction="bottom">Delete</md-tooltip>
-    </md-button>
+    </md-button> -->
+
+      <md-menu>
+      <md-button md-menu-trigger class="md-icon-button" >
+        <md-icon class="icon" >more_vert</md-icon>
+        <md-tooltip md-direction="bottom">more</md-tooltip>
+      </md-button>
+     
+      <md-menu-content style="width:200px;height:700px;">
+         <md-button>
+          <md-menu-item class="more" @click="deletenote(result.noteid)">Delete permanently</md-menu-item>
+        </md-button>
+        <md-button @click="untrashnote(result.noteid)">Restore note</md-button>
+         <md-menuoo-content>
+            <getlabelsfornote :parentmessage="parentmessage"></getlabelsfornote>
+         <!-- <md-card style="width:200px;height:1000px;">
+        <md-menu-item class="dropdown" v-if="visible" >
+          <md-menu-content style="margin-left:200px;">
+            <md-menu-item>
+                 <getlabelsfornote :parentmessage="parentmessage"></getlabelsfornote>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu-item>
+         </md-card>  -->
+         </md-menuoo-content>
+      </md-menu-content>
+     
+    </md-menu>
+
         </div>
       </md-card>
       </div>
@@ -37,7 +65,7 @@
     <div>
       <md-dialog :md-active.sync="showDialog">
         <!-- <md-dialog-title>Preferences</md-dialog-title> -->
-        <md-card class="takenote">
+        <md-card style="width:250px">
           <div>
             <input
               type="text"
@@ -69,7 +97,7 @@
   </div>
 </template>
 <script>
-// import iconlist from "./../components/iconlist";
+import iconlist from "./../components/iconlist";
 // import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import axios from "axios";
 export default {
@@ -82,7 +110,7 @@ export default {
     };
   },
   components: {
-    // iconlist
+    iconlist
   },
   methods: {
     // showDailogue(){
@@ -156,6 +184,39 @@ export default {
           console.log("====================================");
         });
     },
+untrashnote(noteid){
+     
+      const token = {
+        token: localStorage.getItem("token")
+      };
+      console.log('====================================');
+      console.log("...........",noteid);
+      console.log('====================================');
+      // NoteService.DeleteNote(this.noteid, token)
+      //   .then("notedeleted")
+      //   .catch(error => {
+      //  console.log('====================================');
+      //       console.log("error"+error);
+      //       console.log('====================================');
+      //   });
+      axios
+        .put(
+          "http://localhost:8080/note/trashnote/" + noteid,'',
+          {
+            headers: { token: token.token }
+          }
+        )
+        .this(response => {
+          console.log("====================================");
+          console.log(response.data.message);
+          console.log("====================================");
+        })
+        .catch(error => {
+          console.log("====================================");
+          console.log(error);
+          console.log("====================================");
+        });
+}
   }
 };
 </script>
@@ -172,7 +233,7 @@ export default {
 .md-card {
   border-radius: 10px;
   display: flex;
-  width: auto;
+  width: 300px;
   // height: auto;
   margin: 4px;
   display: inline-block;
@@ -185,14 +246,10 @@ export default {
 .card-note {
   border: none;
 }
-.takenote {
-  width: 275px;
-  margin-left: 50px;
-  margin-top: -350px;
-}
+
 .titleone {
   margin-top: 15px;
-  margin-right: 55px;
+  // margin-right: 55px;
   width: 70%;
   border: none;
 }

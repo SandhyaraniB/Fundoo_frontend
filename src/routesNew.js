@@ -13,7 +13,7 @@ import getalllabelsfornote from './components/getlabelsfornote.vue'
 import cards from './components/cards.vue'
 import navbarr from './components/navbarr.vue'
 import uploadprofilepic from './components/uploadprofilepic.vue'
-import search from'./components/searchcomp.vue'
+import searchcomp from'./components/searchcomp.vue'
 export default
  [
     { 
@@ -69,7 +69,7 @@ export default
                
             },
             {
-                path:'reminder',
+                path:'reminderr',
                 component:reminderr,
                
             },
@@ -79,8 +79,8 @@ export default
                
             },
             {
-                path:'search',
-                component:search,
+                path:'searchcomp',
+                component:searchcomp,
                
             },
          ],

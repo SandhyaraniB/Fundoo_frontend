@@ -87,7 +87,7 @@ components:{
         token: localStorage.getItem("token")
         };
     var notes= await createNote(data, token.token);
-    this.$emit("notecreation",notes)
+    this.$emit("createnotee",notes)
     this.flag = !this.flag;
    
     }

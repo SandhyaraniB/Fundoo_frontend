@@ -22,3 +22,15 @@ export function postServiceTokenfor(url,token) {
     // console.log(token)
     return axios.post(`${BASE_URL}/${url}`,{},{ headers: {token:`${token}`}})
 }
+
+
+export function deleteServiceToken(url,token) {
+    // console.log(`${BASE_URL}/${url}`)
+    // console.log(token)
+    return axios.delete(`${BASE_URL}/${url}`,{ headers: {token:`${token}`}})
+}
+export function deleteServiceforlabel(url) {
+    // console.log(`${BASE_URL}/${url}`)
+    // console.log(token)
+    return axios.delete(`${BASE_URL}/${url}`)
+}

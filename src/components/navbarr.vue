@@ -23,8 +23,8 @@
             type="text" v-model="msgg"
             placeholder="Search"
             style="border: none; outline:none;margin-left: 70px;"
-            v-on:keyup.enter="search()"
             @click="navigationdrawer()"
+            v-on:keyup.enter="searchoperation()"
            >
         </md-card>
 
@@ -57,6 +57,7 @@
         <!-- <md-button style="margin-top: -65px; margin-left: 1200px;;background-color:pink" class="md-icon-button"> -->
          <!-- <input type="file" style="width:20px">
          </md-button>  -->
+         <!-- ............................................................................................. -->
           <md-dialog :md-active.sync="show">
       <md-dialog-title>UploadProfilepic</md-dialog-title>
    <input type="file">
@@ -65,11 +66,16 @@
         <md-button class="md-primary" @click="uploadpic(file)">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
-
-    <md-button  class="md-icon-button" @click="show = true" style="margin-top: -65px; margin-left: 1200px;">
-        <md-icon class="icon"></md-icon>
+<!-- @click="show = true" -->
+    <md-button  class="md-icon-button"
+      style="margin-top: -65px; margin-left: 1200px;"
+     @click="getprofilepic()">
+        <md-icon class="icon">
+          <img src="imgforprofile">
+        </md-icon>
         <md-tooltip md-direction="bottom">uploadimage</md-tooltip>
     </md-button>
+    <!-- ............................................................................................. -->
         <!-- <uploadprofilepic>
           <v-btn>s</v-btn>
         </uploadprofilepic> -->
@@ -182,18 +188,20 @@ import getlabels from "./../components/getlabels";
 import axios from "axios";
 // import {router} from '/home/admin1/Desktop/fundoo/src/routesNew.js'
 // import cards from "./../components/cards";
-import uploadProfilePic from './uploadprofilepic'
-import { async } from "q";
+// import uploadProfilePic from './uploadprofilepic'
+// import { async } from "q";
 import {messageService} from "/home/admin1/Desktop/fundoo/src/dataservice/dataservice.js";
 import createlabels from './createlabels'
 
 export default {
+  
   components: {
     getlabels,
-    uploadProfilePic,
+    // uploadProfilePic,
     createlabels,
   },
   data: () => ({
+    imgforprofile:"",
     msgg:"",
     someData: "",
     showSnackbar: false,
@@ -204,6 +212,12 @@ export default {
     labelname: "",
      show: false,
     results: [],
+
+     fav: true,
+      menu: false,
+      message: false,
+      hints: true,
+
     drawer: {
       // sets the open status of the drawer
       open: true,
@@ -229,14 +243,14 @@ export default {
   props: {
     source: String
   },
-  
-   computed: {
-    // a computed getter
-    search:function(){
-      // `this` points to the vm instance
-      messageService.sendMessage();
-    }
-  },
+  // computed: {
+  //   // a computed getter
+  //   searchoperation(){
+  //     // `this` points to the vm instance
+  //     console.log("in computedddddddd",this.msgg);
+  //    messageService.sendMessage(this.msgg);
+  //   }
+  //  },
   methods: {
     // changes the drawer to permanent
     makeDrawerPermanent() {
@@ -262,12 +276,13 @@ export default {
       }
     },
 
- craetelabel(event)
+ craetelabel()
  {
    this.gettinglabels;
  },
     
-    uploadpic(event) {
+    uploadpic(event) 
+    {
       this.someData = event.target.files[0];
 
       console.log("====================================");
@@ -292,13 +307,28 @@ export default {
           console.log("====================================");
         });
     },
+    getprofilepic(){
+      const token = {
+        token: localStorage.getItem("token")
+          };
+      axios.get('http://localhost:8080/user/getprofilepic',{
+          headers: { token: token.token }
+        })
+          .then(response => { 
+          console.log(response.data.message)
+          this.imgforprofile=response.data.message;
+        }).catch(error => { 
+            console.log(error)
+         
+          })
+    },
     note()
     {
        this.$router.push({ path: 'dashboard'})
     },
      reminder()
     {
-       this.$router.push({ path: 'reminder'})
+       this.$router.push({ path: 'reminderr'})
     },
     archive(){
       this.$router.push({ path: 'archive'})
@@ -308,18 +338,20 @@ export default {
      this.$router.push({ path: 'trashed'})
       },
        
-       search()
-       {
-          console.log("inserach navbar:",this.msgg)
-       messageService.sendMessage(this.msgg);
-      
-       },
     navigationdrawer(){
-      this.$router.push({path:'search'})
+      this.$router.push({path:'searchcomp'})
+    },
+     searchoperation(){
+      // `this` points to the vm instance
+      console.log("in computedddddddd",this.msgg);
+     messageService.sendMessage(this.msgg);
     }
+
   }
-};
+  }
+
 </script>
+
 <style lang="scss" scoped>
 .search{
   display: flex;

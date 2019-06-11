@@ -190,11 +190,11 @@
 <script>
 // import { NoteService } from "/home/admin1/Desktop/fundoo/src/Service/NoteService.js";
 import getlabelsfornote from "./../components/getlabelsfornote.vue";
-import Vue from "vue";
+// import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
 import addcollaborator from "./addcollaborator.vue";
-import {addcolortonote,addreminder} from '/home/admin1/Desktop/fundoo/src/Service/noteservice.js'
+import {addcolortonote,addreminder,trsahnote} from '/home/admin1/Desktop/fundoo/src/Service/noteservice.js'
 export default {
   props: ["parentmessage"],
 
@@ -222,7 +222,7 @@ export default {
     },
 
     // ............................................................deletenote.......................................................................................
-    deletenote() {
+    async deletenote() {
       this.noteid = this.parentmessage.noteid;
       const token = {
         token: localStorage.getItem("token")
@@ -237,23 +237,25 @@ export default {
       //       console.log("error"+error);
       //       console.log('====================================');
       //   });
-      axios
-        .put(
-          "http://localhost:8080/note/trashnote/" + this.noteid,'',
-          {
-            headers: { token: token.token }
-          }
-        )
-        .this(response => {
-          console.log("====================================");
-          console.log(response.data.message);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log(error);
-          console.log("====================================");
-        });
+      // axios
+      //   .put(
+      //     "http://localhost:8080/note/trashnote/" + this.noteid,'',
+      //     {
+      //       headers: { token: token.token }
+      //     }
+      //   )
+      //   .this(response => {
+      //     console.log("====================================");
+      //     console.log(response.data.message);
+      //     console.log("====================================");
+      //   })
+      //   .catch(error => {
+      //     console.log("====================================");
+      //     console.log(error);
+      //     console.log("====================================");
+      //   });
+      var deleten= await trsahnote(this.noteid,token)
+      this.$emit("trashingnote",deleten)
     },
 
     // .............................................................Reminder..................................................................................................
