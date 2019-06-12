@@ -1,4 +1,4 @@
-import { postServiceToken,postServiceTokenfor,getServiceTokenforlabel}  from '/home/admin1/Desktop/fundoo/src/Service/Service.js'
+import { postServiceToken,postServiceTokenfor,getServiceTokenforlabel,deleteServiceforlabel}  from '/home/admin1/Desktop/fundoo/src/Service/Service.js'
 
 export function createLabel(data,token) {
      return postServiceToken(`Label/createlabel`, data ,token)
@@ -30,3 +30,11 @@ export function addreminder(noteid,datevalue,token) {
         return postServiceTokenfor(`note/reminder/` + noteid + "?date=" + datevalue,token)
        
     }
+
+    
+
+    export function deletelabelfromnote(labelid,noteid) {
+   
+            return deleteServiceforlabel(`Label/deltelabelfromnote/` + labelid + "?noteId=" + noteid)
+           
+        }

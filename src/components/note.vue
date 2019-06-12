@@ -14,7 +14,7 @@
             >
               <div @click="showDialog = true">
                 <div v-if="result.imageToNote!=null">
-                  <img src="result.imageToNote">
+                  <img v-bind:src="imgforprofile">
                 </div>
                 <input
                   type="text"
@@ -66,7 +66,7 @@
                     class="md-accent"
                     md-deletable
                     style="width: auto;"
-                    @click="deletelabel(label)"
+                    @click="deletelabelfromnote(label,result.noteid)"
                   >{{label.labelname}}</md-chip>
                 </div>
               </div>
@@ -75,6 +75,8 @@
                 :parentmessage="result"
                 v-on:coloraddtonote="addcolortonote($event)"
                 v-on:addremindertonote="addremindertonotee($event)"
+                v-on:trashingnote="trashnote($event)"
+                v-on:labeltonote="labelltonote($event)"
                 style="color:white; margin-top: 10px;"
                 class="iconlist"
               ></iconlist>
@@ -93,13 +95,15 @@
 <script>
 import iconlist from "./../components/iconlist";
 import CreateNote from "./CreateNote";
-import {deletereminder,deletelabel} from '/home/admin1/Desktop/fundoo/src/Service/noteservice.js';
+import {deletereminder} from '/home/admin1/Desktop/fundoo/src/Service/noteservice.js';
+import {deletelabelfromnote} from '/home/admin1/Desktop/fundoo/src/Service/labelservice.js'
 import axios from "axios";
 import updatenote from "./updatenote";
 export default {
    props: ['allNotes'],
   data() {
     return {
+      imgforprofile:'',
       showDialog: false,
       parentmessage: "",
       // allNotes: [],
@@ -110,6 +114,9 @@ export default {
     iconlist,
     updatenote,
     CreateNote
+  },
+   mounted(){
+    this.getprofilepic()
   },
   // mounted() {
   //   this.getnotes();
@@ -135,6 +142,14 @@ export default {
     deletereminder(){
       this.getnotes();
     },
+    labelltonote(){
+      this.getnotes();
+    },
+    trashnote()
+    {
+      console.log("in trash note..........notecomponenet")
+       this.getnotes();
+    },
     pin(noteid) {
       // this.noteid = this.parentmessage;
       const token = {
@@ -151,12 +166,12 @@ export default {
         )
         .then(res => {
           console.log("====================================");
-          console.log(res.message);
+          console.log(res.data.message);
           console.log("====================================");
         })
         .catch(error => {
           console.log("====================================");
-          console.log("error" + error);
+          console.log("error=================" + error);
           console.log("====================================");
         });
     },
@@ -167,7 +182,21 @@ export default {
       // alert(note.noteid)
     },
    
-   
+    getprofilepic(){
+      const token = {
+        token: localStorage.getItem("token")
+          };
+      axios.get('http://localhost:8080/user/getprofilepic',{
+          headers: { token: token.token }
+        })
+          .then(response => { 
+          console.log(response.data.message)
+          this.imgforprofile=response.data.message;
+        }).catch(error => { 
+            console.log(error)
+         
+          })
+    },
    getnotes() {
       console.log("after emit in get notes");
       const token = {
@@ -180,10 +209,10 @@ export default {
         })
         .then(res => {
           console.log("== in axios ", res.data);
-          if(result.trashed!=true)
-          {
+         
+         
           this.allNotes = res.data;
-          }
+
           // this.$emit("gett");
 
           console.log("====================================");
@@ -203,12 +232,12 @@ export default {
       console.log("====================================");
     },
 
-   async deletelabel(label) {
-      console.log("====================================");
+   async deletelabelfromnote(label,noteid) {
+      console.log("==============noteid======================",noteid);
       console.log(label.labelid);
       console.log("====================================");
-       var deletelabell= await deletelabel(label.labelid);
-    this.$emit("deletedlabel",deletelabell)
+       var deletelabellfromnote= await deletelabelfromnote(label.labelid,noteid);
+    this.$emit("deletedlabelfromnote",deletelabellfromnote)
     },
     // deletereminder
     async deletereminderr(noteid) {

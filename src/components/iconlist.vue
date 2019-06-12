@@ -85,7 +85,7 @@
         <div>
           <md-button
             class="md-icon-button"
-            style="background-color:green;"
+            style="background-color:#c8cfc0;"
             @click="addcolor('green')"
           >
             <md-icon></md-icon>
@@ -171,7 +171,8 @@
         </md-button>
         <md-button md-menuoo-trigger @click="visible = !visible">add labels</md-button>
          <md-menuoo-content>
-            <getlabelsfornote :parentmessage="parentmessage"></getlabelsfornote>
+            <getlabelsfornote :parentmessage="parentmessage"
+            v-on:addlabel="addlabeltonote($event)"></getlabelsfornote>
          <!-- <md-card style="width:200px;height:1000px;">
         <md-menu-item class="dropdown" v-if="visible" >
           <md-menu-content style="margin-left:200px;">
@@ -228,33 +229,10 @@ export default {
         token: localStorage.getItem("token")
       };
       console.log('====================================');
-      console.log("..........."+this.noteid);
+      console.log("....deletenote method in iconlist.......",this.noteid,"------token---",token.token);
       console.log('====================================');
-      // NoteService.DeleteNote(this.noteid, token)
-      //   .then("notedeleted")
-      //   .catch(error => {
-      //  console.log('====================================');
-      //       console.log("error"+error);
-      //       console.log('====================================');
-      //   });
-      // axios
-      //   .put(
-      //     "http://localhost:8080/note/trashnote/" + this.noteid,'',
-      //     {
-      //       headers: { token: token.token }
-      //     }
-      //   )
-      //   .this(response => {
-      //     console.log("====================================");
-      //     console.log(response.data.message);
-      //     console.log("====================================");
-      //   })
-      //   .catch(error => {
-      //     console.log("====================================");
-      //     console.log(error);
-      //     console.log("====================================");
-      //   });
-      var deleten= await trsahnote(this.noteid,token)
+      var deleten= await trsahnote(this.noteid,token.token)
+      console.log("+++++++++++",deleten.data. message)
       this.$emit("trashingnote",deleten)
     },
 
@@ -383,6 +361,10 @@ export default {
           console.log("====================================");
         });
     },
+    addlabeltonote()
+    {
+      this.$$emit("labeltonote")
+    }
   }
 };
 </script>
@@ -416,4 +398,41 @@ export default {
 .md-icon-button {
   // margin-left: 10px;
 }
+.white {
+background-color: #ffffff;
+}
+.red {
+background-color: #ef9a9a;
+}
+.orange {
+background-color: #ffa726;
+}
+.yellow {
+background-color: #ffee58;
+}
+.green {
+background-color: #c8cfc0;
+}
+.teal {
+background-color: #a7ffeb;
+}
+.blue {
+background-color: #80d8ff;
+}
+.Darkblue {
+background-color: #8c9eff;
+}
+.purpale {
+background-color: #ea80fc;
+}
+.pink {
+background-color: #ff80ab;
+}
+.brown {
+background-color: #d7ccc8;
+}
+.gray {
+background-color: #cfd8dc;
+}
+</style>
 </style>

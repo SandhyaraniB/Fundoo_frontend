@@ -7,7 +7,7 @@
       <!-- <note v-on:gett="getting($event)"></note> -->
        <note :allNotes="allNotes"
        v-on:deletereminder="deletereminder($event)"
-       v-on:deletedlabel="deletelabel($event)"
+       v-on:deletedlabelfromnote="deletelabelfromnote($event)"
        v-on:trashingnote="trashnote($event)"></note>
     </div>
   </div>
@@ -45,7 +45,7 @@ export default {
     deletereminder(){
       this.getnotes();
     },
-    deletelabel(){
+    deletelabelfromnote(){
       this.getnotes();
     },
     trashnote(){

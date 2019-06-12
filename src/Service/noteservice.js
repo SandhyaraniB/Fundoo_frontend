@@ -1,4 +1,4 @@
-import { postServiceToken,getServiceToken,postServiceTokenfor,deleteServiceToken,deleteServiceforlabel}  from '/home/admin1/Desktop/fundoo/src/Service/Service.js'
+import { postServiceToken,getServiceToken,postServiceTokenfor,deleteServiceToken,deleteServiceforlabel,putServiceToken}  from '/home/admin1/Desktop/fundoo/src/Service/Service.js'
 
 export function createNote(data,token) {
      return postServiceToken(`note/createnote`, data ,token)
@@ -46,5 +46,5 @@ export function addreminder(noteid,datevalue,token) {
 
         export function trsahnote(noteid,token)
          {
-             return deleteServiceToken(`note/trashnote/` + noteid,token)
+             return putServiceToken(`note/trashnote/` + noteid,token)
         }

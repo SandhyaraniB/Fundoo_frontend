@@ -184,38 +184,47 @@ export default {
           console.log("====================================");
         });
     },
-untrashnote(noteid){
-     
+   async untrashnote(noteid){
+      this.noteid = this.parentmessage.noteid;
       const token = {
         token: localStorage.getItem("token")
       };
       console.log('====================================');
-      console.log("...........",noteid);
+      console.log("....untrahnote method in trashnote component.......",this.noteid,"------token---",token.token);
       console.log('====================================');
-      // NoteService.DeleteNote(this.noteid, token)
-      //   .then("notedeleted")
+      var deleten= await trsahnote(this.noteid,token.token)
+      console.log("+++++++++++",deleten.data. message)
+      this.$emit("trashingnote",deleten)
+      // const token = {
+      //   token: localStorage.getItem("token")
+      // };
+      // console.log('====================================');
+      // console.log("...........",noteid);
+      // console.log('====================================');
+      // // NoteService.DeleteNote(this.noteid, token)
+      // //   .then("notedeleted")
+      // //   .catch(error => {
+      // //  console.log('====================================');
+      // //       console.log("error"+error);
+      // //       console.log('====================================');
+      // //   });
+      // axios
+      //   .put(
+      //     "http://localhost:8080/note/trashnote/" + noteid,'',
+      //     {
+      //       headers: { token: token.token }
+      //     }
+      //   )
+      //   .this(response => {
+      //     console.log("====================================");
+      //     console.log(response.data.message);
+      //     console.log("====================================");
+      //   })
       //   .catch(error => {
-      //  console.log('====================================');
-      //       console.log("error"+error);
-      //       console.log('====================================');
+      //     console.log("====================================");
+      //     console.log(error);
+      //     console.log("====================================");
       //   });
-      axios
-        .put(
-          "http://localhost:8080/note/trashnote/" + noteid,'',
-          {
-            headers: { token: token.token }
-          }
-        )
-        .this(response => {
-          console.log("====================================");
-          console.log(response.data.message);
-          console.log("====================================");
-        })
-        .catch(error => {
-          console.log("====================================");
-          console.log(error);
-          console.log("====================================");
-        });
 }
   }
 };

@@ -34,3 +34,7 @@ export function deleteServiceforlabel(url) {
     // console.log(token)
     return axios.delete(`${BASE_URL}/${url}`)
 }
+export function putServiceToken(url,token)
+{
+    return axios.put(`${BASE_URL}/${url}`,{},{headers:{token:`${token}`}})
+}

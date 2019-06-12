@@ -29,20 +29,20 @@
         </md-card>
 
         <md-button
-          style="color:black;margin-left: 1000px;margin-top: -45px;"
+          style="margin-left: 1000px;margin-top: -45px;"
           class="md-icon-button"
           width="-30px"
         >
-          <md-icon style="color:black">refresh</md-icon>
+          <md-icon >refresh</md-icon>
           <md-tooltip md-direction="bottom">Refresh</md-tooltip>
         </md-button>
 
         <md-button
-          style="color:black;margin-top: -45px;margin-left:0px;flex-direction:column"
+          style="margin-top: -45px;margin-left:0px;flex-direction:column"
           class="md-icon-button"
           width="-30px"
         >
-          <md-icon style="color:black">settings</md-icon>
+          <md-icon>settings</md-icon>
           <md-tooltip md-direction="bottom">settings</md-tooltip>
         </md-button>
 
@@ -51,7 +51,7 @@
           class="md-icon-button"
           width="-30px"
         >
-          <md-icon style="color:black">apps</md-icon>
+          <md-icon >apps</md-icon>
         </md-button>
         <!-- <form @submit.prevent="onsubmit" enctype="multipart/form-data"> -->
         <!-- <md-button style="margin-top: -65px; margin-left: 1200px;;background-color:pink" class="md-icon-button"> -->
@@ -70,9 +70,9 @@
     <md-button  class="md-icon-button"
       style="margin-top: -65px; margin-left: 1200px;"
      @click="getprofilepic()">
-        <md-icon class="icon">
-          <img src="imgforprofile">
-        </md-icon>
+       <md-avatar>
+          <img v-bind:src="imgforprofile">
+       </md-avatar>
         <md-tooltip md-direction="bottom">uploadimage</md-tooltip>
     </md-button>
     <!-- ............................................................................................. -->
@@ -195,12 +195,16 @@ import createlabels from './createlabels'
 
 export default {
   
+  mounted(){
+    this.getprofilepic()
+  },
   components: {
     getlabels,
     // uploadProfilePic,
     createlabels,
   },
   data: () => ({
+    
     imgforprofile:"",
     msgg:"",
     someData: "",
@@ -344,7 +348,7 @@ export default {
      searchoperation(){
       // `this` points to the vm instance
       console.log("in computedddddddd",this.msgg);
-     messageService.sendMessage(this.msgg);
+      messageService.sendMessage(this.msgg);
     }
 
   }
